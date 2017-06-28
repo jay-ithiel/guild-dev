@@ -5,7 +5,7 @@ Blogstack is a decentralized blog site powered by Blockstack. The goal is to be 
 
 
 ## Who's it for?
-- Anyone and everyone: Medium, Reddit, Quora are delightful sources of information & entertainment for anyone and everyone
+- Anyone and everyone: Medium, Reddit, Quora are delightful sources of information & entertainment for anyone and everyone since blog sites don't have to be confined to an individual industry or topic
 - Bloggers: People that enjoy sharing ideas, stories & experiences online
 - Readers: People that enjoy discovering & reading about new ideas, stories & experiences online
 
@@ -19,11 +19,12 @@ Blogstack is a decentralized blog site powered by Blockstack. The goal is to be 
 
 ## Minimum Viable Product (MVP)
 At minimum, this app will satisfy the following criteria with bug-free, smooth navigation & sufficient CSS styling.
-- [ ] User: userauth provided by blockstack
-- [ ] Blogs: Users can write blogs
+- [ ] Users: User Auth provided by blockstack
+- [ ] Blogs: Users can post/edit/delete blogs
 - [ ] Tags: Topic(s) of a blog
+- [ ] Search: Search & filter blogs
 - [ ] Comments: Users can comment on blog
-- [ ] Index View: Homepage/Landing page of Blogstack
+- [ ] Index View: Homepage page of Blogstack
 - [ ] Blog View: Individual blog show page
 
 ### Bonus features
@@ -36,13 +37,13 @@ At minimum, this app will satisfy the following criteria with bug-free, smooth n
 
 ## Design Docs
 * [View Wireframes][wireframes]
-* [React Components][components]
-* [Model Skeletons][model_skeletons]
+* [React Component Hierarchy][component_hierarchy]
+* [Model Skeleton/Schema][model_skeletons]
 * [React/Redux Sample State][sample_state]
 
 
 [wireframes]: ./wireframes
-[components]: ./component_hierarchy.md
+[component_hierarchy]: ./component_hierarchy.md
 [model_skeletons]: ./model_skeletons.md
 [sample_state]: ./sample_state.md
 
@@ -50,31 +51,31 @@ At minimum, this app will satisfy the following criteria with bug-free, smooth n
 ## MVP Timeline
 
 ### Phase 1: Landing page & Navbar Component (1 day)
-**Objective:** Build fully functional Blockstack app with sufficient styling
+  * Build fully functional Blockstack app with sufficient styling
 
-### Phase 2: User (1 day)
-**Objective:** Add User Auth with blockstack.js
-**Objective:** Make AboutUser component with sufficient CSS styling
+### Phase 2: Users (1 day)
+  * Add User Auth with blockstack.js
+  * Make AboutUser component with sufficient CSS styling
 
 ### Phase 3: Blogs (3 days)
-**Objective:** Allow users to create, edit, & delete blogs
-**Objective:** Create blogs index page & blog show page
+  * Allow users to create, edit, & delete blogs
+  * Create blogs index page & blog show page
 
 ### Phase 4: Tags (4 days)
-**Objective:** Users can create tags for blogs
-**Objective:** Blog forms have a section to add tags to the blog
-**Objective:** Create related blogs section in blog show component
+  * Users can create tags for blogs
+  * Blog forms have a section to add tags to the blog
+  * Create related blogs section in blog show component
 
 ### Phase 5: Search (4 days)
-**Objective:** Users can search by blog title
-**Objective:** Filter blogs by tags
+  * Users can search by blog title
+  * Filter blogs by tags
 
 ### Phase 6: Comments (2 days)
-**Objective:** Add ability for users to comment on blogs
+  * Add ability for users to comment on blogs
 
 ### Phase 7: Bonus features
-**Objective:** Make User profile page
-**Objective:** Users can reply to comments
-**Objective:** Users can 'like' a blog
-**Objective:** Users can follow other users
-**Objective:** Filter blogs author/date
+  * Make User profile page
+  * Users can reply to comments
+  * Users can 'like' a blog
+  * Users can follow other users
+  * Filter blogs author/date
