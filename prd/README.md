@@ -38,14 +38,16 @@ At minimum, this app will satisfy the following criteria with bug-free, smooth n
 ## Design Docs
 * [View Wireframes][wireframes]
 * [React Component Hierarchy][component_hierarchy]
-* [Model Skeleton/Schema][model_skeletons]
 * [React/Redux Sample State][sample_state]
+* [Model Skeleton/Schema][model_skeletons]
+* [API endpoints][api_endpoints]
 
 
 [wireframes]: ./wireframes
 [component_hierarchy]: ./component_hierarchy.md
-[model_skeletons]: ./model_skeletons.md
 [sample_state]: ./sample_state.md
+[model_skeletons]: ./model_skeletons.md
+[api_endpoints]: ./api_endpoints.md
 
 
 ## MVP Timeline

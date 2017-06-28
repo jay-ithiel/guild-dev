@@ -1,4 +1,4 @@
-React/Redux Frontend App State Skeleton
+React/Redux Sample State
 
 ```js
 {

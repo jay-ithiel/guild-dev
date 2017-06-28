@@ -1,5 +1,5 @@
 # Blogstack API endpoints
-(Subject to updates & change)
+(Subject to updates & change to fit blockstack api)
 
 ### Home
 - `GET /` - landing page of Blogstack (Home Component)
