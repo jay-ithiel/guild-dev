@@ -51,15 +51,16 @@ At minimum, this app will satisfy the following criteria with bug-free, smooth n
 
 
 ## MVP Timeline
+This is the timeline to meet the MVP requirements before the July 2017 Blockstack Summit in 20 days. Feel free to build faster than the set timeline, but do not get behind the timeline.
 
-### Phase 1: Landing page & Navbar Component (1 day)
+### Phase 1: Landing page & Navbar Component (2 days)
   * Build fully functional Blockstack app with sufficient styling
 
-### Phase 2: Users (1 day)
+### Phase 2: Users (2 days)
   * Add User Auth with blockstack.js
   * Make AboutUser component with sufficient CSS styling
 
-### Phase 3: Blogs (3 days)
+### Phase 3: Blogs (5 days)
   * Allow users to create, edit, & delete blogs
   * Create blogs index page & blog show page
 
@@ -68,7 +69,7 @@ At minimum, this app will satisfy the following criteria with bug-free, smooth n
   * Blog forms have a section to add tags to the blog
   * Create related blogs section in blog show component
 
-### Phase 5: Search (4 days)
+### Phase 5: Search & Filter (5 days)
   * Users can search by blog title
   * Filter blogs by tags
 
