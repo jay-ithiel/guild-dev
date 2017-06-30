@@ -1,9 +1,12 @@
 # Component Hierarchy
 
+## App/Root
+  - Navbar Component
+  - Home Component
+
 ## Home
 
 ### Home Component
-  - Navbar Component
   - Blogs Component
 
 ## Navbar

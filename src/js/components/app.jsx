@@ -11,7 +11,7 @@ import Navbar from './navbar/navbar';
 const App = () => (
   <div id='app' className=''>
     App Component
-    <Route expact path='/' component={ Home }></Route>
+    <Route exact path='/' component={ Home }></Route>
   </div>
 );
 

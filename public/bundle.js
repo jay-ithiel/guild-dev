@@ -38715,7 +38715,7 @@ var App = function App() {
     'div',
     { id: 'app', className: '' },
     'App Component',
-    _react2.default.createElement(_reactRouter.Route, { expact: true, path: '/', component: _home2.default })
+    _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/', component: _home2.default })
   );
 };
 
