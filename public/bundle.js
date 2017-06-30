@@ -38714,7 +38714,6 @@ var App = function App() {
   return _react2.default.createElement(
     'div',
     { id: 'app', className: '' },
-    'App Component',
     _react2.default.createElement(_navbar2.default, null),
     _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/', component: _home2.default })
   );
@@ -83013,9 +83012,9 @@ var _logo = __webpack_require__(702);
 
 var _logo2 = _interopRequireDefault(_logo);
 
-var _search = __webpack_require__(704);
+var _nav_search = __webpack_require__(713);
 
-var _search2 = _interopRequireDefault(_search);
+var _nav_search2 = _interopRequireDefault(_nav_search);
 
 var _nav_menu = __webpack_require__(703);
 
@@ -83026,8 +83025,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Navbar = function Navbar(props) {
   return _react2.default.createElement(
     'nav',
-    { id: 'navbar' },
-    'Navbar Component',
+    { id: 'navbar', className: '' },
+    _react2.default.createElement(_logo2.default, null),
+    _react2.default.createElement(_nav_search2.default, null),
     _react2.default.createElement(_nav_menu2.default, null)
   );
 };
@@ -83091,33 +83091,7 @@ var NavMenu = function NavMenu() {
 exports.default = NavMenu;
 
 /***/ }),
-/* 704 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(12);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Search = function Search() {
-  return _react2.default.createElement(
-    'div',
-    { id: 'search' },
-    'Search Component'
-  );
-};
-
-exports.default = Search;
-
-/***/ }),
+/* 704 */,
 /* 705 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -83138,7 +83112,11 @@ var GuestNavMenu = function GuestNavMenu() {
   return _react2.default.createElement(
     'div',
     { id: 'guest-nav-menu' },
-    'Guest Nav Menu Component'
+    _react2.default.createElement(
+      'span',
+      null,
+      'Sign In'
+    )
   );
 };
 
@@ -83169,7 +83147,7 @@ var UserNavMenu = function UserNavMenu() {
   return _react2.default.createElement(
     'div',
     { id: 'user-nav-menu' },
-    'User Nav Menu Component'
+    _react2.default.createElement(_hamburger_menu2.default, null)
   );
 };
 
@@ -83190,13 +83168,19 @@ var _react = __webpack_require__(12);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _hamburger_dropdown = __webpack_require__(714);
+
+var _hamburger_dropdown2 = _interopRequireDefault(_hamburger_dropdown);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var HamburgerMenu = function HamburgerMenu() {
   return _react2.default.createElement(
     'div',
     { id: 'hamburger-menu' },
-    'Hamburger Menu Component'
+    _react2.default.createElement('span', { className: 'hamburger-slab' }),
+    _react2.default.createElement('span', { className: 'hamburger-slab' }),
+    _react2.default.createElement('span', { className: 'hamburger-slab' })
   );
 };
 
@@ -83211,7 +83195,7 @@ exports = module.exports = __webpack_require__(709)(undefined);
 
 
 // module
-exports.push([module.i, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  font-family: 'Lato', sans-serif;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n", ""]);
+exports.push([module.i, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  font-family: 'Lato', sans-serif;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n#app {\n  padding-top: 82px; }\n\n.fit-img {\n  width: 100%;\n  height: 100%; }\n\n.title {\n  font-size: 30px;\n  font-weight: 700;\n  letter-spacing: 2px; }\n\n.btn {\n  width: 100px;\n  height: 60px;\n  background-color: #fff;\n  border: 1px solid #000;\n  border-radius: 3px;\n  cursor: pointer; }\n\n.flex-center {\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.flex-column {\n  flex-direction: column; }\n\n.flex-row {\n  flex-direction: row; }\n\n.full {\n  width: 100%;\n  height: 100%; }\n\n.border-box-sizing {\n  box-sizing: border-box; }\n\n.content-half {\n  width: 50vw;\n  height: 50vh; }\n\n.display-none {\n  display: none; }\n\n.close-modal {\n  position: absolute;\n  top: 5px;\n  right: 15px; }\n\n.z1 {\n  z-index: 1;\n  width: 100%;\n  height: 100vh;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center; }\n\n.dark-veil {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2); }\n\n#logo {\n  height: 40px;\n  width: 40px; }\n\n#nav-search {\n  height: 35px;\n  width: 200px;\n  border: 1px solid #ddd;\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  color: grey; }\n\n#navbar {\n  height: 80px;\n  width: 100vw;\n  background-color: #fff;\n  border-bottom: 2px solid #ddd;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  padding: 0 15px; }\n", ""]);
 
 // exports
 
@@ -83782,6 +83766,76 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
+
+/***/ }),
+/* 713 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(12);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NavSearch = function NavSearch() {
+  return _react2.default.createElement(
+    'div',
+    { id: 'nav-search' },
+    'Search'
+  );
+};
+
+exports.default = NavSearch;
+
+/***/ }),
+/* 714 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(12);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = __webpack_require__(224);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var HamburgerDropdown = function HamburgerDropdown() {
+  return _react2.default.createElement(
+    'ul',
+    { id: 'hamburger-dropdown' },
+    _react2.default.createElement(
+      'li',
+      null,
+      'My Blogs'
+    ),
+    _react2.default.createElement(
+      'li',
+      null,
+      'Profile'
+    ),
+    _react2.default.createElement(
+      'li',
+      null,
+      'Log Out'
+    )
+  );
+};
+
+exports.default = (0, _reactRouter.withRouter)(HamburgerDropdown);
 
 /***/ })
 /******/ ]);

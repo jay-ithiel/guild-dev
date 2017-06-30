@@ -1,8 +1,12 @@
 import React from 'react';
 
+import HamburgerDropdown from './hamburger_dropdown';
+
 const HamburgerMenu = () => (
   <div id='hamburger-menu'>
-    Hamburger Menu Component
+    <span className='hamburger-slab'></span>
+    <span className='hamburger-slab'></span>
+    <span className='hamburger-slab'></span>
   </div>
 );
 

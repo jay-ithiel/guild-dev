@@ -10,7 +10,6 @@ import Navbar from './navbar/navbar';
 
 const App = () => (
   <div id='app' className=''>
-    App Component
     <Navbar />
     <Route exact path='/' component={ Home }></Route>
   </div>
