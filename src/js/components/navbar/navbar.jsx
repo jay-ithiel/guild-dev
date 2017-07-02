@@ -9,6 +9,7 @@ const Navbar = props => (
   <nav id='navbar' className=''>
     <Logo />
     <NavSearch />
+    <a href='/blogs/new'>Write a blog</a>
     <NavMenu />
   </nav>
 );

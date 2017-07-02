@@ -16,6 +16,7 @@ const App = () => (
         {/*
             <Route path='/profile' component={ Profile }></Route>
             <Route path='/blogs/user' component={ UserBlogs }></Route>
+            <Route path='/blogs/new' component={ BlogForm }></Route>
         */}
     </div>
 );

@@ -1,0 +1,56 @@
+#blogs {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#blog {
+    width: 80vw;
+    height: 120vw;
+    background-color: #fff;
+    border: 1px solid #111;
+    margin: 20px auto;
+}
+
+@media screen and (min-width: 450px) {
+    #blogs {
+        width: 100vw;
+        padding: 3vw;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    #blog {
+        width: 40vw;
+        height: 60vw;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #blog {
+        width: 26vw;
+        height: 39vw;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    #blog {
+        max-width: 340px;
+        max-height: 500px;
+        background-color: #000;
+    }
+}
+
+.blog-img-box {
+    height: 45%;
+    width: 100%;
+    background-color: lightgrey;
+}
+
+.blog-info {
+    height: 55%;
+    width: 100%;
+}
