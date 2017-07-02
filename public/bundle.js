@@ -39552,25 +39552,25 @@ var _session_actions = __webpack_require__(154);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener('DOMContentLoaded', function (event) {
-  var root = document.getElementById('root');
-  var store = (0, _store2.default)();
+    var root = document.getElementById('root');
+    var store = (0, _store2.default)();
 
-  if ((0, _blockstack.isUserSignedIn)()) {
-    (0, _blockstack.loadUserData)(function (userData) {
-      var person = new _blockstack.Person(userData.profile);
-      store.dispatch((0, _session_actions.receiveCurrentUser)(person));
-    });
-  } else if ((0, _blockstack.isSignInPending)()) {
-    (0, _blockstack.signUserIn)(function (userData) {
-      window.location = window.location.origin;
-    });
-  }
+    if ((0, _blockstack.isUserSignedIn)()) {
+        (0, _blockstack.loadUserData)(function (userData) {
+            var person = new _blockstack.Person(userData.profile);
+            store.dispatch((0, _session_actions.receiveCurrentUser)(person));
+        });
+    } else if ((0, _blockstack.isSignInPending)()) {
+        (0, _blockstack.signUserIn)(function (userData) {
+            window.location = window.location.origin;
+        });
+    }
 
-  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
+    _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 
-  // NOTE: DEVELOPMENT ONLY
-  // Allows easy access to store from chrome debugger. Remove before production
-  window.store = store;
+    // NOTE: DEVELOPMENT ONLY
+    // Allows easy access to store from chrome debugger. Remove before production
+    window.store = store;
 });
 
 /***/ }),
@@ -39581,7 +39581,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _react = __webpack_require__(8);
@@ -39606,12 +39606,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 __webpack_require__(646);
 
 var App = function App() {
-  return _react2.default.createElement(
-    'div',
-    { id: 'app', className: '' },
-    _react2.default.createElement(_navbar2.default, null),
-    _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/', component: _home2.default })
-  );
+    return _react2.default.createElement(
+        'div',
+        { id: 'app', className: '' },
+        _react2.default.createElement(_navbar2.default, null),
+        _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/', component: _home2.default })
+    );
 };
 
 exports.default = App;
@@ -39707,7 +39707,7 @@ exports.default = GuestNavMenu;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _react = __webpack_require__(8);
@@ -39716,32 +39716,39 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = __webpack_require__(64);
 
+var _blockstack_session_actions = __webpack_require__(312);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var HamburgerDropdown = function HamburgerDropdown() {
-  return _react2.default.createElement(
-    'div',
-    { className: '' },
-    _react2.default.createElement(
-      'ul',
-      { id: 'hamburger-dropdown', className: '' },
-      _react2.default.createElement(
-        'li',
-        null,
-        'My Blogs'
-      ),
-      _react2.default.createElement(
-        'li',
-        null,
-        'Profile'
-      ),
-      _react2.default.createElement(
-        'li',
-        null,
-        'Log Out'
-      )
-    )
-  );
+var HamburgerDropdown = function HamburgerDropdown(_ref) {
+    var history = _ref.history;
+    return _react2.default.createElement(
+        'div',
+        { id: 'hamburger-dropdown-container' },
+        _react2.default.createElement(
+            'ul',
+            { id: 'hamburger-dropdown', className: '' },
+            _react2.default.createElement(
+                'li',
+                { onClick: function onClick() {
+                        return null;
+                    } },
+                'My Blogs'
+            ),
+            _react2.default.createElement(
+                'li',
+                { onClick: function onClick() {
+                        return null;
+                    } },
+                'Profile'
+            ),
+            _react2.default.createElement(
+                'li',
+                { onClick: _blockstack_session_actions.handleSignOut },
+                'Log Out'
+            )
+        )
+    );
 };
 
 exports.default = (0, _reactRouter.withRouter)(HamburgerDropdown);
@@ -39754,7 +39761,7 @@ exports.default = (0, _reactRouter.withRouter)(HamburgerDropdown);
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _react = __webpack_require__(8);
@@ -39767,15 +39774,23 @@ var _hamburger_dropdown2 = _interopRequireDefault(_hamburger_dropdown);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var dropdown = function dropdown() {
+    var hamburgerDropdown = $('#hamburger-dropdown-container');
+    hamburgerDropdown.slideDown();
+    hamburgerDropdown.mouseleave(function () {
+        return hamburgerDropdown.slideUp();
+    });
+};
+
 var HamburgerMenu = function HamburgerMenu() {
-  return _react2.default.createElement(
-    'div',
-    { id: 'hamburger-menu' },
-    _react2.default.createElement('span', { className: 'hamburger-slab' }),
-    _react2.default.createElement('span', { className: 'hamburger-slab' }),
-    _react2.default.createElement('span', { className: 'hamburger-slab' }),
-    _react2.default.createElement(_hamburger_dropdown2.default, null)
-  );
+    return _react2.default.createElement(
+        'div',
+        { id: 'hamburger-menu', onClick: dropdown },
+        _react2.default.createElement('span', { className: 'hamburger-slab' }),
+        _react2.default.createElement('span', { className: 'hamburger-slab' }),
+        _react2.default.createElement('span', { className: 'hamburger-slab' }),
+        _react2.default.createElement(_hamburger_dropdown2.default, null)
+    );
 };
 
 exports.default = HamburgerMenu;
@@ -39821,7 +39836,7 @@ exports.default = NavMenu;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _react = __webpack_require__(8);
@@ -39835,11 +39850,11 @@ var _hamburger_menu2 = _interopRequireDefault(_hamburger_menu);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var UserNavMenu = function UserNavMenu() {
-  return _react2.default.createElement(
-    'div',
-    { id: 'user-nav-menu' },
-    _react2.default.createElement(_hamburger_menu2.default, null)
-  );
+    return _react2.default.createElement(
+        'div',
+        { id: 'user-nav-menu' },
+        _react2.default.createElement(_hamburger_menu2.default, null)
+    );
 };
 
 exports.default = UserNavMenu;
@@ -40046,25 +40061,25 @@ exports.default = SessionReducer;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 exports.handleSignOut = exports.handleSignIn = undefined;
 
 var _blockstack = __webpack_require__(24);
 
 var handleSignIn = exports.handleSignIn = function handleSignIn(event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  var privateKey = null;
-  var appDomain = window.location.hostname;
-  var authRequest = (0, _blockstack.makeAuthRequest)(privateKey, appDomain);
+    var privateKey = null;
+    var appDomain = window.location.hostname;
+    var authRequest = (0, _blockstack.makeAuthRequest)(privateKey, appDomain);
 
-  (0, _blockstack.redirectUserToSignIn)(authRequest);
+    (0, _blockstack.redirectUserToSignIn)(authRequest);
 };
 
 var handleSignOut = exports.handleSignOut = function handleSignOut(event) {
-  event.preventDefault();
-  (0, _blockstack.signUserOut)(window.location.origin);
+    event.preventDefault();
+    (0, _blockstack.signUserOut)(window.location.origin);
 };
 
 /***/ }),
@@ -45153,7 +45168,7 @@ exports = module.exports = __webpack_require__(356)(undefined);
 
 
 // module
-exports.push([module.i, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  font-family: 'Lato', sans-serif;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n#app {\n  padding-top: 82px; }\n\n.fit-img {\n  width: 100%;\n  height: 100%; }\n\n.title {\n  font-size: 30px;\n  font-weight: 700;\n  letter-spacing: 2px; }\n\n.btn {\n  width: 100px;\n  height: 60px;\n  background-color: #fff;\n  border: 1px solid #000;\n  border-radius: 3px;\n  cursor: pointer; }\n\n.flex-center {\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.flex-column {\n  flex-direction: column; }\n\n.flex-row {\n  flex-direction: row; }\n\n.full {\n  width: 100%;\n  height: 100%; }\n\n.border-box-sizing {\n  box-sizing: border-box; }\n\n.content-half {\n  width: 50vw;\n  height: 50vh; }\n\n.display-none {\n  display: none; }\n\n.close-modal {\n  position: absolute;\n  top: 5px;\n  right: 15px; }\n\n.z1 {\n  z-index: 1;\n  width: 100%;\n  height: 100vh;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center; }\n\n.dark-veil {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2); }\n\n#logo {\n  height: 40px;\n  width: 40px; }\n\n#nav-search {\n  height: 35px;\n  width: 200px;\n  border: 1px solid #ddd;\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  color: grey; }\n\n#hamburger-menu {\n  height: 30px;\n  width: 30px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around; }\n\n.hamburger-slab {\n  width: 100%;\n  height: 2px;\n  background-color: #333; }\n\n#hamburger-dropdown {\n  position: fixed;\n  top: 78px;\n  right: 0;\n  width: 150px;\n  height: auto;\n  border: 1px solid #ddd;\n  border-top: 0;\n  background-color: #fff;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start; }\n\n#hamburger-dropdown li {\n  height: 50px;\n  border-bottom: 1px solid #ccc; }\n\n#hamburger-dropdown li:last-child {\n  border-bottom: 0; }\n\n#navbar {\n  height: 80px;\n  width: 100vw;\n  background-color: #fff;\n  border-bottom: 2px solid #ddd;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  padding: 0 15px; }\n", ""]);
+exports.push([module.i, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  font-family: 'Lato', sans-serif;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n#app {\n  padding-top: 82px; }\n\n.fit-img {\n  width: 100%;\n  height: 100%; }\n\n.title {\n  font-size: 30px;\n  font-weight: 700;\n  letter-spacing: 2px; }\n\n.btn {\n  width: 100px;\n  height: 60px;\n  background-color: #fff;\n  border: 1px solid #000;\n  border-radius: 3px;\n  cursor: pointer; }\n\n.flex-center {\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.flex-column {\n  flex-direction: column; }\n\n.flex-row {\n  flex-direction: row; }\n\n.full {\n  width: 100%;\n  height: 100%; }\n\n.border-box-sizing {\n  box-sizing: border-box; }\n\n.content-half {\n  width: 50vw;\n  height: 50vh; }\n\n.display-none {\n  display: none; }\n\n.close-modal {\n  position: absolute;\n  top: 5px;\n  right: 15px; }\n\n.z1 {\n  z-index: 1;\n  width: 100%;\n  height: 100vh;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center; }\n\n.dark-veil {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2); }\n\n#logo {\n  height: 40px;\n  width: 40px; }\n\n#nav-search {\n  height: 35px;\n  width: 200px;\n  border: 1px solid #ddd;\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  color: grey; }\n\n#hamburger-menu {\n  height: 30px;\n  width: 30px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  cursor: pointer; }\n\n.hamburger-slab {\n  width: 100%;\n  height: 2px;\n  background-color: #333; }\n\n#hamburger-dropdown-container {\n  display: none; }\n\n#hamburger-dropdown {\n  position: fixed;\n  top: 78px;\n  right: 0;\n  width: 150px;\n  height: auto;\n  border: 1px solid #ddd;\n  border-top: 0;\n  background-color: #fff;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start; }\n\n#hamburger-dropdown li {\n  height: 50px;\n  width: 100%;\n  border-bottom: 1px solid #ccc;\n  background-color: #fff; }\n\n#hamburger-dropdown li:last-child {\n  border-bottom: 0; }\n\n#hamburger-dropdown li:hover {\n  background-color: #ddd;\n  transition: all .2s ease-in; }\n\n#navbar {\n  height: 80px;\n  width: 100vw;\n  background-color: #fff;\n  border-bottom: 2px solid #ddd;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  padding: 0 15px; }\n", ""]);
 
 // exports
 

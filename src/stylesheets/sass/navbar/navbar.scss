@@ -3,20 +3,20 @@
 @import 'hamburger_menu.scss';
 
 #navbar {
-  height: 80px;
-  width: 100vw;
-  background-color: #fff;
-  border-bottom: 2px solid #ddd;
+    height: 80px;
+    width: 100vw;
+    background-color: #fff;
+    border-bottom: 2px solid #ddd;
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-  box-sizing: border-box;
-  padding: 0 15px;
+    box-sizing: border-box;
+    padding: 0 15px;
 }
