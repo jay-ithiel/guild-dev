@@ -1,7 +1,39 @@
 #hamburger-menu {
-
+    height: 30px;
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .hamburger-slab {
-  
+    width: 100%;
+    height: 2px;
+    background-color: #333;
+}
+
+#hamburger-dropdown {
+    position: fixed;
+    top: 78px;
+    right: 0;
+
+    width: 150px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-top: 0;
+    background-color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+}
+
+#hamburger-dropdown li {
+    height: 50px;
+    border-bottom: 1px solid #ccc;
+}
+
+#hamburger-dropdown li:last-child {
+    border-bottom: 0;
 }

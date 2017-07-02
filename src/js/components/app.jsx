@@ -12,6 +12,7 @@ const App = () => (
   <div id='app' className=''>
     <Navbar />
     <Route exact path='/' component={ Home }></Route>
+    
   </div>
 );
 

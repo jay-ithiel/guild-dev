@@ -7,6 +7,7 @@ const HamburgerMenu = () => (
     <span className='hamburger-slab'></span>
     <span className='hamburger-slab'></span>
     <span className='hamburger-slab'></span>
+    <HamburgerDropdown />
   </div>
 );
 
