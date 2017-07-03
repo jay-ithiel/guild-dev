@@ -19,9 +19,9 @@ const App = () => (
         <Route path='/signin'     component={ SignIn   }></Route>
         <Route path='/blogs/new'  component={ BlogForm }></Route>
         <Route path='/blogs/edit/:id' component={ BlogForm }></Route>
-        <Route path='/blogs/:id'  component={ Blog     }></Route>
         <Route path='/blogs/show' component={ Blog }></Route>
         {/*
+            <Route path='/blogs/:id'  component={ Blog     }></Route>
             <Route path='/profile' component={ Profile }></Route>
             <Route path='/blogs/user' component={ UserBlogs }></Route>
         */}
