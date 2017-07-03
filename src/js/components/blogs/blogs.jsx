@@ -1,15 +1,15 @@
 import React from 'react';
 
-import Blog from './blog';
+import BlogLink from './blog_link';
 
 const Blogs = () => (
     <ul id='blogs' className='border-box-sizing'>
-        <Blog />
-        <Blog />
-        <Blog />
-        <Blog />
-        <Blog />
-        <Blog />
+        <BlogLink />
+        <BlogLink />
+        <BlogLink />
+        <BlogLink />
+        <BlogLink />
+        <BlogLink />
     </ul>
 );
 

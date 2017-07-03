@@ -12,6 +12,7 @@ class BlogForm extends React.Component {
             body: ''
         };
 
+        this.actionType = (props.history.location.pathname === '/blogs/new/') ? 'Create' : 'Update';
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -24,7 +25,7 @@ class BlogForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
+        // Will store using blockstack storage
     }
 
     handleChange(field) {
@@ -58,7 +59,7 @@ class BlogForm extends React.Component {
                         placeholder='Body'
                     />
 
-                <button id='blog-submit' className='btn primary-btn blog-input'>Post Blog</button>
+                <button id='blog-submit' className='btn primary-btn blog-input'>{this.actionType} Blog</button>
                 </form>
             </div>
         );

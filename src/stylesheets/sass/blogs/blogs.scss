@@ -9,7 +9,7 @@
     flex-wrap: wrap;
 }
 
-#blog {
+#blog-link {
     width: 80vw;
     height: 120vw;
     background-color: #fff;
@@ -25,34 +25,42 @@
         justify-content: flex-start;
     }
 
-    #blog {
+    #blog-link {
         width: 40vw;
         height: 60vw;
     }
 }
 
 @media screen and (min-width: 768px) {
-    #blog {
+    #blog-link {
         width: 26vw;
         height: 39vw;
     }
 }
 
 @media screen and (min-width: 1100px) {
-    #blog {
+    #blog-link {
         max-width: 340px;
         max-height: 500px;
         background-color: #000;
     }
 }
 
-.blog-img-box {
+.blog-link-img-box {
     height: 45%;
     width: 100%;
     background-color: lightgrey;
 }
 
-.blog-info {
+.blog-link-info {
     height: 55%;
+    width: 100%;
+}
+
+#blog {
+    padding: 0 40px;
+}
+
+.blog-show-section {
     width: 100%;
 }
