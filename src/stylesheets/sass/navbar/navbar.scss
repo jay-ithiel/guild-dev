@@ -1,12 +1,11 @@
 @import 'logo.scss';
-@import 'nav_search.scss';
 @import 'hamburger_menu.scss';
 
 #navbar {
-    height: 80px;
+    height: 70px;
     width: 100vw;
     background-color: #fff;
-    border-bottom: 2px solid #ddd;
+    box-shadow: 0 4px 2px -2px #ddd;
 
     position: fixed;
     top: 0;
@@ -19,4 +18,8 @@
 
     box-sizing: border-box;
     padding: 0 15px;
+}
+
+#navbar > div {
+    width: 190px;
 }

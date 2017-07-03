@@ -6,11 +6,13 @@ import NavSearch from '../search/nav_search';
 import NavMenu from './nav_menu/nav_menu';
 
 const Navbar = props => (
-  <nav id='navbar' className=''>
+  <nav id='navbar'>
     <Logo />
-    <NavSearch />
-    <a href='/blogs/new'>Write a blog</a>
-    <NavMenu />
+    <div id='navdiv' className='flex justify-between align-center'>
+        <NavSearch />
+        <a href='/blogs/new' className='dk-green bold'>Write a blog</a>
+        <NavMenu />
+    </div>
   </nav>
 );
 
