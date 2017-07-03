@@ -1,3 +1,5 @@
+@import 'blog_form.scss';
+
 #blogs {
     width: 100vw;
     height: auto;
@@ -53,17 +55,4 @@
 .blog-info {
     height: 55%;
     width: 100%;
-}
-
-
-// Blog Form SCSS
-
-#blog-form-container {
-    width: 100vw;
-    height: 100vh;
-
-}
-
-#blog-form {
-
 }
