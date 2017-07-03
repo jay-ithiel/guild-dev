@@ -1,7 +1,11 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 
-const Logo = () => (
-  <img id='logo' src='https://res.cloudinary.com/ddgtwtbre/image/upload/v1498777018/blogstack_ljmzcy.png' />
+const Logo = ({ history }) => (
+    <img id='logo'
+        className='btn'
+        onClick={ () => history.push('/') }
+        src='https://res.cloudinary.com/ddgtwtbre/image/upload/v1498777018/blogstack_ljmzcy.png' />
 );
 
-export default Logo;
+export default withRouter(Logo);

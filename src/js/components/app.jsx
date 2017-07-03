@@ -10,7 +10,6 @@ import Navbar from './navbar/navbar';
 import BlogForm from './blogs/blog_form';
 import SignIn from './session/signin';
 
-
 const App = () => (
     <div id='app' className=''>
         <Navbar />

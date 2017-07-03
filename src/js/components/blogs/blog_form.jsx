@@ -16,9 +16,9 @@ class BlogForm extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componendDidMount() {
-        if (!isUserSignedIn) {
-            this.props.router.history.push('/signin');
+    componentDidMount() {
+        if (!isUserSignedIn()) {
+            this.props.history.push('/signin');
         }
     }
 
@@ -56,4 +56,4 @@ class BlogForm extends React.Component {
     }
 }
 
-export default BlogForm;
+export default withRouter(BlogForm);
