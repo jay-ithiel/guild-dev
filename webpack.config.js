@@ -18,6 +18,9 @@ module.exports = {
         }
       },
       {
+        test: /\.tsx?$/, loader: 'ts-loader'
+      },
+      {
         test: /\.scss$/,
         loaders: ["style-loader", "css-loader", "sass-loader"]
       }
@@ -25,7 +28,7 @@ module.exports = {
   },
   devtool: 'source-map',
   resolve: {
-    extensions: ['.js', '.jsx', '*']
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '*']
   },
   devServer: {
     historyApiFallback: true

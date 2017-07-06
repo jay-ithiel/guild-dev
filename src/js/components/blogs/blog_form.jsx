@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { isUserSignedIn } from 'blockstack';
+import Blog from '../../../models/blog.ts';
+global.Blog = Blog;
 
 class BlogForm extends React.Component {
     constructor(props) {
