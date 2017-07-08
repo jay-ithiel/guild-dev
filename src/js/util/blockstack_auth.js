@@ -7,12 +7,16 @@ import * as blockstack from 'blockstack';
 global.blockstack = blockstack;
 
 export const signin = () => {
-    var privateKey = undefined, appDomain = window.location.hostname;
-    var authRequest = makeAuthRequest(privateKey, appDomain);
-    debugger;
-    blockstack.redirectToSignInWithAuthRequest(authRequest);
+    // Blockstack version 0.7
+    // var privateKey = undefined, appDomain = window.location.hostname;
+    // var authRequest = makeAuthRequest(privateKey, appDomain);
+    // debugger;
     // redirectToSignIn(authRequest);
-    // redirectToSignIn();
+
+    // Blockstack version 0.8.1
+    debugger;
+    // blockstack.redirectToSignInWithAuthRequest(authRequest);
+    redirectToSignIn();
 
 };
 

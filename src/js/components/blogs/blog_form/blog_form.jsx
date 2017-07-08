@@ -6,7 +6,6 @@ import * as blockstackStorage from 'blockstack-storage';
 import Blog from '../../../../models/blog.ts';
 global.Blog = Blog;
 global.blockstack = blockstack;
-global.blockstackStorage = blockstackStorage;
 
 class BlogForm extends React.Component {
     constructor(props) {

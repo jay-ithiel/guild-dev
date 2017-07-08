@@ -8,7 +8,7 @@ const close = e => {
     $('#hamburger-dropdown-container').fadeOut();
 };
 
-const HamburgerDropdown = ({ history, signOut }) => (
+const HamburgerDropdown = props => (
     <div id='hamburger-dropdown-container'>
         <span onClick={ close }
             className='modal no-desktop close-modal'>x
@@ -17,13 +17,13 @@ const HamburgerDropdown = ({ history, signOut }) => (
         <ul id='hamburger-dropdown' className=''>
             <li onClick={ () => null }>My Blogs</li>
             <li onClick={ () => null }>Profile</li>
-            <li onClick={ signOut }>Log Out</li>
+            <li onClick={ props.signout }>Log Out</li>
         </ul>
     </div>
 );
 
 const mapDispatchToProps = dispatch => ({
-    signout: dispatch(signout())
+    signout: () => dispatch(signout())
 });
 
 // export default withRouter(HamburgerDropdown);

@@ -48362,7 +48362,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
             store.dispatch((0, _session_actions.receiveCurrentUser)(person));
         });
     } else if ((0, _blockstack.isSignInPending)()) {
-        (0, _blockstack.handlePendingSignIn)();
+        (0, _blockstack.handlePendingSignIn)(function (userData) {
+            window.location = window.location.origin;
+        });
         // signUserIn(userData => {
         //     window.location = window.location.origin;
         // });
@@ -48684,9 +48686,7 @@ var close = function close(e) {
     $('#hamburger-dropdown-container').fadeOut();
 };
 
-var HamburgerDropdown = function HamburgerDropdown(_ref) {
-    var history = _ref.history,
-        signOut = _ref.signOut;
+var HamburgerDropdown = function HamburgerDropdown(props) {
     return _react2.default.createElement(
         'div',
         { id: 'hamburger-dropdown-container' },
@@ -48715,7 +48715,7 @@ var HamburgerDropdown = function HamburgerDropdown(_ref) {
             ),
             _react2.default.createElement(
                 'li',
-                { onClick: signOut },
+                { onClick: props.signout },
                 'Log Out'
             )
         )
@@ -48724,7 +48724,9 @@ var HamburgerDropdown = function HamburgerDropdown(_ref) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
-        signout: dispatch((0, _session_actions.signout)())
+        signout: function signout() {
+            return dispatch((0, _session_actions.signout)());
+        }
     };
 };
 
@@ -48801,7 +48803,7 @@ var _guest_nav_menu2 = _interopRequireDefault(_guest_nav_menu);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var NavMenu = function NavMenu() {
-  return (0, _blockstack.isUserSignedIn)() ? _react2.default.createElement(_user_nav_menu2.default, null) : _react2.default.createElement(_guest_nav_menu2.default, null);
+  return (0, _blockstack.isUserSignedIn)() || (0, _blockstack.isSignInPending)() ? _react2.default.createElement(_user_nav_menu2.default, null) : _react2.default.createElement(_guest_nav_menu2.default, null);
 };
 
 exports.default = NavMenu;
@@ -96328,13 +96330,16 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 global.blockstack = blockstack;
 
 var signin = exports.signin = function signin() {
-    var privateKey = undefined,
-        appDomain = window.location.hostname;
-    var authRequest = (0, _blockstack.makeAuthRequest)(privateKey, appDomain);
-    debugger;
-    blockstack.redirectToSignInWithAuthRequest(authRequest);
+    // Blockstack version 0.7
+    // var privateKey = undefined, appDomain = window.location.hostname;
+    // var authRequest = makeAuthRequest(privateKey, appDomain);
+    // debugger;
     // redirectToSignIn(authRequest);
-    // redirectToSignIn();
+
+    // Blockstack version 0.8.1
+    debugger;
+    // blockstack.redirectToSignInWithAuthRequest(authRequest);
+    (0, _blockstack.redirectToSignIn)();
 };
 
 var signout = exports.signout = function signout() {
@@ -96625,7 +96630,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 global.Blog = _blog2.default;
 global.blockstack = blockstack;
-global.blockstackStorage = blockstackStorage;
 
 var BlogForm = function (_React$Component) {
     _inherits(BlogForm, _React$Component);

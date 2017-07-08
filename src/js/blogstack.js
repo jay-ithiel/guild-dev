@@ -23,7 +23,9 @@ document.addEventListener('DOMContentLoaded', event => {
             store.dispatch(receiveCurrentUser(person));
         });
     } else if (isSignInPending()) {
-        handlePendingSignIn();
+        handlePendingSignIn(userData => {
+            window.location = window.location.origin;
+        });
         // signUserIn(userData => {
         //     window.location = window.location.origin;
         // });
