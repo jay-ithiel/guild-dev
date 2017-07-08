@@ -8,7 +8,7 @@ require("!style-loader!css-loader!sass-loader!../../stylesheets/sass/all.scss");
 import Navbar from './navbar/navbar';
 import Home from './home/home';
 import SignIn from './session/signin';
-import BlogForm from './blogs/blog_form';
+import BlogForm from './blogs/blog_form/blog_form_container';
 import Blog from './blogs/blog';
 
 

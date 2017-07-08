@@ -1,13 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { handleSignOut } from '../../../util/blockstack_session_actions';
+import { signout } from '../../../actions/session_actions';
 
 const close = e => {
     e.stopPropagation();
     $('#hamburger-dropdown-container').fadeOut();
 };
 
-const HamburgerDropdown = ({ history }) => (
+const HamburgerDropdown = ({ history, signOut }) => (
     <div id='hamburger-dropdown-container'>
         <span onClick={ close }
             className='modal no-desktop close-modal'>x
@@ -16,9 +17,14 @@ const HamburgerDropdown = ({ history }) => (
         <ul id='hamburger-dropdown' className=''>
             <li onClick={ () => null }>My Blogs</li>
             <li onClick={ () => null }>Profile</li>
-            <li onClick={ handleSignOut }>Log Out</li>
+            <li onClick={ signOut }>Log Out</li>
         </ul>
     </div>
 );
 
-export default withRouter(HamburgerDropdown);
+const mapDispatchToProps = dispatch => ({
+    signout: dispatch(signout())
+});
+
+// export default withRouter(HamburgerDropdown);
+export default connect(null, mapDispatchToProps)(HamburgerDropdown);

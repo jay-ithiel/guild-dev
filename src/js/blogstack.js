@@ -5,7 +5,8 @@ import {
     signUserIn,
     isUserSignedIn,
     loadUserData,
-    Person
+    Person,
+    handlePendingSignIn
 } from 'blockstack';
 
 import Root from './components/root';
@@ -22,9 +23,10 @@ document.addEventListener('DOMContentLoaded', event => {
             store.dispatch(receiveCurrentUser(person));
         });
     } else if (isSignInPending()) {
-        signUserIn(userData => {
-            window.location = window.location.origin;
-        });
+        handlePendingSignIn();
+        // signUserIn(userData => {
+        //     window.location = window.location.origin;
+        // });
     }
 
     ReactDOM.render(<Root store={ store } />, root);

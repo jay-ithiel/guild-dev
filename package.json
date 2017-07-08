@@ -31,7 +31,7 @@
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
-    "blockstack": "^0.3.10",
+    "blockstack": "^0.8.1",
     "css-loader": "^0.28.4",
     "history": "^4.6.3",
     "lodash": "^4.17.4",

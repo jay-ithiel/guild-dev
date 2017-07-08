@@ -1,17 +1,25 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { isUserSignedIn } from 'blockstack';
-import Blog from '../../../models/blog.ts';
+import * as blockstack from 'blockstack';
+import * as blockstackStorage from 'blockstack-storage';
+import Blog from '../../../../models/blog.ts';
 global.Blog = Blog;
+global.blockstack = blockstack;
+global.blockstackStorage = blockstackStorage;
 
 class BlogForm extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            authorId: '',
-            title: '',
-            body: ''
+            blog: {
+                title: '',
+                imageUrl: '',
+                body: '',
+                authorId: ''
+            },
+            storageFile: 'blogs.json'
         };
 
         this.actionType = (props.history.location.pathname === '/blogs/new/') ? 'Create' : 'Update';
@@ -23,11 +31,22 @@ class BlogForm extends React.Component {
         if (!isUserSignedIn()) {
             this.props.history.push('/signin');
         }
+        // if !props.isNewBlog, dispatch requestBlog to edit
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        // Will store using blockstack storage
+        // let blog = new Blog(
+        //     this.state.blog.title,
+        //     this.state.blog.imageUrl,
+        //     this.state.blog.body,
+        //     this.state.blog.authorId
+        // );
+
+        // dispatch createBlog action
+        // check props.createBlog and this.state.blog
+        debugger;
+        this.props.createBlog(this.state.blog);
     }
 
     handleChange(field) {

@@ -1,10 +1,15 @@
 import React from 'react';
-import { handleSignIn } from '../../../util/blockstack_session_actions';
+import { connect } from 'react-redux';
+import { signin } from '../../../actions/session_actions';
 
-const GuestNavMenu = () => (
+const GuestNavMenu = props => (
   <div id='guest-nav-menu'>
-    <span className='green skinny letter-space-1' onClick={ handleSignIn }>Sign In</span>
+    <span className='btn green skinny letter-space-1' onClick={ props.signin }>Sign In</span>
   </div>
 );
 
-export default GuestNavMenu;
+const mapDispatchToProps = dispatch => ({
+    signin: () => dispatch(signin())
+});
+
+export default connect(null, mapDispatchToProps)(GuestNavMenu);
