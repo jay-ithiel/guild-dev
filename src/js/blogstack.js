@@ -18,17 +18,25 @@ document.addEventListener('DOMContentLoaded', event => {
     let store = configureStore();
 
     if (isUserSignedIn()) {
-        loadUserData(userData => {
-            let person = new Person(userData.profile);
-            store.dispatch(receiveCurrentUser(person));
-        });
+        // Blockstack version 8
+        let userData = loadUserData();
+        store.dispatch(receiveCurrentUser(userData.profile));
+
+        // Blockstack version 7
+        // loadUserData(userData => {
+        //     let person = new Person(userData.profile);
+        //     store.dispatch(receiveCurrentUser(person));
+        // });
     } else if (isSignInPending()) {
-        handlePendingSignIn(userData => {
-            window.location = window.location.origin;
-        });
+        // Blockstack version < 0.8
         // signUserIn(userData => {
         //     window.location = window.location.origin;
         // });
+
+        // Blockstack version 0.8.1
+        handlePendingSignIn(userData => {
+            window.location = window.location.origin;
+        });
     }
 
     ReactDOM.render(<Root store={ store } />, root);

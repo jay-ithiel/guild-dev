@@ -48357,17 +48357,25 @@ document.addEventListener('DOMContentLoaded', function (event) {
     var store = (0, _store2.default)();
 
     if ((0, _blockstack.isUserSignedIn)()) {
-        (0, _blockstack.loadUserData)(function (userData) {
-            var person = new _blockstack.Person(userData.profile);
-            store.dispatch((0, _session_actions.receiveCurrentUser)(person));
-        });
+        // Blockstack version 8
+        var userData = (0, _blockstack.loadUserData)();
+        store.dispatch((0, _session_actions.receiveCurrentUser)(userData.profile));
+
+        // Blockstack version 7
+        // loadUserData(userData => {
+        //     let person = new Person(userData.profile);
+        //     store.dispatch(receiveCurrentUser(person));
+        // });
     } else if ((0, _blockstack.isSignInPending)()) {
-        (0, _blockstack.handlePendingSignIn)(function (userData) {
-            window.location = window.location.origin;
-        });
+        // Blockstack version < 0.8
         // signUserIn(userData => {
         //     window.location = window.location.origin;
         // });
+
+        // Blockstack version 0.8.1
+        (0, _blockstack.handlePendingSignIn)(function (userData) {
+            window.location = window.location.origin;
+        });
     }
 
     _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
@@ -49041,21 +49049,6 @@ var SignIn = function (_React$Component) {
     return SignIn;
 }(_react2.default.Component);
 
-// const SignIn = props => {
-//     const redirectIfSignedIn = () => {
-//         if (isUserSignedIn()) {
-//             props.history.push('/');
-//         }
-//     };
-//     return (
-//         <div id='signin' className='full flex-center'>
-//             <button onClick={ props.signin } className='btn primary-btn'>
-//                 Sign In With Blockstack
-//             </button>
-//         </div>
-//     );
-// };
-
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
         signin: function signin() {
@@ -49197,7 +49190,7 @@ exports.default = RootReducer;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _reactRouter = __webpack_require__(39);
@@ -49211,31 +49204,31 @@ var _session_actions = __webpack_require__(162);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _defaultState = {
-  currentUser: null,
-  errors: []
+    currentUser: null,
+    errors: []
 };
 
 var SessionReducer = function SessionReducer() {
-  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultState;
-  var action = arguments[1];
+    var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _defaultState;
+    var action = arguments[1];
 
-  Object.freeze(oldState);
-  var newState = (0, _merge2.default)({}, oldState);
+    Object.freeze(oldState);
+    var newState = (0, _merge2.default)({}, oldState);
 
-  switch (action.type) {
-    case _session_actions.RECEIVE_CURRENT_USER:
-      newState.currentUser = action.currentUser;
-      newState.errors = [];
-      return newState;
+    switch (action.type) {
+        case _session_actions.RECEIVE_CURRENT_USER:
+            newState.currentUser = action.currentUser;
+            newState.errors = [];
+            return newState;
 
-    case _session_actions.RECEIVE_ERRORS:
-      newState.currentUser = null;
-      newState.errors = action.errors;
-      return newState;
+        case _session_actions.RECEIVE_ERRORS:
+            newState.currentUser = null;
+            newState.errors = action.errors;
+            return newState;
 
-    default:
-      return oldState;
-  }
+        default:
+            return oldState;
+    }
 };
 
 exports.default = SessionReducer;
@@ -96451,7 +96444,7 @@ var BlogMiddleware = function BlogMiddleware(_ref) {
     return function (next) {
         return function (action) {
             // check action values
-            // debugger;
+            debugger;
 
             switch (action.type) {
                 case _blog_actions.CREATE_BLOG:
@@ -96564,7 +96557,7 @@ var BlogReducer = function BlogReducer() {
 
     // check action values
     if (action.type !== "@@redux/INIT") {
-        // debugger;
+        debugger;
     }
 
     switch (action.type) {
@@ -96701,7 +96694,7 @@ var BlogForm = function (_React$Component) {
                         id: 'blog-title-input',
                         className: 'blog-input',
                         onChange: this.handleChange('title'),
-                        value: this.state.title,
+                        value: this.state.blog.title,
                         placeholder: 'Title'
                     }),
                     _react2.default.createElement(
@@ -96720,7 +96713,7 @@ var BlogForm = function (_React$Component) {
                         id: 'blog-body-input',
                         className: 'blog-input',
                         onChange: this.handleChange('body'),
-                        value: this.state.body,
+                        value: this.state.blog.body,
                         placeholder: 'Body'
                     }),
                     _react2.default.createElement(

@@ -26,21 +26,6 @@ class SignIn extends React.Component {
     }
 }
 
-// const SignIn = props => {
-//     const redirectIfSignedIn = () => {
-//         if (isUserSignedIn()) {
-//             props.history.push('/');
-//         }
-//     };
-//     return (
-//         <div id='signin' className='full flex-center'>
-//             <button onClick={ props.signin } className='btn primary-btn'>
-//                 Sign In With Blockstack
-//             </button>
-//         </div>
-//     );
-// };
-
 const mapDispatchToProps = dispatch => ({
     signin: () => dispatch(signin())
 });

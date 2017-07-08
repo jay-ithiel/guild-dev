@@ -17,7 +17,7 @@ const BlogReducer = (oldState = _defaultState, action) => {
 
     // check action values
     if (action.type !== "@@redux/INIT") {
-        // debugger;
+        debugger;
     }
 
     switch(action.type) {

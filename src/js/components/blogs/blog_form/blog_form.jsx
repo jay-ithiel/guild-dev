@@ -60,7 +60,7 @@ class BlogForm extends React.Component {
                         id='blog-title-input'
                         className='blog-input'
                         onChange={ this.handleChange('title') }
-                        value={ this.state.title }
+                        value={ this.state.blog.title }
                         placeholder='Title'
                     />
 
@@ -75,7 +75,7 @@ class BlogForm extends React.Component {
                         id='blog-body-input'
                         className='blog-input'
                         onChange={ this.handleChange('body') }
-                        value={ this.state.body }
+                        value={ this.state.blog.body }
                         placeholder='Body'
                     />
 
