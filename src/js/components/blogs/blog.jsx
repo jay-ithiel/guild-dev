@@ -4,7 +4,7 @@ import AboutUser from '../users/about_user';
 
 const Blog = ({ blog }) => (
     <div id='blog' className='full-screen'>
-        <h3 id='blog-title' className='blog-show-section'>Blog Title</h3>
+        <h3 id='blog-title' className='blog-show-section title'>Blog Title</h3>
 
         <img id='blog-img' className='blog-show-section' src='' />
 

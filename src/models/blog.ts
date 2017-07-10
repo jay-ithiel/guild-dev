@@ -20,14 +20,6 @@ class Blog {
         this.authorId = authorId;
     }
 
-    // public setTaggings(taggings: Tagging[]) {
-    //     this.taggings = taggings;
-    // }
-    //
-    // public getTaggings(): Tagging[] {
-    //     return this.taggings;
-    // }
-
     public addComment(comment: Comment) {
         this.comments.push(comment)
     }

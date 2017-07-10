@@ -8,6 +8,8 @@ import {
     Person,
     handlePendingSignIn
 } from 'blockstack';
+window.blockstack = require('blockstack');
+window.blockstackStorage = require('blockstack-storage');
 
 import Root from './components/root';
 import configureStore from './store/store';

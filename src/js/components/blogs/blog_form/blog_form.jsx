@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { isUserSignedIn } from 'blockstack';
 import * as blockstack from 'blockstack';
-import * as blockstackStorage from 'blockstack-storage';
 import Blog from '../../../../models/blog.ts';
 global.Blog = Blog;
 global.blockstack = blockstack;
@@ -12,13 +11,10 @@ class BlogForm extends React.Component {
         super(props);
 
         this.state = {
-            blog: {
-                title: '',
-                imageUrl: '',
-                body: '',
-                authorId: ''
-            },
-            storageFile: 'blogs.json'
+            title: '',
+            imageUrl: '',
+            body: '',
+            authorId: ''
         };
 
         this.actionType = (props.history.location.pathname === '/blogs/new/') ? 'Create' : 'Update';
@@ -29,23 +25,23 @@ class BlogForm extends React.Component {
     componentDidMount() {
         if (!isUserSignedIn()) {
             this.props.history.push('/signin');
+        } else {
+            this.state.authorId = this.props.currentUser.name;
         }
         // if !props.isNewBlog, dispatch requestBlog to edit
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        // let blog = new Blog(
-        //     this.state.blog.title,
-        //     this.state.blog.imageUrl,
-        //     this.state.blog.body,
-        //     this.state.blog.authorId
-        // );
-
-        // dispatch createBlog action
-        // check props.createBlog and this.state.blog
+        let blog = new Blog(
+            this.state.title,
+            this.state.imageUrl,
+            this.state.body,
+            this.state.authorId
+        );
         debugger;
-        this.props.createBlog(this.state.blog);
+        // this.props.createBlog(this.state);
+        this.props.createBlog(blog);
     }
 
     handleChange(field) {
@@ -60,26 +56,26 @@ class BlogForm extends React.Component {
                         id='blog-title-input'
                         className='blog-input'
                         onChange={ this.handleChange('title') }
-                        value={ this.state.blog.title }
+                        value={ this.state.title }
                         placeholder='Title'
                     />
 
-                    <button id='add-img-btn' className='blog-input btn'>
+                    <div id='add-img-btn' className='blog-input btn'>
                         <img id='add-img-icon'
                             src='https://res.cloudinary.com/ddgtwtbre/image/upload/v1499124357/cam-icon_cztsyy.png'
                         />
                         <h4 className='title-2'>Add Image</h4>
-                    </button>
+                    </div>
 
                     <textarea type='text'
                         id='blog-body-input'
                         className='blog-input'
                         onChange={ this.handleChange('body') }
-                        value={ this.state.blog.body }
+                        value={ this.state.body }
                         placeholder='Body'
                     />
 
-                <button id='blog-submit' className='btn primary-btn blog-input'>{this.actionType} Blog</button>
+                    <button id='blog-submit' className='btn primary-btn blog-input'>{this.actionType} Blog</button>
                 </form>
             </div>
         );

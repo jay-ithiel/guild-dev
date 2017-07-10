@@ -8,8 +8,8 @@ global.blockstack = blockstack;
 
 export const signin = () => {
     // Blockstack version 0.7
-    // var privateKey = undefined, appDomain = window.location.hostname;
-    // var authRequest = makeAuthRequest(privateKey, appDomain);
+    var privateKey = undefined, appDomain = window.location.hostname;
+    var authRequest = makeAuthRequest(privateKey, appDomain);
     // debugger;
     // redirectToSignIn(authRequest);
 
