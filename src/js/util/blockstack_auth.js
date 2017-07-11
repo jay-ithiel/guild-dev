@@ -14,7 +14,6 @@ export const signin = () => {
     // redirectToSignIn(authRequest);
 
     // Blockstack version 0.8.1
-    debugger;
     // blockstack.redirectToSignInWithAuthRequest(authRequest);
     redirectToSignIn();
 

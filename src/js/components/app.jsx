@@ -7,15 +7,15 @@ require("!style-loader!css-loader!sass-loader!../../stylesheets/sass/all.scss");
 
 import Navbar from './navbar/navbar';
 import Home from './home/home';
-import SignIn from './session/signin';
+import SignInPage from './session/signin_page';
 import BlogForm from './blogs/blog_form/blog_form_container';
 import Blog from './blogs/blog';
 
 const App = () => (
     <div id='app' className=''>
         <Navbar />
-        <Route exact path='/'     component={ Home     }></Route>
-        <Route path='/signin'     component={ SignIn   }></Route>
+        <Route exact path='/' component={ Home }></Route>
+        <Route path='/signin' component={ SignInPage }></Route>
         <Route exact path='/blogs/new'  component={ BlogForm }></Route>
         <Route exact path='/blogs/edit/:id' component={ BlogForm }></Route>
         <Route exact path='/blogs/show' component={ Blog }></Route>
