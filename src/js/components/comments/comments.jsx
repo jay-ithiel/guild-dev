@@ -34,15 +34,30 @@ class Comments extends React.Component {
 
         return (
             <div>
-                <div id='blog-content'>
+                <div className='blog-content'>
                     <h3 className='header'>COMMENTS</h3>
-                    <ul id='comments'>
-                        { commentLis }
+                    <ul className='comments'>
+                    { commentLis }
                     </ul>
                 </div>
             </div>
         );
     }
+
+    // render() {
+    //     let commentLis = this.mapComments();
+    //
+    //     return (
+    //         <div>
+    //             <div id='blog-content'>
+    //                 <h3 className='header'>COMMENTS</h3>
+    //                 <ul id='comments'>
+    //                     { commentLis }
+    //                 </ul>
+    //             </div>
+    //         </div>
+    //     );
+    // }
 }
 
 export default Comments;

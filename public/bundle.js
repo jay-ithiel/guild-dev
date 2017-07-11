@@ -49090,19 +49090,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Comment = function Comment(props) {
     return _react2.default.createElement(
         'div',
-        { id: 'comment' },
+        { className: 'comment' },
         _react2.default.createElement(
             'div',
-            { id: 'comment-head' },
+            { className: 'comment-head' },
             _react2.default.createElement(
                 'h4',
-                { id: 'comment-author' },
+                { className: 'comment-author' },
                 'Commenter\'s Name'
             )
         ),
         _react2.default.createElement(
             'p',
-            { id: 'comment-body' },
+            { className: 'comment-body' },
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
         )
     );
@@ -49182,24 +49182,87 @@ var CommentForm = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { id: 'comment-form-container', className: 'blog-content' },
+                null,
                 _react2.default.createElement(
-                    'form',
-                    { onSubmit: this.handleSubmit },
-                    _react2.default.createElement('textarea', {
-                        id: 'comment-input',
-                        className: '',
-                        onChange: this.handleChange('body'),
-                        value: this.state.body,
-                        placeholder: 'Your comment here...'
-                    }),
+                    'div',
+                    { className: 'blog-content desktop' },
                     _react2.default.createElement(
-                        'button',
-                        { id: 'submit-comment-btn', className: 'btn' },
-                        'Post Comment'
+                        'form',
+                        { className: 'comment-form', onSubmit: this.handleSubmit },
+                        _react2.default.createElement(
+                            'label',
+                            { className: 'label' },
+                            _react2.default.createElement(
+                                'h4',
+                                null,
+                                'COMMENT'
+                            ),
+                            _react2.default.createElement('textarea', { className: 'comment-input comment-body-input',
+                                onChange: this.handleChange('body'),
+                                value: this.state.body })
+                        ),
+                        _react2.default.createElement(
+                            'label',
+                            { className: 'label' },
+                            _react2.default.createElement(
+                                'h4',
+                                null,
+                                'NAME',
+                                _react2.default.createElement(
+                                    'span',
+                                    { className: 'required' },
+                                    '*'
+                                )
+                            ),
+                            _react2.default.createElement('input', { type: 'text',
+                                className: 'comment-input',
+                                onChange: this.handleChange('author_name'),
+                                value: this.state.author_name })
+                        ),
+                        _react2.default.createElement(
+                            'label',
+                            { className: 'label' },
+                            _react2.default.createElement(
+                                'h4',
+                                null,
+                                'EMAIL',
+                                _react2.default.createElement(
+                                    'span',
+                                    { className: 'required' },
+                                    '*'
+                                )
+                            ),
+                            _react2.default.createElement('input', { type: 'text',
+                                className: 'comment-input',
+                                onChange: this.handleChange('author_email'),
+                                value: this.state.author_email })
+                        ),
+                        _react2.default.createElement(
+                            'button',
+                            { className: 'btn submit-btn' },
+                            'POST COMMENT'
+                        )
                     )
                 )
             );
+            //
+            // return (
+            //     <div id='comment-form-container' className='blog-content'>
+            //         <form onSubmit={ this.handleSubmit }>
+            //             <textarea
+            //                 id='comment-input'
+            //                 className=''
+            //                 onChange={ this.handleChange('body') }
+            //                 value={ this.state.body }
+            //                 placeholder='Your comment here...'
+            //             />
+            //
+            //             <button id='submit-comment-btn' className='btn'>
+            //                 Post Comment
+            //             </button>
+            //         </form>
+            //     </div>
+            // );
         }
     }]);
 
@@ -49298,7 +49361,7 @@ var Comments = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                     'div',
-                    { id: 'blog-content' },
+                    { className: 'blog-content' },
                     _react2.default.createElement(
                         'h3',
                         { className: 'header' },
@@ -49306,12 +49369,28 @@ var Comments = function (_React$Component) {
                     ),
                     _react2.default.createElement(
                         'ul',
-                        { id: 'comments' },
+                        { className: 'comments' },
                         commentLis
                     )
                 )
             );
         }
+
+        // render() {
+        //     let commentLis = this.mapComments();
+        //
+        //     return (
+        //         <div>
+        //             <div id='blog-content'>
+        //                 <h3 className='header'>COMMENTS</h3>
+        //                 <ul id='comments'>
+        //                     { commentLis }
+        //                 </ul>
+        //             </div>
+        //         </div>
+        //     );
+        // }
+
     }]);
 
     return Comments;
@@ -57663,7 +57742,7 @@ exports = module.exports = __webpack_require__(437)(undefined);
 
 
 // module
-exports.push([module.i, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  font-family: 'Lato', sans-serif;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n#app {\n  padding-top: 70px; }\n\n.fit-img {\n  width: 100%;\n  height: 100%; }\n\n.title {\n  font-size: 30px;\n  font-weight: 700;\n  letter-spacing: 2px; }\n\n.title-2 {\n  font-size: 15px;\n  letter-spacing: 1px; }\n\n.btn {\n  background-color: #fff;\n  cursor: pointer;\n  border: none;\n  outline: none; }\n\n.primary-btn {\n  padding: 7px 15px;\n  border-radius: 2px;\n  background-color: #0be370;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  transition: all .15s ease-in;\n  font-size: 20px;\n  letter-spacing: 1px;\n  color: #fff; }\n\n.modal {\n  z-index: 10000; }\n\n@media screen and (min-width: 1100px) {\n  .no-desktop {\n    display: none; }\n  .primary-btn:hover {\n    filter: brightness(115%);\n    transition: all .15s ease-in; } }\n\n.flex {\n  display: flex; }\n\n.flex-center {\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.flex-column {\n  flex-direction: column; }\n\n.flex-row {\n  flex-direction: row; }\n\n.justify-between {\n  justify-content: space-between; }\n\n.justify-end {\n  justify-content: flex-end; }\n\n.align-center {\n  align-items: center; }\n\n.full-screen {\n  min-width: 100vw;\n  min-height: 100vh; }\n\n.full {\n  width: 100%;\n  height: 100%; }\n\n.border-box-sizing {\n  box-sizing: border-box; }\n\n.content-half {\n  width: 50vw;\n  height: 50vh; }\n\n.display-none {\n  display: none; }\n\n.close-modal {\n  position: absolute;\n  top: 7px;\n  right: 17px;\n  color: #555;\n  font-size: 35px;\n  font-weight: 100; }\n\n.z1 {\n  z-index: 1;\n  width: 100%;\n  height: 100vh;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center; }\n\n.dark-veil {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2); }\n\n.letter-space-2 {\n  letter-spacing: 2px; }\n\n.letter-space-1 {\n  letter-spacing: 1px; }\n\n.skinny {\n  font-weight: 100; }\n\n.bold {\n  font-weight: 700; }\n\n.dk-green {\n  color: #00ab6c; }\n\n.green {\n  color: #0be370; }\n\n.li-green {\n  color: #14fc7d; }\n\n#logo {\n  height: 30px;\n  width: 30px; }\n\n#hamburger-menu {\n  height: 30px;\n  width: 30px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  cursor: pointer; }\n\n.hamburger-slab {\n  width: 100%;\n  height: 2px;\n  background-color: #333; }\n\n#hamburger-dropdown-container {\n  width: 100vw;\n  height: 100vh;\n  background-color: #fff;\n  position: fixed;\n  top: 0;\n  right: 0;\n  display: none; }\n\n#hamburger-dropdown {\n  width: 80%;\n  height: 100%;\n  margin: 0 auto;\n  padding-top: 50px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: flex-start; }\n\n#hamburger-dropdown li {\n  height: 45px;\n  width: 100%;\n  margin: 10px;\n  background-color: #fff;\n  padding: 10px;\n  display: flex;\n  align-items: center;\n  font-size: 25px;\n  font-weight: 100;\n  letter-spacing: 1px; }\n\n@media screen and (min-width: 1100px) {\n  #hamburger-dropdown-container {\n    top: 70px;\n    right: 0;\n    width: auto;\n    height: auto; }\n  #hamburger-dropdown {\n    width: 250px;\n    height: auto;\n    border: 1px solid #ddd;\n    border-top: 0;\n    background-color: #fff;\n    padding-top: 0;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start; }\n  #hamburger-dropdown li {\n    margin: 0;\n    border-bottom: 1px solid #e7e7e7;\n    font-size: 15px; }\n  #hamburger-dropdown li:last-child {\n    border-bottom: 0; }\n  #hamburger-dropdown li:hover {\n    background-color: #e7e7e7;\n    transition: all .2s ease-in; } }\n\n#navbar {\n  height: 70px;\n  width: 100vw;\n  background-color: #fff;\n  box-shadow: 0 4px 2px -2px #777;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  padding: 0 15px;\n  padding-right: 25px; }\n\n#navbar > div {\n  width: 190px; }\n\n#blog-form-container {\n  width: 100vw;\n  height: 100vh;\n  display: flex;\n  justify-content: center; }\n\n#blog-form {\n  height: 100%;\n  width: 80%;\n  background-color: #fff;\n  display: flex;\n  flex-direction: column; }\n\n.blog-input {\n  min-width: 100%;\n  box-sizing: border-box;\n  padding: 7px;\n  border: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 3px;\n  outline: none;\n  font-weight: 100;\n  letter-spacing: 1px; }\n\n#blog-title-input {\n  margin-top: 25px;\n  height: 50px;\n  font-size: 30px; }\n\n#add-img-btn {\n  height: 180px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center; }\n\n#add-img-icon {\n  height: 100px; }\n\n#blog-body-input {\n  min-height: 300px;\n  font-size: 17px; }\n\n#blog-submit {\n  height: 50px; }\n\n.blog-bg {\n  width: 100%;\n  height: auto;\n  background-color: whitesmoke; }\n\n.blog {\n  width: 100%;\n  height: auto;\n  margin: 0 auto;\n  margin-top: 60px;\n  padding-top: 30px;\n  padding-bottom: 60px; }\n\n.blog-body {\n  width: 100%;\n  min-height: 700px;\n  height: auto;\n  background-color: #fff;\n  padding: 80px 60px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  font-size: 19px;\n  line-height: 30px;\n  letter-spacing: 1px;\n  color: #5f5f5f; }\n\n.blog-img {\n  width: 100%;\n  height: 50vw;\n  max-height: 600px;\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.blog-img-mobile {\n  width: 100%;\n  height: 65vw; }\n\n#blogs {\n  width: 100vw;\n  height: auto;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  flex-wrap: wrap; }\n\n#blog-link {\n  width: 80vw;\n  height: 120vw;\n  background-color: #fff;\n  border: 1px solid #111;\n  margin: 20px auto; }\n\n@media screen and (min-width: 450px) {\n  #blogs {\n    width: 100vw;\n    padding: 3vw;\n    flex-direction: row;\n    justify-content: flex-start; }\n  #blog-link {\n    width: 40vw;\n    height: 60vw; } }\n\n.blog-content {\n  height: auto;\n  width: 80%;\n  min-width: 540px;\n  max-width: 900px;\n  margin: 0 auto;\n  margin-bottom: 60px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 0 10px #aaaaaa;\n  background-color: #fff;\n  position: relative; }\n\n@media screen and (min-width: 768px) {\n  #blog-link {\n    width: 26vw;\n    height: 39vw; }\n  .blog-content {\n    width: 90%; } }\n\n@media screen and (min-width: 1100px) {\n  #blog-link {\n    max-width: 340px;\n    max-height: 500px;\n    background-color: #000; } }\n\n.blog-link-img-box {\n  height: 45%;\n  width: 100%;\n  background-color: lightgrey; }\n\n.blog-link-info {\n  height: 55%;\n  width: 100%; }\n\n#nav-search {\n  height: 25px;\n  height: 25px; }\n\n#search-icon {\n  height: 25px;\n  width: 25px;\n  float: left; }\n\n#search-modal-container {\n  display: none; }\n\n#search-modal {\n  height: 100vh;\n  width: 100vw;\n  position: fixed;\n  top: 0;\n  right: 0;\n  display: flex;\n  justify-content: center;\n  background-color: #fff; }\n\n#search-modal-input {\n  height: 40px;\n  width: 80vw;\n  margin-top: 30vh;\n  border: none;\n  border-bottom: 1px solid #00ab6c;\n  outline: none;\n  font-size: 30px;\n  font-weight: 100;\n  letter-spacing: 1px;\n  padding: 5px 10px; }\n\n#about-user {\n  width: 500px;\n  height: 125px;\n  background-color: #fff;\n  border: 1px solid #ccc;\n  box-sizing: border-box;\n  padding: 10px 30px;\n  margin: 0 auto; }\n\n#about-user-img {\n  width: 75px;\n  height: 75px;\n  background-color: grey;\n  border-radius: 50%;\n  margin-right: 30px; }\n\n#about-user-name {\n  font-size: 14px;\n  font-weight: 200;\n  letter-spacing: 1px; }\n\n#about-user-bio {\n  font-size: 13px;\n  font-weight: 100;\n  letter-spacing: 1px;\n  line-height: 17px; }\n", ""]);
+exports.push([module.i, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  font-family: 'Lato', sans-serif;\n  vertical-align: baseline;\n  box-sizing: border-box; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n#app {\n  padding-top: 70px; }\n\n.fit-img {\n  width: 100%;\n  height: 100%; }\n\n.title {\n  font-size: 30px;\n  font-weight: 700;\n  letter-spacing: 2px; }\n\n.title-2 {\n  font-size: 15px;\n  letter-spacing: 1px; }\n\n.btn {\n  background-color: #fff;\n  cursor: pointer;\n  border: none;\n  outline: none; }\n\n.primary-btn {\n  padding: 7px 15px;\n  border-radius: 2px;\n  background-color: #0be370;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  transition: all .15s ease-in;\n  font-size: 20px;\n  letter-spacing: 1px;\n  color: #fff; }\n\n.modal {\n  z-index: 10000; }\n\n@media screen and (min-width: 1100px) {\n  .no-desktop {\n    display: none; }\n  .primary-btn:hover {\n    filter: brightness(115%);\n    transition: all .15s ease-in; } }\n\n.flex {\n  display: flex; }\n\n.flex-center {\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.flex-column {\n  flex-direction: column; }\n\n.flex-row {\n  flex-direction: row; }\n\n.justify-between {\n  justify-content: space-between; }\n\n.justify-end {\n  justify-content: flex-end; }\n\n.align-center {\n  align-items: center; }\n\n.full-screen {\n  min-width: 100vw;\n  min-height: 100vh; }\n\n.full {\n  width: 100%;\n  height: 100%; }\n\n.border-box-sizing {\n  box-sizing: border-box; }\n\n.content-half {\n  width: 50vw;\n  height: 50vh; }\n\n.display-none {\n  display: none; }\n\n.close-modal {\n  position: absolute;\n  top: 7px;\n  right: 17px;\n  color: #555;\n  font-size: 35px;\n  font-weight: 100; }\n\n.z1 {\n  z-index: 1;\n  width: 100%;\n  height: 100vh;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center; }\n\n.dark-veil {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2); }\n\n.letter-space-2 {\n  letter-spacing: 2px; }\n\n.letter-space-1 {\n  letter-spacing: 1px; }\n\n.skinny {\n  font-weight: 100; }\n\n.bold {\n  font-weight: 700; }\n\n.dk-green {\n  color: #00ab6c; }\n\n.green {\n  color: #0be370; }\n\n.li-green {\n  color: #14fc7d; }\n\n#logo {\n  height: 30px;\n  width: 30px; }\n\n#hamburger-menu {\n  height: 30px;\n  width: 30px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  cursor: pointer; }\n\n.hamburger-slab {\n  width: 100%;\n  height: 2px;\n  background-color: #333; }\n\n#hamburger-dropdown-container {\n  width: 100vw;\n  height: 100vh;\n  background-color: #fff;\n  position: fixed;\n  top: 0;\n  right: 0;\n  display: none; }\n\n#hamburger-dropdown {\n  width: 80%;\n  height: 100%;\n  margin: 0 auto;\n  padding-top: 50px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: flex-start; }\n\n#hamburger-dropdown li {\n  height: 45px;\n  width: 100%;\n  margin: 10px;\n  background-color: #fff;\n  padding: 10px;\n  display: flex;\n  align-items: center;\n  font-size: 25px;\n  font-weight: 100;\n  letter-spacing: 1px; }\n\n@media screen and (min-width: 1100px) {\n  #hamburger-dropdown-container {\n    top: 70px;\n    right: 0;\n    width: auto;\n    height: auto; }\n  #hamburger-dropdown {\n    width: 250px;\n    height: auto;\n    border: 1px solid #ddd;\n    border-top: 0;\n    background-color: #fff;\n    padding-top: 0;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start; }\n  #hamburger-dropdown li {\n    margin: 0;\n    border-bottom: 1px solid #e7e7e7;\n    font-size: 15px; }\n  #hamburger-dropdown li:last-child {\n    border-bottom: 0; }\n  #hamburger-dropdown li:hover {\n    background-color: #e7e7e7;\n    transition: all .2s ease-in; } }\n\n#navbar {\n  height: 70px;\n  width: 100vw;\n  background-color: #fff;\n  box-shadow: 0 4px 2px -2px #777;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  padding: 0 15px;\n  padding-right: 25px;\n  z-index: 1000000000000; }\n\n#navbar > div {\n  width: 190px; }\n\n#blog-form-container {\n  width: 100vw;\n  height: 100vh;\n  display: flex;\n  justify-content: center; }\n\n#blog-form {\n  height: 100%;\n  width: 80%;\n  background-color: #fff;\n  display: flex;\n  flex-direction: column; }\n\n.blog-input {\n  min-width: 100%;\n  box-sizing: border-box;\n  padding: 7px;\n  border: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 3px;\n  outline: none;\n  font-weight: 100;\n  letter-spacing: 1px; }\n\n#blog-title-input {\n  margin-top: 25px;\n  height: 50px;\n  font-size: 30px; }\n\n#add-img-btn {\n  height: 180px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center; }\n\n#add-img-icon {\n  height: 100px; }\n\n#blog-body-input {\n  min-height: 300px;\n  font-size: 17px; }\n\n#blog-submit {\n  height: 50px; }\n\n#blogs {\n  width: 100vw;\n  height: auto;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  flex-wrap: wrap; }\n\n#blog-link {\n  width: 80vw;\n  height: 120vw;\n  background-color: #fff;\n  border: 1px solid #111;\n  margin: 20px auto; }\n\n@media screen and (min-width: 450px) {\n  #blogs {\n    width: 100vw;\n    padding: 3vw;\n    flex-direction: row;\n    justify-content: flex-start; }\n  #blog-link {\n    width: 40vw;\n    height: 60vw; } }\n\n.blog-content {\n  height: auto;\n  width: 80%;\n  min-width: 540px;\n  max-width: 900px;\n  margin: 0 auto;\n  margin-bottom: 60px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 0 10px #aaaaaa;\n  background-color: #fff;\n  position: relative; }\n\n@media screen and (min-width: 768px) {\n  #blog-link {\n    width: 26vw;\n    height: 39vw; }\n  .blog-content {\n    width: 90%; } }\n\n@media screen and (min-width: 1100px) {\n  #blog-link {\n    max-width: 340px;\n    max-height: 500px;\n    background-color: #000; } }\n\n.blog-link-img-box {\n  height: 45%;\n  width: 100%;\n  background-color: lightgrey; }\n\n.blog-link-info {\n  height: 55%;\n  width: 100%; }\n\n#nav-search {\n  height: 25px;\n  height: 25px; }\n\n#search-icon {\n  height: 25px;\n  width: 25px;\n  float: left; }\n\n#search-modal-container {\n  display: none; }\n\n#search-modal {\n  height: 100vh;\n  width: 100vw;\n  position: fixed;\n  top: 0;\n  right: 0;\n  display: flex;\n  justify-content: center;\n  background-color: #fff; }\n\n#search-modal-input {\n  height: 40px;\n  width: 80vw;\n  margin-top: 30vh;\n  border: none;\n  border-bottom: 1px solid #00ab6c;\n  outline: none;\n  font-size: 30px;\n  font-weight: 100;\n  letter-spacing: 1px;\n  padding: 5px 10px; }\n\n#about-user {\n  width: 500px;\n  height: 125px;\n  background-color: #fff;\n  border: 1px solid #ccc;\n  box-sizing: border-box;\n  padding: 10px 30px;\n  margin: 0 auto; }\n\n#about-user-img {\n  width: 75px;\n  height: 75px;\n  background-color: grey;\n  border-radius: 50%;\n  margin-right: 30px; }\n\n#about-user-name {\n  font-size: 14px;\n  font-weight: 200;\n  letter-spacing: 1px; }\n\n#about-user-bio {\n  font-size: 13px;\n  font-weight: 100;\n  letter-spacing: 1px;\n  line-height: 17px; }\n", ""]);
 
 // exports
 
