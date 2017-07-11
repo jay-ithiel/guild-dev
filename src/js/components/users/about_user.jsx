@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 const AboutUser = props => (
     <div id='about-user' className='flex'>
         <div>
-            <img src={ props.currentUser.image[0].contentUrl } id='about-user-img' alt='Blog Image' />
+            <img src={ props.currentUser.image[0].contentUrl } id='about-user-img' alt='Profile Image' />
             <h4 id='about-user-name'>
                 User Name
                 {/* props.currentUser.name */}

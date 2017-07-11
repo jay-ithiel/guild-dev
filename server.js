@@ -14,12 +14,11 @@ function allowCrossDomain(req, res, next) {
 app.use(allowCrossDomain);
 app.use('/', express.static(__dirname + '/public'));
 app.use('/signin', express.static(__dirname + '/public'));
-app.use('/profile', express.static(__dirname + '/public'));
-app.use('/blogs/user', express.static(__dirname + '/public'));
 app.use('/blogs/new', express.static(__dirname + '/public'));
 app.use('/blogs/edit/:id', express.static(__dirname + '/public'));
 app.use('/blogs/:id', express.static(__dirname + '/public'));
-app.use('/blogs/show', express.static(__dirname + '/public'));
+// app.use('/profile', express.static(__dirname + '/public'));
+// app.use('/blogs/user', express.static(__dirname + '/public'));
 
 app.listen(port, (err) => {
   if (err) {

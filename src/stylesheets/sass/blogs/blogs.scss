@@ -32,10 +32,32 @@
     }
 }
 
+.blog-content {
+    height: auto;
+    width: 80%;
+    min-width: 540px;
+    max-width: 900px;
+
+    margin: 0 auto;
+    margin-bottom: 60px;
+
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px #aaaaaa;
+
+    background-color: #fff;
+    position: relative;
+}
+
+
 @media screen and (min-width: 768px) {
     #blog-link {
         width: 26vw;
         height: 39vw;
+    }
+
+    .blog-content {
+        width: 90%;
     }
 }
 
