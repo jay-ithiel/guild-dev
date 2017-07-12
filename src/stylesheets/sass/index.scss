@@ -1,5 +1,14 @@
 #app {
     padding-top: 70px;
+    // background-color: whitesmoke;
+}
+
+#layout {
+    min-width: 100vw;
+    min-height: 100vh;
+    margin-top: -70px;
+    padding: 0 10vw;
+    padding-top: 70px;
 }
 
 .fit-img {
@@ -25,10 +34,13 @@
     outline: none;
 }
 
-.primary-btn {
+.shadow-button {
+    box-shadow: 0 0 20px #777;
+}
+
+.primary-btn-light {
     padding: 10px 20px;
     border-radius: 2px;
-    // background-color: #0be370;
     background-color: #fefefe;
 
     display: flex;
@@ -43,8 +55,20 @@
     color: #222;
 }
 
-.shadow-button {
-    box-shadow: 0 0 20px #777;
+.primary-btn {
+    padding: 7px 15px;
+    border-radius: 2px;
+    background-color: #43bd7e;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: all .15s ease-in;
+
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: #fff;
 }
 
 .modal {

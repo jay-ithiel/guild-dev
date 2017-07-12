@@ -2,14 +2,6 @@
     background-color: #43bd7e;
 }
 
-// #signin-content {
-//     height: 225px;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-around;
-//     align-items: center;
-// }
-
 #signin-guild-logo {
     width: 100px;
 }
@@ -31,6 +23,7 @@
 
 #about-user {
     width: 500px;
+    max-width: 80vw;
     height: 125px;
 
     background-color: #fff;

@@ -20,9 +20,8 @@ document.addEventListener('DOMContentLoaded', event => {
     let store = configureStore();
 
     if (isUserSignedIn()) {
-        // Blockstack version 8
         let userData = loadUserData();
-        store.dispatch(receiveCurrentUser(userData.profile));
+        store.dispatch(receiveCurrentUser(userData));
 
         // Blockstack version 7
         // loadUserData(userData => {

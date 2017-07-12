@@ -48580,9 +48580,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
     var store = (0, _store2.default)();
 
     if ((0, _blockstack.isUserSignedIn)()) {
-        // Blockstack version 8
         var userData = (0, _blockstack.loadUserData)();
-        store.dispatch((0, _session_actions.receiveCurrentUser)(userData.profile));
+        store.dispatch((0, _session_actions.receiveCurrentUser)(userData));
 
         // Blockstack version 7
         // loadUserData(userData => {
@@ -48737,33 +48736,26 @@ var Blog = function (_React$Component) {
                 return _react2.default.createElement('div', null);
             } else {
                 return _react2.default.createElement(
-                    'div',
-                    { className: 'blog-bg' },
+                    'section',
+                    { id: 'layout' },
                     _react2.default.createElement(
                         'div',
-                        { className: 'blog' },
+                        { id: 'blog', className: '' },
+                        _react2.default.createElement(
+                            'h3',
+                            { id: 'blog-title', className: 'blog-show-section' },
+                            'Blog Title'
+                        ),
+                        _react2.default.createElement('img', { id: 'blog-img', alt: 'Blog Image', className: 'blog-show-section', src: '' }),
+                        _react2.default.createElement(
+                            'p',
+                            { id: 'blog-body', className: 'blog-show-section' },
+                            'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                        ),
                         _react2.default.createElement(
                             'div',
-                            { className: 'blog-content' },
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'blink-img' },
-                                _react2.default.createElement('img', { className: 'blog-img', src: '', alt: 'Blog Image' })
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'blink-intro' },
-                                _react2.default.createElement(
-                                    'span',
-                                    { className: 'blink-title' },
-                                    'Blog Title'
-                                ),
-                                _react2.default.createElement(
-                                    'p',
-                                    { className: 'blink-body' },
-                                    'Hello World! This is a blog. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-                                )
-                            )
+                            { className: 'blog-show-section' },
+                            _react2.default.createElement(_about_user2.default, null)
                         ),
                         _react2.default.createElement(_comment_form2.default, null)
                     )
@@ -48774,29 +48766,6 @@ var Blog = function (_React$Component) {
 
     return Blog;
 }(_react2.default.Component);
-
-// const Blog = ({ blog }) => (
-//     <div id='blog' className='full-screen'>
-//         <h3 id='blog-title' className='blog-show-section'>
-//             {/* blog.title */}
-//             Blog Title
-//         </h3>
-//
-//         <img id='blog-img' alt='Blog Image' className='blog-show-section' src='' />
-//
-//         <p id='blog-body' className='blog-show-section'>
-//             {/* blog.body */}
-//             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-//         </p>
-//
-//         <div className='blog-show-section'>
-//             <AboutUser />
-//         </div>
-//
-//         <CommentForm />
-//
-//     </div>
-// );
 
 exports.default = Blog;
 
@@ -49022,7 +48991,7 @@ var BlogLink = function BlogLink(_ref) {
         _react2.default.createElement(
             'div',
             { className: 'blog-link-img-box' },
-            _react2.default.createElement('img', { src: '', className: 'blog-link-img' })
+            _react2.default.createElement('img', { src: '', alt: 'Blog Image', className: 'blog-link-img' })
         ),
         _react2.default.createElement(
             'div',
@@ -49919,7 +49888,7 @@ var SignIn = function (_React$Component) {
                 { id: 'signin' },
                 _react2.default.createElement(
                     'button',
-                    { onClick: this.props.signin, className: 'btn primary-btn shadow-button' },
+                    { onClick: this.props.signin, className: 'btn primary-btn-light shadow-button' },
                     'Sign In With Blockstack'
                 )
             );
@@ -49965,7 +49934,7 @@ var AboutUser = function AboutUser(props) {
         _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement('img', { src: props.currentUser.image[0].contentUrl, id: 'about-user-img', alt: 'Profile Image' }),
+            _react2.default.createElement('img', { src: '', id: 'about-user-img', alt: 'Profile Image' }),
             _react2.default.createElement(
                 'h4',
                 { id: 'about-user-name' },
@@ -57741,7 +57710,7 @@ exports = module.exports = __webpack_require__(437)(undefined);
 
 
 // module
-exports.push([module.i, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  font-family: 'Lato', sans-serif;\n  vertical-align: baseline;\n  box-sizing: border-box; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n#app {\n  padding-top: 70px; }\n\n.fit-img {\n  width: 100%;\n  height: 100%; }\n\n.title {\n  font-size: 30px;\n  font-weight: 700;\n  letter-spacing: 2px; }\n\n.title-2 {\n  font-size: 15px;\n  letter-spacing: 1px; }\n\n.btn {\n  background-color: #fff;\n  cursor: pointer;\n  border: none;\n  outline: none; }\n\n.primary-btn {\n  padding: 10px 20px;\n  border-radius: 2px;\n  background-color: #fefefe;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  transition: all .15s ease-in;\n  font-size: 21px;\n  font-weight: 400;\n  letter-spacing: 2px;\n  color: #222; }\n\n.shadow-button {\n  box-shadow: 0 0 20px #777; }\n\n.modal {\n  z-index: 10000; }\n\n@media screen and (min-width: 1100px) {\n  .no-desktop {\n    display: none; }\n  .primary-btn:hover {\n    filter: brightness(115%);\n    transition: all .15s ease-in; } }\n\n.text-align-center {\n  text-align: center; }\n\n.center {\n  margin: 0 auto; }\n\n.flex {\n  display: flex; }\n\n.flex-center {\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.flex-column {\n  flex-direction: column; }\n\n.flex-row {\n  flex-direction: row; }\n\n.justify-between {\n  justify-content: space-between; }\n\n.justify-end {\n  justify-content: flex-end; }\n\n.align-center {\n  align-items: center; }\n\n.full-screen {\n  min-width: 100vw;\n  min-height: 100vh;\n  margin-top: -70px;\n  padding-top: 70px; }\n\n.full {\n  width: 100%;\n  height: 100%; }\n\n.border-box-sizing {\n  box-sizing: border-box; }\n\n.content-half {\n  width: 50vw;\n  height: 50vh; }\n\n.display-none {\n  display: none; }\n\n.close-modal {\n  position: absolute;\n  top: 7px;\n  right: 17px;\n  color: #555;\n  font-size: 35px;\n  font-weight: 100; }\n\n.z1 {\n  z-index: 1;\n  width: 100%;\n  height: 100vh;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center; }\n\n.dark-veil {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2); }\n\n.letter-space-2 {\n  letter-spacing: 2px; }\n\n.letter-space-1 {\n  letter-spacing: 1px; }\n\n.skinny {\n  font-weight: 100; }\n\n.bold {\n  font-weight: 700; }\n\n.dk-green {\n  color: #00ab6c; }\n\n.green {\n  color: #0be370; }\n\n.li-green {\n  color: #14fc7d; }\n\n#logo {\n  height: 30px;\n  width: 30px; }\n\n#hamburger-menu {\n  height: 30px;\n  width: 30px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  cursor: pointer; }\n\n.hamburger-slab {\n  width: 100%;\n  height: 2px;\n  background-color: #333; }\n\n#hamburger-dropdown-container {\n  width: 100vw;\n  height: 100vh;\n  background-color: #fff;\n  position: fixed;\n  top: 0;\n  right: 0;\n  display: none; }\n\n#hamburger-dropdown {\n  width: 80%;\n  height: 100%;\n  margin: 0 auto;\n  padding-top: 50px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: flex-start; }\n\n#hamburger-dropdown li {\n  height: 45px;\n  width: 100%;\n  margin: 10px;\n  background-color: #fff;\n  padding: 10px;\n  display: flex;\n  align-items: center;\n  font-size: 25px;\n  font-weight: 100;\n  letter-spacing: 1px; }\n\n@media screen and (min-width: 1100px) {\n  #hamburger-dropdown-container {\n    top: 70px;\n    right: 0;\n    width: auto;\n    height: auto; }\n  #hamburger-dropdown {\n    width: 250px;\n    height: auto;\n    border: 1px solid #ddd;\n    border-top: 0;\n    background-color: #fff;\n    padding-top: 0;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start; }\n  #hamburger-dropdown li {\n    margin: 0;\n    border-bottom: 1px solid #e7e7e7;\n    font-size: 15px; }\n  #hamburger-dropdown li:last-child {\n    border-bottom: 0; }\n  #hamburger-dropdown li:hover {\n    background-color: #e7e7e7;\n    transition: all .2s ease-in; } }\n\n#navbar {\n  height: 70px;\n  width: 100vw;\n  background-color: #fff;\n  box-shadow: 0 4px 2px -2px #777;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  padding: 0 15px;\n  padding-right: 25px;\n  z-index: 1000000000000; }\n\n#navbar > div {\n  width: 190px; }\n\n#blog-form-container {\n  width: 100vw;\n  height: 100vh;\n  display: flex;\n  justify-content: center; }\n\n#blog-form {\n  height: 100%;\n  width: 80%;\n  background-color: #fff;\n  display: flex;\n  flex-direction: column; }\n\n.blog-input {\n  min-width: 100%;\n  box-sizing: border-box;\n  padding: 7px;\n  border: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 3px;\n  outline: none;\n  font-weight: 100;\n  letter-spacing: 1px; }\n\n#blog-title-input {\n  margin-top: 25px;\n  height: 50px;\n  font-size: 30px; }\n\n#add-img-btn {\n  height: 180px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center; }\n\n#add-img-icon {\n  height: 100px; }\n\n#blog-body-input {\n  min-height: 300px;\n  font-size: 17px; }\n\n#blog-submit {\n  height: 50px; }\n\n#blogs {\n  width: 100vw;\n  height: auto;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  flex-wrap: wrap; }\n\n#blog-link {\n  width: 80vw;\n  height: 120vw;\n  background-color: #fff;\n  border: 1px solid #111;\n  margin: 20px auto; }\n\n@media screen and (min-width: 450px) {\n  #blogs {\n    width: 100vw;\n    padding: 3vw;\n    flex-direction: row;\n    justify-content: flex-start; }\n  #blog-link {\n    width: 40vw;\n    height: 60vw; } }\n\n.blog-content {\n  height: auto;\n  width: 80%;\n  min-width: 540px;\n  max-width: 900px;\n  margin: 0 auto;\n  margin-bottom: 60px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 0 10px #aaaaaa;\n  background-color: #fff;\n  position: relative; }\n\n@media screen and (min-width: 768px) {\n  #blog-link {\n    width: 26vw;\n    height: 39vw; }\n  .blog-content {\n    width: 90%; } }\n\n@media screen and (min-width: 1100px) {\n  #blog-link {\n    max-width: 340px;\n    max-height: 500px;\n    background-color: #000; } }\n\n.blog-link-img-box {\n  height: 45%;\n  width: 100%;\n  background-color: lightgrey; }\n\n.blog-link-info {\n  height: 55%;\n  width: 100%; }\n\n#nav-search {\n  height: 25px;\n  height: 25px; }\n\n#search-icon {\n  height: 25px;\n  width: 25px;\n  float: left; }\n\n#search-modal-container {\n  display: none; }\n\n#search-modal {\n  height: 100vh;\n  width: 100vw;\n  position: fixed;\n  top: 0;\n  right: 0;\n  display: flex;\n  justify-content: center;\n  background-color: #fff; }\n\n#search-modal-input {\n  height: 40px;\n  width: 80vw;\n  margin-top: 30vh;\n  border: none;\n  border-bottom: 1px solid #00ab6c;\n  outline: none;\n  font-size: 30px;\n  font-weight: 100;\n  letter-spacing: 1px;\n  padding: 5px 10px; }\n\n.signin-bg {\n  background-color: #43bd7e; }\n\n#signin-guild-logo {\n  width: 100px; }\n\n#signin-guild-head {\n  font-size: 55px;\n  font-weight: 200;\n  letter-spacing: 2px;\n  margin: 20px;\n  margin-top: 10px; }\n\n#signin-guild-span {\n  font-size: 13px;\n  font-weight: 100;\n  letter-spacing: 3px;\n  margin-bottom: 20px; }\n\n#about-user {\n  width: 500px;\n  height: 125px;\n  background-color: #fff;\n  border: 1px solid #ccc;\n  box-sizing: border-box;\n  padding: 10px 30px;\n  margin: 0 auto; }\n\n#about-user-img {\n  width: 75px;\n  height: 75px;\n  background-color: grey;\n  border-radius: 50%;\n  margin-right: 30px; }\n\n#about-user-name {\n  font-size: 14px;\n  font-weight: 200;\n  letter-spacing: 1px; }\n\n#about-user-bio {\n  font-size: 13px;\n  font-weight: 100;\n  letter-spacing: 1px;\n  line-height: 17px; }\n", ""]);
+exports.push([module.i, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  font-family: 'Lato', sans-serif;\n  vertical-align: baseline;\n  box-sizing: border-box; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n#app {\n  padding-top: 70px; }\n\n#layout {\n  min-width: 100vw;\n  min-height: 100vh;\n  margin-top: -70px;\n  padding: 0 10vw;\n  padding-top: 70px; }\n\n.fit-img {\n  width: 100%;\n  height: 100%; }\n\n.title {\n  font-size: 30px;\n  font-weight: 700;\n  letter-spacing: 2px; }\n\n.title-2 {\n  font-size: 15px;\n  letter-spacing: 1px; }\n\n.btn {\n  background-color: #fff;\n  cursor: pointer;\n  border: none;\n  outline: none; }\n\n.shadow-button {\n  box-shadow: 0 0 20px #777; }\n\n.primary-btn-light {\n  padding: 10px 20px;\n  border-radius: 2px;\n  background-color: #fefefe;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  transition: all .15s ease-in;\n  font-size: 21px;\n  font-weight: 400;\n  letter-spacing: 2px;\n  color: #222; }\n\n.primary-btn {\n  padding: 7px 15px;\n  border-radius: 2px;\n  background-color: #43bd7e;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  transition: all .15s ease-in;\n  font-size: 20px;\n  letter-spacing: 1px;\n  color: #fff; }\n\n.modal {\n  z-index: 10000; }\n\n@media screen and (min-width: 1100px) {\n  .no-desktop {\n    display: none; }\n  .primary-btn:hover {\n    filter: brightness(115%);\n    transition: all .15s ease-in; } }\n\n.text-align-center {\n  text-align: center; }\n\n.center {\n  margin: 0 auto; }\n\n.flex {\n  display: flex; }\n\n.flex-center {\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.flex-column {\n  flex-direction: column; }\n\n.flex-row {\n  flex-direction: row; }\n\n.justify-between {\n  justify-content: space-between; }\n\n.justify-end {\n  justify-content: flex-end; }\n\n.align-center {\n  align-items: center; }\n\n.full-screen {\n  min-width: 100vw;\n  min-height: 100vh;\n  margin-top: -70px;\n  padding-top: 70px; }\n\n.full {\n  width: 100%;\n  height: 100%; }\n\n.border-box-sizing {\n  box-sizing: border-box; }\n\n.content-half {\n  width: 50vw;\n  height: 50vh; }\n\n.display-none {\n  display: none; }\n\n.close-modal {\n  position: absolute;\n  top: 7px;\n  right: 17px;\n  color: #555;\n  font-size: 35px;\n  font-weight: 100; }\n\n.z1 {\n  z-index: 1;\n  width: 100%;\n  height: 100vh;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center; }\n\n.dark-veil {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2); }\n\n.letter-space-2 {\n  letter-spacing: 2px; }\n\n.letter-space-1 {\n  letter-spacing: 1px; }\n\n.skinny {\n  font-weight: 100; }\n\n.bold {\n  font-weight: 700; }\n\n.dk-green {\n  color: #00ab6c; }\n\n.green {\n  color: #0be370; }\n\n.li-green {\n  color: #14fc7d; }\n\n#logo {\n  height: 30px;\n  width: 30px; }\n\n#hamburger-menu {\n  height: 30px;\n  width: 30px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  cursor: pointer; }\n\n.hamburger-slab {\n  width: 100%;\n  height: 2px;\n  background-color: #333; }\n\n#hamburger-dropdown-container {\n  width: 100vw;\n  height: 100vh;\n  background-color: #fff;\n  position: fixed;\n  top: 0;\n  right: 0;\n  display: none; }\n\n#hamburger-dropdown {\n  width: 80%;\n  height: 100%;\n  margin: 0 auto;\n  padding-top: 50px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: flex-start; }\n\n#hamburger-dropdown li {\n  height: 45px;\n  width: 100%;\n  margin: 10px;\n  background-color: #fff;\n  padding: 10px;\n  display: flex;\n  align-items: center;\n  font-size: 25px;\n  font-weight: 100;\n  letter-spacing: 1px; }\n\n@media screen and (min-width: 1100px) {\n  #hamburger-dropdown-container {\n    top: 70px;\n    right: 0;\n    width: auto;\n    height: auto; }\n  #hamburger-dropdown {\n    width: 250px;\n    height: auto;\n    border: 1px solid #ddd;\n    border-top: 0;\n    background-color: #fff;\n    padding-top: 0;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start; }\n  #hamburger-dropdown li {\n    margin: 0;\n    border-bottom: 1px solid #e7e7e7;\n    font-size: 15px; }\n  #hamburger-dropdown li:last-child {\n    border-bottom: 0; }\n  #hamburger-dropdown li:hover {\n    background-color: #e7e7e7;\n    transition: all .2s ease-in; } }\n\n#navbar {\n  height: 70px;\n  width: 100vw;\n  background-color: #fff;\n  box-shadow: 0 4px 2px -2px #777;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  padding: 0 15px;\n  padding-right: 25px;\n  z-index: 1000000000000; }\n\n#navbar > div {\n  width: 190px; }\n\n#blog-form-container {\n  width: 100vw;\n  height: 100vh;\n  display: flex;\n  justify-content: center; }\n\n#blog-form {\n  height: 100%;\n  width: 80%;\n  background-color: #fff;\n  display: flex;\n  flex-direction: column; }\n\n.blog-input {\n  min-width: 100%;\n  box-sizing: border-box;\n  padding: 7px;\n  border: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 3px;\n  outline: none;\n  font-weight: 100;\n  letter-spacing: 1px; }\n\n#blog-title-input {\n  margin-top: 25px;\n  height: 50px;\n  font-size: 30px; }\n\n#add-img-btn {\n  height: 180px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center; }\n\n#add-img-icon {\n  height: 100px; }\n\n#blog-body-input {\n  min-height: 300px;\n  font-size: 17px; }\n\n#blog-submit {\n  height: 50px; }\n\n#blog {\n  width: 100%;\n  height: auto;\n  margin: 30px 0; }\n\n#blog-title {\n  text-align: center;\n  font-size: 35px;\n  font-weight: 700;\n  letter-spacing: 2px; }\n\n#blog-img {\n  width: 80vw;\n  height: 40vw;\n  margin: 20px 0;\n  background-color: lightgrey; }\n\n#blog-body {\n  font-size: 17px;\n  font-weight: 100;\n  line-height: 23px;\n  letter-spacing: 1px;\n  margin-bottom: 20px; }\n\n#blogs {\n  width: 100vw;\n  height: auto;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  flex-wrap: wrap; }\n\n#blog-link {\n  width: 80vw;\n  height: 120vw;\n  background-color: whitesmoke;\n  margin: 20px auto; }\n\n@media screen and (min-width: 450px) {\n  #blogs {\n    width: 100vw;\n    padding: 3vw;\n    flex-direction: row;\n    justify-content: flex-start; }\n  #blog-link {\n    width: 40vw;\n    height: 60vw; } }\n\n.blog-content {\n  height: auto;\n  width: 80%;\n  min-width: 540px;\n  max-width: 900px;\n  margin: 0 auto;\n  margin-bottom: 60px;\n  display: flex;\n  flex-direction: column;\n  box-shadow: 0 0 10px #aaaaaa;\n  background-color: #fff;\n  position: relative; }\n\n@media screen and (min-width: 768px) {\n  #blog-link {\n    width: 26vw;\n    height: 39vw; }\n  .blog-content {\n    width: 90%; } }\n\n@media screen and (min-width: 1100px) {\n  #blog-link {\n    max-width: 340px;\n    max-height: 500px;\n    background-color: #000; } }\n\n.blog-link-img-box {\n  height: 45%;\n  width: 100%;\n  background-color: lightgrey; }\n\n.blog-link-info {\n  height: 55%;\n  width: 100%; }\n\n#nav-search {\n  height: 25px;\n  height: 25px; }\n\n#search-icon {\n  height: 25px;\n  width: 25px;\n  float: left; }\n\n#search-modal-container {\n  display: none; }\n\n#search-modal {\n  height: 100vh;\n  width: 100vw;\n  position: fixed;\n  top: 0;\n  right: 0;\n  display: flex;\n  justify-content: center;\n  background-color: #fff; }\n\n#search-modal-input {\n  height: 40px;\n  width: 80vw;\n  margin-top: 30vh;\n  border: none;\n  border-bottom: 1px solid #00ab6c;\n  outline: none;\n  font-size: 30px;\n  font-weight: 100;\n  letter-spacing: 1px;\n  padding: 5px 10px; }\n\n.signin-bg {\n  background-color: #43bd7e; }\n\n#signin-guild-logo {\n  width: 100px; }\n\n#signin-guild-head {\n  font-size: 55px;\n  font-weight: 200;\n  letter-spacing: 2px;\n  margin: 20px;\n  margin-top: 10px; }\n\n#signin-guild-span {\n  font-size: 13px;\n  font-weight: 100;\n  letter-spacing: 3px;\n  margin-bottom: 20px; }\n\n#about-user {\n  width: 500px;\n  max-width: 80vw;\n  height: 125px;\n  background-color: #fff;\n  border: 1px solid #ccc;\n  box-sizing: border-box;\n  padding: 10px 30px;\n  margin: 0 auto; }\n\n#about-user-img {\n  width: 75px;\n  height: 75px;\n  background-color: grey;\n  border-radius: 50%;\n  margin-right: 30px; }\n\n#about-user-name {\n  font-size: 14px;\n  font-weight: 200;\n  letter-spacing: 1px; }\n\n#about-user-bio {\n  font-size: 13px;\n  font-weight: 100;\n  letter-spacing: 1px;\n  line-height: 17px; }\n", ""]);
 
 // exports
 
