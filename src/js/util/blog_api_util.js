@@ -17,13 +17,14 @@ export const createBlog = (blog, dispatch) => {
     });
 };
 
-export const fetchBlogs = () => {
+export const fetchBlogs = dispatch => {
     var blogs;
-    blockstack.getFile(STORAGE_FILE).then((blogs) => {
-        blogs = JSON.parse(blogs || '[]');
-        blogs.forEach((blog, index) => {
+    blockstack.getFile(STORAGE_FILE).then((blogItems) => {
+        blogItems = JSON.parse(blogItems || '[]');
+        blogItems.forEach((blog, index) => {
             blog.id = index;
         });
+        blogs = blogItems;
     });
     dispatch({
         type: RECEIVE_BLOGS,

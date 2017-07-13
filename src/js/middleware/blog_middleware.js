@@ -16,6 +16,8 @@ import {
 } from '../util/blog_api_util';
 
 const BlogMiddleware = ({ getState, dispatch }) => next => action => {
+    debugger;
+
     switch(action.type) {
         case CREATE_BLOG:
             createBlog(action.blog, dispatch);

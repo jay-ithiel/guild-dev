@@ -16,7 +16,7 @@ const BlogReducer = (oldState = _defaultState, action) => {
     let newState = merge({}, oldState);
 
     // check action values
-    // debugger;
+    debugger;
 
     switch(action.type) {
         case RECEIVE_BLOG:
