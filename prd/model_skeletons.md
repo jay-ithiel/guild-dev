@@ -1,4 +1,4 @@
-# Blogstack Model skeleton/Schema
+# Guild Model skeleton/Schema
 
 ## Users
 User auth powered by Blockstack.js

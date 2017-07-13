@@ -1,7 +1,7 @@
-# Blogstack
+# Guild
 
 ## Intro
-Blogstack is a decentralized blog site powered by Blockstack. The goal is to be the destination to share and discover innovative ideas, stories, news/entertainment articles in the new, decentralized internet.
+Guild is a decentralized blog site powered by Blockstack. The goal is to be the destination to share and discover innovative ideas, stories, news/entertainment articles in the new, decentralized internet.
 
 
 ## Who's it for?
@@ -24,7 +24,7 @@ At minimum, this app will satisfy the following criteria with bug-free, smooth n
 - [ ] Tags: Topic(s) of a blog
 - [ ] Search: Search & filter blogs
 - [ ] Comments: Users can comment on blog
-- [ ] Index View: Homepage page of Blogstack
+- [ ] Index View: Homepage page of Guild
 - [ ] Blog View: Individual blog show page
 
 ### Bonus features

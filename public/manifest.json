@@ -1,9 +1,9 @@
 {
-  "name": "Blogstack",
+  "name": "Guild",
   "start_url": "localhost:5000",
   "description": "A blog app powered by Blockstack",
   "icons": [{
-    "src": "https://res.cloudinary.com/ddgtwtbre/image/upload/v1498777018/blogstack_ljmzcy.png",
+    "src": "https://res.cloudinary.com/ddgtwtbre/image/upload/v1499820814/guild_logo-green_pl6kk1.png",
     "sizes": "192x192",
     "type": "image/png"
   }]

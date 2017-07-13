@@ -1,5 +1,5 @@
 {
-  "name": "Blogstack",
+  "name": "Guild",
   "version": "0.0.0",
   "description": "A blog app powered by Blockstack",
   "main": "index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jay-hwang/blogstack.git"
+    "url": "git+https://github.com/jay-hwang/guild.git"
   },
   "author": "Jay Hwang",
   "license": "GNU-GPL",
   "bugs": {
-    "url": "https://github.com/jay-hwang/blogstack/issues"
+    "url": "https://github.com/jay-hwang/guild/issues"
   },
-  "homepage": "https://github.com/jay-hwang/blogstack#readme",
+  "homepage": "https://github.com/jay-hwang/guild#readme",
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",

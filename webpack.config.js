@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/js/blogstack.js',
+  entry: './src/js/Guild.js',
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'public'),
