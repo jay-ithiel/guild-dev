@@ -10,7 +10,12 @@ class BlogForm extends React.Component {
     constructor(props) {
         super(props);
 
+        // check Object.keys(this.props.blogs).length;
+        debugger;
+        // this.props.blogIndex = Object.keys(this.props.blogs).length;
+
         this.state = {
+            id: this.props.blogIndex,
             title: '',
             imageUrl: '',
             body: '',
@@ -33,15 +38,20 @@ class BlogForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        let blog = new Blog(
-            this.state.title,
-            this.state.imageUrl,
-            this.state.body,
-            this.state.authorId
-        );
-        debugger;
+        if (this.actionType === 'Create') {
+            let blog = new Blog(
+                this.state.id,
+                this.state.title,
+                this.state.imageUrl,
+                this.state.body,
+                this.state.authorId
+            );
+
+            debugger;
+            this.props.blogs[blog.id] = blog;
+        }
         // this.props.createBlog(this.state);
-        this.props.createBlog(blog);
+        this.props.createBlog(this.props.blogs);
     }
 
     handleChange(field) {

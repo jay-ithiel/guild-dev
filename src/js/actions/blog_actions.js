@@ -1,7 +1,7 @@
 export const CREATE_BLOG = 'CREATE_BLOG';
-export const createBlog = blog => ({
+export const createBlog = blogs => ({
   type: CREATE_BLOG,
-  blog
+  blogs
 });
 
 export const REQUEST_BLOG = 'REQUEST_BLOG';

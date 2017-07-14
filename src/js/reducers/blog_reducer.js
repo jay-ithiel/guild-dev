@@ -8,15 +8,13 @@ import {
 
 const _defaultState = {
     index: {},
-    errors: []
+    errors: [],
+    blogIndex: 1
 };
 
 const BlogReducer = (oldState = _defaultState, action) => {
     Object.freeze(oldState);
     let newState = merge({}, oldState);
-
-    // check action values
-    debugger;
 
     switch(action.type) {
         case RECEIVE_BLOG:
@@ -26,6 +24,7 @@ const BlogReducer = (oldState = _defaultState, action) => {
 
         case RECEIVE_BLOGS:
             newState.index = action.blogs;
+            newState.blogIndex = action.blogIndex;
             newState.errors = [];
             return newState;
 

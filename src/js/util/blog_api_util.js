@@ -5,10 +5,9 @@ import {
 } from '../actions/blog_actions';
 var STORAGE_FILE = 'blogs.json';
 
-export const createBlog = (blog, dispatch) => {
+export const createBlog = (blogs, dispatch) => {
     debugger;
-    // blockstack.putFile('../../blogs_storage.json', JSON.stringify(blog));
-    blockstack.putFile(STORAGE_FILE, JSON.stringify(blog)).then((blogInfo) => {
+    blockstack.putFile(STORAGE_FILE, JSON.stringify(blogs)).then((blogInfo) => {
         console.log('dispatching BLOG SAVED action');
         debugger;
         dispatch({
@@ -18,16 +17,21 @@ export const createBlog = (blog, dispatch) => {
 };
 
 export const fetchBlogs = dispatch => {
-    var blogs;
+    var blogs, blogIndex;
+    debugger;
     blockstack.getFile(STORAGE_FILE).then((blogItems) => {
         blogItems = JSON.parse(blogItems || '[]');
+        debugger;
         blogItems.forEach((blog, index) => {
             blog.id = index;
+            blogIndex = index;
         });
+        debugger;
         blogs = blogItems;
     });
     dispatch({
         type: RECEIVE_BLOGS,
-        blogs
+        blogs,
+        blogIndex
     });
 };

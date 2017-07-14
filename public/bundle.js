@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 356);
+/******/ 	return __webpack_require__(__webpack_require__.s = 355);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -14834,10 +14834,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var CREATE_BLOG = exports.CREATE_BLOG = 'CREATE_BLOG';
-var createBlog = exports.createBlog = function createBlog(blog) {
+var createBlog = exports.createBlog = function createBlog(blogs) {
   return {
     type: CREATE_BLOG,
-    blog: blog
+    blogs: blogs
   };
 };
 
@@ -48476,6 +48476,70 @@ PEMEncoder.prototype.encode = function encode(data, options) {
 "use strict";
 
 
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(314);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _blockstack = __webpack_require__(14);
+
+var _root = __webpack_require__(312);
+
+var _root2 = _interopRequireDefault(_root);
+
+var _store = __webpack_require__(313);
+
+var _store2 = _interopRequireDefault(_store);
+
+var _session_actions = __webpack_require__(43);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+window.blockstack = __webpack_require__(14);
+window.blockstackStorage = __webpack_require__(164);
+
+document.addEventListener('DOMContentLoaded', function (event) {
+    var root = document.getElementById('root');
+    var store = (0, _store2.default)();
+
+    if ((0, _blockstack.isUserSignedIn)()) {
+        var userData = (0, _blockstack.loadUserData)();
+        store.dispatch((0, _session_actions.receiveCurrentUser)(userData));
+
+        // Blockstack version 7
+        // loadUserData(userData => {
+        //     let person = new Person(userData.profile);
+        //     store.dispatch(receiveCurrentUser(person));
+        // });
+    } else if ((0, _blockstack.isSignInPending)()) {
+        // Blockstack version < 0.8
+        // signUserIn(userData => {
+        //     window.location = window.location.origin;
+        // });
+
+        // Blockstack version 0.8.1
+        (0, _blockstack.handlePendingSignIn)(function (userData) {
+            window.location = window.location.origin;
+        });
+    }
+
+    _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
+
+    // NOTE: DEVELOPMENT ONLY
+    // Allows easy access to store from chrome debugger. Remove before production
+    window.store = store;
+});
+
+/***/ }),
+/* 356 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -48542,70 +48606,6 @@ var receiveCommentErrors = exports.receiveCommentErrors = function receiveCommen
     errors: errors
   };
 };
-
-/***/ }),
-/* 356 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _react = __webpack_require__(6);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(314);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _blockstack = __webpack_require__(14);
-
-var _root = __webpack_require__(312);
-
-var _root2 = _interopRequireDefault(_root);
-
-var _store = __webpack_require__(313);
-
-var _store2 = _interopRequireDefault(_store);
-
-var _session_actions = __webpack_require__(43);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-window.blockstack = __webpack_require__(14);
-window.blockstackStorage = __webpack_require__(164);
-
-document.addEventListener('DOMContentLoaded', function (event) {
-    var root = document.getElementById('root');
-    var store = (0, _store2.default)();
-
-    if ((0, _blockstack.isUserSignedIn)()) {
-        var userData = (0, _blockstack.loadUserData)();
-        store.dispatch((0, _session_actions.receiveCurrentUser)(userData));
-
-        // Blockstack version 7
-        // loadUserData(userData => {
-        //     let person = new Person(userData.profile);
-        //     store.dispatch(receiveCurrentUser(person));
-        // });
-    } else if ((0, _blockstack.isSignInPending)()) {
-        // Blockstack version < 0.8
-        // signUserIn(userData => {
-        //     window.location = window.location.origin;
-        // });
-
-        // Blockstack version 0.8.1
-        (0, _blockstack.handlePendingSignIn)(function (userData) {
-            window.location = window.location.origin;
-        });
-    }
-
-    _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
-
-    // NOTE: DEVELOPMENT ONLY
-    // Allows easy access to store from chrome debugger. Remove before production
-    window.store = store;
-});
 
 /***/ }),
 /* 357 */
@@ -48817,9 +48817,14 @@ var BlogForm = function (_React$Component) {
     function BlogForm(props) {
         _classCallCheck(this, BlogForm);
 
+        // check Object.keys(this.props.blogs).length;
         var _this = _possibleConstructorReturn(this, (BlogForm.__proto__ || Object.getPrototypeOf(BlogForm)).call(this, props));
 
+        debugger;
+        // this.props.blogIndex = Object.keys(this.props.blogs).length;
+
         _this.state = {
+            id: _this.props.blogIndex,
             title: '',
             imageUrl: '',
             body: '',
@@ -48846,10 +48851,14 @@ var BlogForm = function (_React$Component) {
         key: 'handleSubmit',
         value: function handleSubmit(e) {
             e.preventDefault();
-            var blog = new _blog2.default(this.state.title, this.state.imageUrl, this.state.body, this.state.authorId);
-            debugger;
+            if (this.actionType === 'Create') {
+                var blog = new _blog2.default(this.state.id, this.state.title, this.state.imageUrl, this.state.body, this.state.authorId);
+
+                debugger;
+                this.props.blogs[blog.id] = blog;
+            }
             // this.props.createBlog(this.state);
-            this.props.createBlog(blog);
+            this.props.createBlog(this.props.blogs);
         }
     }, {
         key: 'handleChange',
@@ -48943,14 +48952,16 @@ var mapStateToProps = function mapStateToProps(state) {
     return {
         isUserSignedIn: blockstack.isUserSignedIn(),
         currentUser: state.session.currentUser,
-        blogErrors: state.blog.errors
+        blogs: state.blogs.index,
+        blogErrors: state.blogs.errors,
+        blogIndex: state.blogs.blogIndex
     };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
-        createBlog: function createBlog(blog) {
-            return dispatch((0, _blog_actions.createBlog)(blog));
+        createBlog: function createBlog(blogs) {
+            return dispatch((0, _blog_actions.createBlog)(blogs));
         },
         updateBlog: function updateBlog(blog) {
             return dispatch((0, _blog_actions.updateBlog)(blog));
@@ -49014,30 +49025,86 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(34);
 
 var _blog_link = __webpack_require__(361);
 
 var _blog_link2 = _interopRequireDefault(_blog_link);
 
+var _blog_actions = __webpack_require__(72);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Blogs = function Blogs() {
-    return _react2.default.createElement(
-        'ul',
-        { id: 'blogs', className: 'border-box-sizing' },
-        _react2.default.createElement(_blog_link2.default, null),
-        _react2.default.createElement(_blog_link2.default, null),
-        _react2.default.createElement(_blog_link2.default, null),
-        _react2.default.createElement(_blog_link2.default, null),
-        _react2.default.createElement(_blog_link2.default, null),
-        _react2.default.createElement(_blog_link2.default, null)
-    );
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Blogs = function (_React$Component) {
+    _inherits(Blogs, _React$Component);
+
+    function Blogs(props) {
+        _classCallCheck(this, Blogs);
+
+        return _possibleConstructorReturn(this, (Blogs.__proto__ || Object.getPrototypeOf(Blogs)).call(this, props));
+    }
+
+    _createClass(Blogs, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            debugger;
+            this.props.requestBlogs();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            debugger;
+
+            return _react2.default.createElement(
+                'ul',
+                { id: 'blogs', className: 'border-box-sizing' },
+                _react2.default.createElement(_blog_link2.default, null),
+                _react2.default.createElement(_blog_link2.default, null),
+                _react2.default.createElement(_blog_link2.default, null),
+                _react2.default.createElement(_blog_link2.default, null),
+                _react2.default.createElement(_blog_link2.default, null),
+                _react2.default.createElement(_blog_link2.default, null)
+            );
+        }
+    }]);
+
+    return Blogs;
+}(_react2.default.Component);
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        requestBlogs: function requestBlogs() {
+            return dispatch((0, _blog_actions.requestBlogs)());
+        }
+    };
 };
 
-exports.default = Blogs;
+exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Blogs);
+
+// const Blogs = () => (
+//     <ul id='blogs' className='border-box-sizing'>
+//         <BlogLink />
+//         <BlogLink />
+//         <BlogLink />
+//         <BlogLink />
+//         <BlogLink />
+//         <BlogLink />
+//     </ul>
+// );
+
+// export default Blogs;
 
 /***/ }),
 /* 363 */
@@ -49320,7 +49387,7 @@ var _comments = __webpack_require__(365);
 
 var _comments2 = _interopRequireDefault(_comments);
 
-var _comment_actions = __webpack_require__(355);
+var _comment_actions = __webpack_require__(356);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -49960,11 +50027,9 @@ var BlogMiddleware = function BlogMiddleware(_ref) {
         dispatch = _ref.dispatch;
     return function (next) {
         return function (action) {
-            debugger;
-
             switch (action.type) {
                 case _blog_actions.CREATE_BLOG:
-                    (0, _blog_api_util.createBlog)(action.blog, dispatch);
+                    (0, _blog_api_util.createBlog)(action.blogs, dispatch);
                     return next(action);
 
                 case _blog_actions.REQUEST_BLOG:
@@ -49972,7 +50037,7 @@ var BlogMiddleware = function BlogMiddleware(_ref) {
                     return next(action);
 
                 case _blog_actions.REQUEST_BLOGS:
-                    (0, _blog_api_util.fetchBlogs)();
+                    (0, _blog_api_util.fetchBlogs)(dispatch);
                     return next(action);
 
                 case _blog_actions.UPDATE_BLOG:
@@ -50078,7 +50143,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _defaultState = {
     index: {},
-    errors: []
+    errors: [],
+    blogIndex: 1
 };
 
 var BlogReducer = function BlogReducer() {
@@ -50088,9 +50154,6 @@ var BlogReducer = function BlogReducer() {
     Object.freeze(oldState);
     var newState = (0, _merge2.default)({}, oldState);
 
-    // check action values
-    debugger;
-
     switch (action.type) {
         case _blog_actions.RECEIVE_BLOG:
             newState.index[action.blog.id] = action.blog;
@@ -50099,6 +50162,7 @@ var BlogReducer = function BlogReducer() {
 
         case _blog_actions.RECEIVE_BLOGS:
             newState.index = action.blogs;
+            newState.blogIndex = action.blogIndex;
             newState.errors = [];
             return newState;
 
@@ -50134,7 +50198,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var RootReducer = (0, _redux.combineReducers)({
   session: _session_reducer2.default,
-  blog: _blog_reducer2.default
+  blogs: _blog_reducer2.default
 });
 
 exports.default = RootReducer;
@@ -50250,10 +50314,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var STORAGE_FILE = 'blogs.json';
 
-var createBlog = exports.createBlog = function createBlog(blog, dispatch) {
+var createBlog = exports.createBlog = function createBlog(blogs, dispatch) {
     debugger;
-    // blockstack.putFile('../../blogs_storage.json', JSON.stringify(blog));
-    blockstack.putFile(STORAGE_FILE, JSON.stringify(blog)).then(function (blogInfo) {
+    blockstack.putFile(STORAGE_FILE, JSON.stringify(blogs)).then(function (blogInfo) {
         console.log('dispatching BLOG SAVED action');
         debugger;
         dispatch({
@@ -50263,17 +50326,22 @@ var createBlog = exports.createBlog = function createBlog(blog, dispatch) {
 };
 
 var fetchBlogs = exports.fetchBlogs = function fetchBlogs(dispatch) {
-    var blogs;
+    var blogs, blogIndex;
+    debugger;
     blockstack.getFile(STORAGE_FILE).then(function (blogItems) {
         blogItems = JSON.parse(blogItems || '[]');
+        debugger;
         blogItems.forEach(function (blog, index) {
             blog.id = index;
+            blogIndex = index;
         });
+        debugger;
         blogs = blogItems;
     });
     dispatch({
         type: _blog_actions.RECEIVE_BLOGS,
-        blogs: blogs
+        blogs: blogs,
+        blogIndex: blogIndex
     });
 };
 
@@ -93455,8 +93523,9 @@ module.exports = function (buf) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var Blog = (function () {
-    function Blog(title, imageUrl, body, authorId) {
+    function Blog(id, title, imageUrl, body, authorId) {
         this.comments = [];
+        this.id = id;
         this.title = title;
         this.body = body;
         this.imageUrl = imageUrl;

@@ -2,6 +2,7 @@
 import Comment from './comment';
 
 class Blog {
+    public id: number;
     public title: string;
     public body: string;
     public imageUrl: string;
@@ -9,11 +10,13 @@ class Blog {
     public comments: Comment[] = [];
 
     constructor(
+        id: number,
         title: string,
         imageUrl: string,
         body: string,
         authorId: number
     ) {
+        this.id = id;
         this.title = title;
         this.body = body;
         this.imageUrl = imageUrl;
