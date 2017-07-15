@@ -6,9 +6,7 @@ const BlogLink = ({ blog }) => (
             <img src='' alt='Blog Image' className='blog-link-img' />
         </div>
 
-        <div className='blog-link-info'>
-            Blog Title
-        </div>
+        <div className='blog-link-info'>{ blog.title }</div>
     </div>
 );
 

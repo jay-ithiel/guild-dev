@@ -49005,7 +49005,7 @@ var BlogLink = function BlogLink(_ref) {
         _react2.default.createElement(
             'div',
             { className: 'blog-link-info' },
-            'Blog Title'
+            blog.title
         )
     );
 };
@@ -49051,7 +49051,14 @@ var Blogs = function (_React$Component) {
     function Blogs(props) {
         _classCallCheck(this, Blogs);
 
-        return _possibleConstructorReturn(this, (Blogs.__proto__ || Object.getPrototypeOf(Blogs)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (Blogs.__proto__ || Object.getPrototypeOf(Blogs)).call(this, props));
+
+        _this.state = {
+            blogs: {}
+        };
+
+        _this.mapBlogs = _this.mapBlogs.bind(_this);
+        return _this;
     }
 
     _createClass(Blogs, [{
@@ -49060,23 +49067,40 @@ var Blogs = function (_React$Component) {
             this.props.requestBlogs();
         }
     }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            this.setState({ blogs: nextProps.blogs });
+        }
+    }, {
+        key: 'mapBlogs',
+        value: function mapBlogs() {
+            var _this2 = this;
+
+            return Object.keys(this.state.blogs).map(function (blogId, index) {
+                return _react2.default.createElement(_blog_link2.default, { key: index, blog: _this2.state.blogs[blogId] });
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var blogLinks = this.mapBlogs();
+
             return _react2.default.createElement(
                 'ul',
                 { id: 'blogs', className: 'border-box-sizing' },
-                _react2.default.createElement(_blog_link2.default, null),
-                _react2.default.createElement(_blog_link2.default, null),
-                _react2.default.createElement(_blog_link2.default, null),
-                _react2.default.createElement(_blog_link2.default, null),
-                _react2.default.createElement(_blog_link2.default, null),
-                _react2.default.createElement(_blog_link2.default, null)
+                blogLinks
             );
         }
     }]);
 
     return Blogs;
 }(_react2.default.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+    return {
+        blogs: state.blogs.index
+    };
+};
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
@@ -49086,7 +49110,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     };
 };
 
-exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Blogs);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Blogs);
 
 /***/ }),
 /* 363 */
