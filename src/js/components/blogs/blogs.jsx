@@ -10,13 +10,10 @@ class Blogs extends React.Component {
     }
 
     componentDidMount() {
-        debugger;
         this.props.requestBlogs();
     }
 
     render() {
-        debugger;
-        
         return (
             <ul id='blogs' className='border-box-sizing'>
                 <BlogLink />
@@ -35,16 +32,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(null, mapDispatchToProps)(Blogs);
-
-// const Blogs = () => (
-//     <ul id='blogs' className='border-box-sizing'>
-//         <BlogLink />
-//         <BlogLink />
-//         <BlogLink />
-//         <BlogLink />
-//         <BlogLink />
-//         <BlogLink />
-//     </ul>
-// );
-
-// export default Blogs;
