@@ -36,6 +36,7 @@ class BlogForm extends React.Component {
 
         if (this.actionType === 'Create') {
             this.state.id = this.props.blogIndex + 1;
+            this.state.authorId = this.props.currentUser.username;
 
             let blog = new Blog(
                 this.state.id,
@@ -45,6 +46,7 @@ class BlogForm extends React.Component {
                 this.state.authorId
             );
 
+            debugger;
             this.props.blogs[blog.id] = blog;
         }
 

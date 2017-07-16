@@ -1,5 +1,5 @@
 import React from 'react';
-import { parseDateTime } from '../../util/helper_methods.js';
+import { parseDateTime, characterLimit } from '../../util/helper_methods.js';
 
 const BlogLink = ({ blog }) => (
     <div id='blog-link' className=''>
@@ -9,9 +9,16 @@ const BlogLink = ({ blog }) => (
 
         <div className='blog-link-info'>
             <h4 id='blog-link-title'>{ blog.title }</h4>
-            <span id='blog-link-date'>
-                { parseDateTime(blog.updatedAt) }
-            </span>
+            <p id='blog-link-text'>
+                <strong>Created On:</strong> { parseDateTime(blog.updatedAt) }
+            </p>
+            <p id='blog-link-text'>
+                <strong>Author:</strong> { blog.authorId }
+            </p>
+
+            <div id='blog-link-body-intro'>
+                { characterLimit(blog.body) }...
+            </div>
         </div>
     </div>
 );
