@@ -15,10 +15,6 @@ class Blogs extends React.Component {
         this.mapBlogs = this.mapBlogs.bind(this);
     }
 
-    componentDidMount() {
-        this.props.requestBlogs();
-    }
-
     componentWillReceiveProps(nextProps) {
         this.setState({ blogs: nextProps.blogs });
     }
@@ -39,7 +35,8 @@ class Blogs extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    blogs: state.blogs.index
+    blogs: state.blogs.index,
+    state: state
 });
 
 const mapDispatchToProps = dispatch => ({

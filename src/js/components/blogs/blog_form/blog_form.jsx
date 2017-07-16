@@ -22,12 +22,11 @@ class BlogForm extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componentDidMount() {
-        this.props.requestBlogs();
+    componentWillReceiveProps(nextProps) {
         if (!isUserSignedIn()) {
             this.props.history.push('/signin');
         } else {
-            this.state.authorId = this.props.currentUser.name;
+            this.setState({ authorId: nextProps.currentUser.username });
         }
     }
 
@@ -36,7 +35,6 @@ class BlogForm extends React.Component {
 
         if (this.actionType === 'Create') {
             this.state.id = this.props.blogIndex + 1;
-            this.state.authorId = this.props.currentUser.username;
 
             let blog = new Blog(
                 this.state.id,
