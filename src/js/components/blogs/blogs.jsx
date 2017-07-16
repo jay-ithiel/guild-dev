@@ -30,11 +30,9 @@ class Blogs extends React.Component {
     }
 
     render() {
-        let blogLinks = this.mapBlogs();
-
         return (
             <ul id='blogs' className='border-box-sizing'>
-                { blogLinks }
+                { this.mapBlogs() }
             </ul>
         );
     }

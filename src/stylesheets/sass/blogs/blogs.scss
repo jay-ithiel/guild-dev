@@ -75,7 +75,21 @@
     background-color: lightgrey;
 }
 
+.blog-link-img {
+    height: 100%;
+    width: 100%;
+}
+
 .blog-link-info {
     height: 55%;
     width: 100%;
+    padding: 7px;
+}
+
+#blog-link-title {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 22px;
+    text-align: center;
 }

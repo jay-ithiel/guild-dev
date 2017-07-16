@@ -1,10 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { isUserSignedIn } from 'blockstack';
-import * as blockstack from 'blockstack';
+
 import Blog from '../../../../models/blog.ts';
-global.Blog = Blog;
-global.blockstack = blockstack;
 
 class BlogForm extends React.Component {
     constructor(props) {
@@ -15,7 +13,8 @@ class BlogForm extends React.Component {
             title: '',
             imageUrl: '',
             body: '',
-            authorId: ''
+            authorId: '',
+            updatedAt: ''
         };
 
         this.actionType = (props.history.location.pathname === '/blogs/new/') ? 'Create' : 'Update';
@@ -24,19 +23,19 @@ class BlogForm extends React.Component {
     }
 
     componentDidMount() {
+        this.props.requestBlogs();
         if (!isUserSignedIn()) {
             this.props.history.push('/signin');
         } else {
             this.state.authorId = this.props.currentUser.name;
         }
-        this.props.requestBlogs();
-        // if !props.isNewBlog, dispatch requestBlog to edit
     }
 
     handleSubmit(e) {
         e.preventDefault();
+
         if (this.actionType === 'Create') {
-            this.state.id = this.props.blogIndex+1;
+            this.state.id = this.props.blogIndex + 1;
 
             let blog = new Blog(
                 this.state.id,
@@ -48,7 +47,7 @@ class BlogForm extends React.Component {
 
             this.props.blogs[blog.id] = blog;
         }
-        
+
         this.props.createBlog(this.props.blogs);
     }
 
