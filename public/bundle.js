@@ -48848,7 +48848,6 @@ var BlogForm = function (_React$Component) {
 
                 var blog = new _blog2.default(this.state.id, this.state.title, this.state.imageUrl, this.state.body, this.state.authorId);
 
-                debugger;
                 this.props.blogs[blog.id] = blog;
             }
 
@@ -50308,14 +50307,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 global.blockstack = blockstack;
 
 var signin = exports.signin = function signin() {
-    // Blockstack version 0.7
-    var privateKey = undefined,
-        appDomain = window.location.hostname;
-    var authRequest = (0, _blockstack.makeAuthRequest)(privateKey, appDomain);
-    // debugger;
-    // redirectToSignIn(authRequest);
-
-    // Blockstack version 0.8.1
+    // var privateKey = undefined, appDomain = window.location.hostname;
+    // var authRequest = makeAuthRequest(privateKey, appDomain);
     // blockstack.redirectToSignInWithAuthRequest(authRequest);
     (0, _blockstack.redirectToSignIn)();
 };

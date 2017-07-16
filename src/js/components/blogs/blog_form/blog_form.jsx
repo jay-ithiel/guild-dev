@@ -46,7 +46,6 @@ class BlogForm extends React.Component {
                 this.state.authorId
             );
 
-            debugger;
             this.props.blogs[blog.id] = blog;
         }
 

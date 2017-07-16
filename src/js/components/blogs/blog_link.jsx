@@ -9,9 +9,11 @@ const BlogLink = ({ blog }) => (
 
         <div className='blog-link-info'>
             <h4 id='blog-link-title'>{ blog.title }</h4>
+            
             <p id='blog-link-text'>
                 <strong>Created On:</strong> { parseDateTime(blog.updatedAt) }
             </p>
+
             <p id='blog-link-text'>
                 <strong>Author:</strong> { blog.authorId }
             </p>
