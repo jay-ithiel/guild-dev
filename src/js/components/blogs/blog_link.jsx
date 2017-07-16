@@ -1,15 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { parseDateTime, characterLimit } from '../../util/helper_methods.js';
 
 const BlogLink = ({ blog }) => (
-    <div id='blog-link' className=''>
+    <Link id='blog-link' to={`/blogs/${blog.id}`}>
         <div className='blog-link-img-box'>
             <img src={ blog.imageUrl } alt='Blog Image' className='blog-link-img' />
         </div>
 
         <div className='blog-link-info'>
             <h4 id='blog-link-title'>{ blog.title }</h4>
-            
+
             <p id='blog-link-text'>
                 <strong>Created On:</strong> { parseDateTime(blog.updatedAt) }
             </p>
@@ -22,7 +23,7 @@ const BlogLink = ({ blog }) => (
                 { characterLimit(blog.body) }...
             </div>
         </div>
-    </div>
+    </Link>
 );
 
 export default BlogLink;

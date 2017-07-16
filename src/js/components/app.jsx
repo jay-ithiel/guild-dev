@@ -29,8 +29,8 @@ class App extends React.Component {
 
     componentDidMount() {
         if (isUserSignedIn()) {
-            let userData = loadUserData();
-            this.props.receiveCurrentUser(userData);
+            // let userData = loadUserData();
+            this.props.receiveCurrentUser(loadUserData());
         } else if (isSignInPending()) {
             handlePendingSignIn(userData => {
                 window.location = window.location.origin;
@@ -47,7 +47,7 @@ class App extends React.Component {
                 <Route path='/signin' component={ SignInPage }></Route>
                 <Route exact path='/blogs/new'  component={ BlogForm }></Route>
                 <Route exact path='/blogs/edit/:id' component={ BlogForm }></Route>
-                <Route exact path='/blogs/show' component={ Blog }></Route>
+                <Route exact path='/blogs/:id' component={ Blog }></Route>
                 <Route exact path='/blogs/user' component={ UserBlogs }></Route>
 
                 {/*
