@@ -48484,8 +48484,6 @@ var _reactDom = __webpack_require__(314);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _blockstack = __webpack_require__(14);
-
 var _root = __webpack_require__(312);
 
 var _root2 = _interopRequireDefault(_root);
@@ -48493,8 +48491,6 @@ var _root2 = _interopRequireDefault(_root);
 var _store = __webpack_require__(313);
 
 var _store2 = _interopRequireDefault(_store);
-
-var _session_actions = __webpack_require__(43);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48504,27 +48500,6 @@ window.blockstackStorage = __webpack_require__(164);
 document.addEventListener('DOMContentLoaded', function (event) {
     var root = document.getElementById('root');
     var store = (0, _store2.default)();
-
-    if ((0, _blockstack.isUserSignedIn)()) {
-        var userData = (0, _blockstack.loadUserData)();
-        store.dispatch((0, _session_actions.receiveCurrentUser)(userData));
-
-        // Blockstack version 7
-        // loadUserData(userData => {
-        //     let person = new Person(userData.profile);
-        //     store.dispatch(receiveCurrentUser(person));
-        // });
-    } else if ((0, _blockstack.isSignInPending)()) {
-        // Blockstack version < 0.8
-        // signUserIn(userData => {
-        //     window.location = window.location.origin;
-        // });
-
-        // Blockstack version 0.8.1
-        (0, _blockstack.handlePendingSignIn)(function (userData) {
-            window.location = window.location.origin;
-        });
-    }
 
     _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 
@@ -48618,13 +48593,15 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouter = __webpack_require__(35);
+var _reactRedux = __webpack_require__(27);
 
-var _blockstack = __webpack_require__(14);
+var _reactRouter = __webpack_require__(35);
 
 var _navbar = __webpack_require__(374);
 
@@ -48646,25 +48623,89 @@ var _blog = __webpack_require__(358);
 
 var _blog2 = _interopRequireDefault(_blog);
 
+var _user_blogs = __webpack_require__(816);
+
+var _user_blogs2 = _interopRequireDefault(_user_blogs);
+
+var _blockstack = __webpack_require__(14);
+
+var _blog_actions = __webpack_require__(60);
+
+var _session_actions = __webpack_require__(43);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // Loads dependencies to compile SASS to CSS
 __webpack_require__(740);
 
-var App = function App() {
-    return _react2.default.createElement(
-        'div',
-        { id: 'app', className: '' },
-        _react2.default.createElement(_navbar2.default, null),
-        _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/', component: _home2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: '/signin', component: _signin_page2.default }),
-        _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/blogs/new', component: _blog_form_container2.default }),
-        _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/blogs/edit/:id', component: _blog_form_container2.default }),
-        _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/blogs/show', component: _blog2.default })
-    );
+var App = function (_React$Component) {
+    _inherits(App, _React$Component);
+
+    function App(props) {
+        _classCallCheck(this, App);
+
+        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+    }
+
+    _createClass(App, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            if ((0, _blockstack.isUserSignedIn)()) {
+                var userData = (0, _blockstack.loadUserData)();
+                this.props.receiveCurrentUser(userData);
+            } else if ((0, _blockstack.isSignInPending)()) {
+                (0, _blockstack.handlePendingSignIn)(function (userData) {
+                    window.location = window.location.origin;
+                });
+            }
+            this.props.requestBlogs();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { id: 'app', className: '' },
+                _react2.default.createElement(_navbar2.default, null),
+                _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/', component: _home2.default }),
+                _react2.default.createElement(_reactRouter.Route, { path: '/signin', component: _signin_page2.default }),
+                _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/blogs/new', component: _blog_form_container2.default }),
+                _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/blogs/edit/:id', component: _blog_form_container2.default }),
+                _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/blogs/show', component: _blog2.default }),
+                _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/blogs/user', component: _user_blogs2.default })
+            );
+        }
+    }]);
+
+    return App;
+}(_react2.default.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+    return {
+        currentUser: state.session.currentUser,
+        blogs: state.blogs.index,
+        blogIndex: state.blogs.blogIndex
+    };
 };
 
-exports.default = App;
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        receiveCurrentUser: function receiveCurrentUser(userData) {
+            return dispatch((0, _session_actions.receiveCurrentUser)(userData));
+        },
+        requestBlogs: function requestBlogs() {
+            return dispatch((0, _blog_actions.requestBlogs)());
+        }
+    };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
 
 /***/ }),
 /* 358 */
@@ -97407,6 +97448,57 @@ var parseDateTime = exports.parseDateTime = function parseDateTime(dateTimeStrin
 var characterLimit = exports.characterLimit = function characterLimit(string) {
     return string.substring(0, 50);
 };
+
+/***/ }),
+/* 816 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var UserBlogs = function (_React$Component) {
+    _inherits(UserBlogs, _React$Component);
+
+    function UserBlogs(props) {
+        _classCallCheck(this, UserBlogs);
+
+        var _this = _possibleConstructorReturn(this, (UserBlogs.__proto__ || Object.getPrototypeOf(UserBlogs)).call(this, props));
+
+        _this.state = {
+            userBlogs: {}
+        };
+        return _this;
+    }
+
+    _createClass(UserBlogs, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement('section', { id: 'user-blogs' });
+        }
+    }]);
+
+    return UserBlogs;
+}(_react2.default.Component);
+
+exports.default = UserBlogs;
 
 /***/ })
 /******/ ]);
