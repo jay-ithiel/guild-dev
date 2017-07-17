@@ -15,7 +15,7 @@ const HamburgerDropdown = props => (
         </span>
 
         <ul id='hamburger-dropdown' className=''>
-            <li onClick={ () => null }>My Blogs</li>
+            <li onClick={ () => props.history.push('/blogs/user') }>My Blogs</li>
             <li onClick={ () => null }>Profile</li>
             <li onClick={ props.signout }>Log Out</li>
         </ul>
@@ -26,5 +26,7 @@ const mapDispatchToProps = dispatch => ({
     signout: () => dispatch(signout())
 });
 
-// export default withRouter(HamburgerDropdown);
-export default connect(null, mapDispatchToProps)(HamburgerDropdown);
+export default connect(
+    null,
+    mapDispatchToProps
+)(withRouter(HamburgerDropdown));

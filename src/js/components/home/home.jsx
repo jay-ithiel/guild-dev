@@ -2,9 +2,9 @@ import React from 'react';
 
 import Blogs from '../blogs/blogs';
 
-const Home = () => (
+const Home = props => (
     <section id='home'>
-        <Blogs />
+        <Blogs/>
     </section>
 );
 

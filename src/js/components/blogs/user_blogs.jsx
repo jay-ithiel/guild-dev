@@ -12,7 +12,7 @@ class UserBlogs extends React.Component {
     render() {
         return (
             <section id='user-blogs'>
-
+                User Blogs
             </section>
         );
     }

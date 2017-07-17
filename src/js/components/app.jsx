@@ -29,7 +29,6 @@ class App extends React.Component {
 
     componentDidMount() {
         if (isUserSignedIn()) {
-            // let userData = loadUserData();
             this.props.receiveCurrentUser(loadUserData());
         } else if (isSignInPending()) {
             handlePendingSignIn(userData => {
@@ -43,12 +42,12 @@ class App extends React.Component {
         return (
             <div id='app' className=''>
                 <Navbar />
-                <Route exact path='/' component={ Home }></Route>
-                <Route path='/signin' component={ SignInPage }></Route>
-                <Route exact path='/blogs/new'  component={ BlogForm }></Route>
-                <Route exact path='/blogs/edit/:id' component={ BlogForm }></Route>
-                <Route exact path='/blogs/:id' component={ Blog }></Route>
-                <Route exact path='/blogs/user' component={ UserBlogs }></Route>
+                <Route exact path='/' component={Home}></Route>
+                <Route path='/signin' component={SignInPage}></Route>
+                <Route exact path='/blogs/new'  component={BlogForm}></Route>
+                <Route exact path='/blogs/edit/:id' component={BlogForm}></Route>
+                <Route exact path='/blogs/user' component={UserBlogs}></Route>
+                <Route exact path='/blogs/:id' component={Blog}></Route>
 
                 {/*
                     <Route path='/blogs/:id'  component={ Blog     }></Route>

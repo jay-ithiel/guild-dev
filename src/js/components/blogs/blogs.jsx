@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 import BlogLink from './blog_link';
 import { requestBlogs } from '../../actions/blog_actions';
@@ -12,31 +13,30 @@ class Blogs extends React.Component {
             blogs: {}
         };
 
-        this.mapBlogs = this.mapBlogs.bind(this);
+        this.mapBlogLinks = this.mapBlogLinks.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({ blogs: nextProps.blogs });
     }
 
-    mapBlogs() {
+    mapBlogLinks() {
         return Object.keys(this.state.blogs).map((blogId, index) => (
-            <BlogLink key={index} blog={ this.state.blogs[blogId] }/>
+            <BlogLink location={ this.props.history.location } key={index} blog={ this.state.blogs[blogId] }/>
         ));
     }
 
     render() {
         return (
             <ul id='blogs' className='border-box-sizing'>
-                { this.mapBlogs() }
+                { this.mapBlogLinks() }
             </ul>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    blogs: state.blogs.index,
-    state: state
+    blogs: state.blogs.index
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -46,4 +46,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Blogs);
+)(withRouter(Blogs));
