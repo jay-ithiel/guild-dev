@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import UserSVG from 'react-icons/lib/fa/user';
 
 const AboutUser = props => {
     const user = props.currentUser;
@@ -7,7 +8,9 @@ const AboutUser = props => {
     return !user ? <div></div> : (
         <div id='about-user' className='flex'>
             <div>
-                <img src='' id='about-user-img' alt='Profile Image' />
+                <div id='about-user-img'>
+                    <UserSVG size={ 90 }/>
+                </div>
                 <h4 id='about-user-name'>
                     { user.profile.givenName } { user.profile.familyName }
                 </h4>
