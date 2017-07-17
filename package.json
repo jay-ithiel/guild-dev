@@ -39,6 +39,7 @@
     "react": "^15.5.4",
     "react-datepicker": "^0.34.0",
     "react-dom": "^15.5.4",
+    "react-icons": "^2.2.5",
     "react-redux": "^5.0.3",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
