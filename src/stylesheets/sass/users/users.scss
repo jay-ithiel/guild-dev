@@ -1,3 +1,5 @@
+@import './about_user.scss';
+
 .signin-bg {
     background-color: #43bd7e;
 }
@@ -19,38 +21,4 @@
     font-weight: 100;
     letter-spacing: 3px;
     margin-bottom: 20px;
-}
-
-#about-user {
-    width: 500px;
-    max-width: 80vw;
-    height: 125px;
-
-    background-color: #fff;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    padding: 10px 30px;
-
-    margin: 0 auto;
-}
-
-#about-user-img {
-    width: 75px;
-    height: 75px;
-    background-color: grey;
-    border-radius: 50%;
-    margin-right: 30px;
-}
-
-#about-user-name {
-    font-size: 14px;
-    font-weight: 200;
-    letter-spacing: 1px;
-}
-
-#about-user-bio {
-    font-size: 13px;
-    font-weight: 100;
-    letter-spacing: 1px;
-    line-height: 17px;
 }

@@ -50,7 +50,6 @@ class App extends React.Component {
                 <Route exact path='/blogs/:id' component={Blog}></Route>
 
                 {/*
-                    <Route path='/blogs/:id'  component={ Blog     }></Route>
                     <Route path='/profile' component={ Profile }></Route>
                 */}
             </div>
