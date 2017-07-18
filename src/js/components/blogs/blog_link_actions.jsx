@@ -3,18 +3,30 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { deleteBlog } from '../../actions/blog_actions';
 
-const BlogLinkActions = ({ blog, isUserBlogs, dispatchDeleteBlog }) => {
-    return !isUserBlogs ? <div></div> : (
-        <div>
-            <span>Edit</span>
-            ====
-            <span onClick={ () => dispatchDeleteBlog(blog.id) }>Delete</span>
-        </div>
-    );
-};
+class BlogLinkActions extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.handleDelete = this.handleDelete.bind(this);
+    }
+
+    handleDelete(e) {
+        e.stopPropagation();
+        this.props.deleteBlog(this.props.blog.id);
+    }
+
+    render() {
+        return !this.props.isUserBlogs ? <div></div> : (
+            <div>
+                <span>Edit</span>
+                <span onClick={ this.handleDelete }>Delete</span>
+            </div>
+        );
+    }
+}
 
 const mapDispatchToProps = dispatch => ({
-    dispatchDeleteBlog: id => dispatch(deleteBlog(id))
+    deleteBlog: id => dispatch(deleteBlog(id))
 });
 
 export default connect(null, mapDispatchToProps)(BlogLinkActions);
