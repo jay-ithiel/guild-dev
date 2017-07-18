@@ -18,10 +18,6 @@ const BlogReducer = (oldState = _defaultState, action) => {
     Object.freeze(oldState);
     let newState = merge({}, oldState);
 
-    if (action.type === RECEIVE_USER_BLOGS) {
-        debugger;
-    }
-
     switch(action.type) {
         case RECEIVE_BLOG:
             newState.index[action.blog.id] = action.blog;

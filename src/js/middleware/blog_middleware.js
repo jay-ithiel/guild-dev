@@ -15,14 +15,11 @@ import {
 import {
     createBlog,
     fetchBlogs,
-    fetchUserBlogs
+    fetchUserBlogs,
+    deleteBlog
 } from '../util/blog_api_util';
 
 const BlogMiddleware = ({ getState, dispatch }) => next => action => {
-    if (action.type === REQUEST_USER_BLOGS) {
-        debugger;
-    }
-
     switch(action.type) {
         case CREATE_BLOG:
             createBlog(action.blogs, dispatch);
@@ -45,7 +42,7 @@ const BlogMiddleware = ({ getState, dispatch }) => next => action => {
             return next(action);
 
         case DELETE_BLOG:
-
+            deleteBlog(action.id, dispatch);
             return next(action);
 
         default:

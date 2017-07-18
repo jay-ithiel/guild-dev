@@ -1,19 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import {
-    requestUserBlogs
-} from '../../actions/blog_actions';
-
+import { requestUserBlogs } from '../../actions/blog_actions';
 import BlogLink from './blog_link';
 
 class UserBlogs extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            userBlogs: {}
-        };
 
         this.mapBlogLink = this.mapBlogLinks.bind(this);
     }
@@ -22,19 +14,15 @@ class UserBlogs extends React.Component {
         this.props.requestUserBlogs(this.props.currentUser);
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({ userBlog: nextProps.userBlogs });
-    }
-
     mapBlogLinks() {
-        return Object.keys(this.state.userBlogs).map((blogId, index) => (
-            <BlogLink key={index} blog={ this.state.blogs[blogId] }/>
+        return Object.keys(this.props.userBlogs).map((blogId, index) => (
+            <BlogLink key={index} blog={ this.props.userBlogs[blogId] } isUserBlogs={true}/>
         ));
     }
 
     render() {
         return (
-            <section id='user-blogs'>
+            <section id='blogs' className='border-box-sizing'>
                 { this.mapBlogLinks() }
             </section>
         );

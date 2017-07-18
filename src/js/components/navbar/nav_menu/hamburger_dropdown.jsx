@@ -16,8 +16,8 @@ const HamburgerDropdown = props => (
         </span>
 
         <ul id='hamburger-dropdown' className=''>
-            <li><Link to='/blogs/user'>My Blogs</Link></li>
-            <li onClick={ () => null }>Profile</li>
+            <li onClick={close}><Link to='/blogs/user'>My Blogs</Link></li>
+            <li onClick={close}>Profile</li>
             <li onClick={ props.signout }>Log Out</li>
         </ul>
     </div>

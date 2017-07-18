@@ -12,12 +12,9 @@ import {
 var STORAGE_FILE = 'blogs.json';
 
 export const createBlog = (blogs, dispatch) => {
-    putFile(STORAGE_FILE, JSON.stringify(blogs));
-    // .then((blogInfo) => {
-    //     dispatch({
-    //         type: 'BLOG_SAVED'
-    //     });
-    // });
+    putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
+
+    });
 };
 
 export const fetchBlogs = dispatch => {
@@ -42,7 +39,7 @@ export const fetchBlogs = dispatch => {
 };
 
 export const fetchUserBlogs = (user, dispatch) => {
-    var userBlogs = {}, blogIndex;
+    var userBlogs = {};
 
     getFile(STORAGE_FILE).then(blogItems => {
         blogItems = JSON.parse(blogItems || '[]');
@@ -56,6 +53,32 @@ export const fetchUserBlogs = (user, dispatch) => {
         dispatch({
             type: RECEIVE_USER_BLOGS,
             userBlogs
+        });
+    });
+};
+
+export const deleteBlog = (id, dispatch) => {
+    var blogs = {}, blogIndex;
+
+    getFile(STORAGE_FILE).then(blogItems => {
+        blogItems = JSON.parse(blogItems || '[]');
+
+        Object.keys(blogItems).forEach((blogId, index) => {
+            if (parseInt(blogId) !== id) {
+                blogs[blogId] = blogItems[blogId];
+            }
+        });
+
+        blogIndex = Object.keys(blogs).length;
+
+        putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
+            if (isBlogSaved) {
+                dispatch({
+                    type: RECEIVE_BLOGS,
+                    blogs,
+                    blogIndex
+                });
+            }
         });
     });
 };

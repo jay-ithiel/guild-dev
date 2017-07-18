@@ -11,7 +11,7 @@ class Blogs extends React.Component {
         this.state = {
             blogs: {}
         };
-
+        
         this.mapBlogLinks = this.mapBlogLinks.bind(this);
     }
 
@@ -20,7 +20,7 @@ class Blogs extends React.Component {
     }
 
     mapBlogLinks() {
-        return Object.keys(this.state.blogs).map((blogId, index) => (
+        return Object.keys(this.state.blogs).reverse().map((blogId, index) => (
             <BlogLink key={index} blog={ this.state.blogs[blogId] }/>
         ));
     }
