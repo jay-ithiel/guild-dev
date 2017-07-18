@@ -49,7 +49,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    receiveCurrentUser: userData => dispatch(receiveCurrentUser(userData)),
     requestBlogs: () => dispatch(requestBlogs())
 });
 
