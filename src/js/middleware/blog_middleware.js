@@ -2,20 +2,27 @@ import {
   CREATE_BLOG,
   REQUEST_BLOG,
   REQUEST_BLOGS,
+  REQUEST_USER_BLOGS,
   UPDATE_BLOG,
   DELETE_BLOG,
   receiveBlog,
   receiveBlogs,
+  receiveUserBlogs,
   removeBlog,
   receiveBlogErrors
 } from '../actions/blog_actions';
 
 import {
     createBlog,
-    fetchBlogs
+    fetchBlogs,
+    fetchUserBlogs
 } from '../util/blog_api_util';
 
 const BlogMiddleware = ({ getState, dispatch }) => next => action => {
+    if (action.type === REQUEST_USER_BLOGS) {
+        debugger;
+    }
+
     switch(action.type) {
         case CREATE_BLOG:
             createBlog(action.blogs, dispatch);
@@ -27,6 +34,10 @@ const BlogMiddleware = ({ getState, dispatch }) => next => action => {
 
         case REQUEST_BLOGS:
             fetchBlogs(dispatch);
+            return next(action);
+
+        case REQUEST_USER_BLOGS:
+            fetchUserBlogs(action.user, dispatch);
             return next(action);
 
         case UPDATE_BLOG:

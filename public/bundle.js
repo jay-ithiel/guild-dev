@@ -12047,6 +12047,14 @@ var requestBlogs = exports.requestBlogs = function requestBlogs(tags) {
   };
 };
 
+var REQUEST_USER_BLOGS = exports.REQUEST_USER_BLOGS = 'REQUEST_USER_BLOGS';
+var requestUserBlogs = exports.requestUserBlogs = function requestUserBlogs(user) {
+  return {
+    type: REQUEST_USER_BLOGS,
+    user: user
+  };
+};
+
 var UPDATE_BLOG = exports.UPDATE_BLOG = 'UPDATE_BLOG';
 var updateBlog = exports.updateBlog = function updateBlog(blog, router) {
   return {
@@ -42276,7 +42284,7 @@ var parseURI = function parseURI(rr) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _react = __webpack_require__(6);
@@ -42300,16 +42308,16 @@ var _app2 = _interopRequireDefault(_app);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Root = function Root(_ref) {
-  var store = _ref.store;
-  return _react2.default.createElement(
-    _reactRedux.Provider,
-    { store: store },
-    _react2.default.createElement(
-      _reactRouter.Router,
-      { history: (0, _createBrowserHistory2.default)() },
-      _react2.default.createElement(_app2.default, null)
-    )
-  );
+    var store = _ref.store;
+    return _react2.default.createElement(
+        _reactRedux.Provider,
+        { store: store },
+        _react2.default.createElement(
+            _reactRouter.Router,
+            { history: (0, _createBrowserHistory2.default)() },
+            _react2.default.createElement(_app2.default, null)
+        )
+    );
 };
 
 // Components
@@ -42323,7 +42331,7 @@ exports.default = Root;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _redux = __webpack_require__(107);
@@ -42339,8 +42347,8 @@ var _root_middleware2 = _interopRequireDefault(_root_middleware);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var configureStore = function configureStore() {
-  var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return (0, _redux.createStore)(_root_reducer2.default, preloadedState, _root_middleware2.default);
+    var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    return (0, _redux.createStore)(_root_reducer2.default, preloadedState, _root_middleware2.default);
 };
 
 exports.default = configureStore;
@@ -48906,11 +48914,25 @@ var _store = __webpack_require__(315);
 
 var _store2 = _interopRequireDefault(_store);
 
+var _blockstack = __webpack_require__(18);
+
+var _blog_actions = __webpack_require__(45);
+
+var _session_actions = __webpack_require__(46);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener('DOMContentLoaded', function (event) {
     var root = document.getElementById('root');
     var store = (0, _store2.default)();
+
+    if ((0, _blockstack.isUserSignedIn)()) {
+        store.dispatch((0, _session_actions.receiveCurrentUser)((0, _blockstack.loadUserData)()));
+    } else if ((0, _blockstack.isSignInPending)()) {
+        (0, _blockstack.handlePendingSignIn)(function (userData) {
+            window.location = window.location.origin;
+        });
+    }
 
     _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 
@@ -49038,11 +49060,7 @@ var _user_blogs = __webpack_require__(365);
 
 var _user_blogs2 = _interopRequireDefault(_user_blogs);
 
-var _blockstack = __webpack_require__(18);
-
 var _blog_actions = __webpack_require__(45);
-
-var _session_actions = __webpack_require__(46);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -49067,13 +49085,6 @@ var App = function (_React$Component) {
     _createClass(App, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            if ((0, _blockstack.isUserSignedIn)()) {
-                this.props.receiveCurrentUser((0, _blockstack.loadUserData)());
-            } else if ((0, _blockstack.isSignInPending)()) {
-                (0, _blockstack.handlePendingSignIn)(function (userData) {
-                    window.location = window.location.origin;
-                });
-            }
             this.props.requestBlogs();
         }
     }, {
@@ -49110,9 +49121,19 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
-        receiveCurrentUser: function receiveCurrentUser(userData) {
-            return dispatch((0, _session_actions.receiveCurrentUser)(userData));
-        },
+        receiveCurrentUser: function (_receiveCurrentUser) {
+            function receiveCurrentUser(_x) {
+                return _receiveCurrentUser.apply(this, arguments);
+            }
+
+            receiveCurrentUser.toString = function () {
+                return _receiveCurrentUser.toString();
+            };
+
+            return receiveCurrentUser;
+        }(function (userData) {
+            return dispatch(receiveCurrentUser(userData));
+        }),
         requestBlogs: function requestBlogs() {
             return dispatch((0, _blog_actions.requestBlogs)());
         }
@@ -49608,6 +49629,12 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(22);
 
+var _blog_actions = __webpack_require__(45);
+
+var _blog_link = __webpack_require__(363);
+
+var _blog_link2 = _interopRequireDefault(_blog_link);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -49627,16 +49654,38 @@ var UserBlogs = function (_React$Component) {
         _this.state = {
             userBlogs: {}
         };
+
+        _this.mapBlogLink = _this.mapBlogLinks.bind(_this);
         return _this;
     }
 
     _createClass(UserBlogs, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.requestUserBlogs(this.props.currentUser);
+        }
+    }, {
         key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {}
+        value: function componentWillReceiveProps(nextProps) {
+            this.setState({ userBlog: nextProps.userBlogs });
+        }
+    }, {
+        key: 'mapBlogLinks',
+        value: function mapBlogLinks() {
+            var _this2 = this;
+
+            return Object.keys(this.state.userBlogs).map(function (blogId, index) {
+                return _react2.default.createElement(_blog_link2.default, { key: index, blog: _this2.state.blogs[blogId] });
+            });
+        }
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('section', { id: 'user-blogs' });
+            return _react2.default.createElement(
+                'section',
+                { id: 'user-blogs' },
+                this.mapBlogLinks()
+            );
         }
     }]);
 
@@ -49646,11 +49695,19 @@ var UserBlogs = function (_React$Component) {
 var mapStateToProps = function mapStateToProps(state) {
     return {
         currentUser: state.session.currentUser,
-        blogs: state.blogs.index
+        userBlogs: state.blogs.userBlogs
     };
 };
 
-exports.default = UserBlogs;
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+        requestUserBlogs: function requestUserBlogs(user) {
+            return dispatch((0, _blog_actions.requestUserBlogs)(user));
+        }
+    };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(UserBlogs);
 
 /***/ }),
 /* 366 */
@@ -50005,12 +50062,18 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(714);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Logo = function Logo() {
-    return _react2.default.createElement('img', { id: 'logo', className: 'btn',
-        src: 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1499820814/guild_logo-green_pl6kk1.png'
-    });
+    return _react2.default.createElement(
+        _reactRouterDom.Link,
+        { to: '/' },
+        _react2.default.createElement('img', { id: 'logo', className: 'btn',
+            src: 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1499820814/guild_logo-green_pl6kk1.png'
+        })
+    );
 };
 
 exports.default = Logo;
@@ -50077,6 +50140,8 @@ var _reactRedux = __webpack_require__(22);
 
 var _reactRouter = __webpack_require__(10);
 
+var _reactRouterDom = __webpack_require__(714);
+
 var _session_actions = __webpack_require__(46);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -50101,10 +50166,12 @@ var HamburgerDropdown = function HamburgerDropdown(props) {
             { id: 'hamburger-dropdown', className: '' },
             _react2.default.createElement(
                 'li',
-                { onClick: function onClick() {
-                        return props.history.push('/blogs/user');
-                    } },
-                'My Blogs'
+                null,
+                _react2.default.createElement(
+                    _reactRouterDom.Link,
+                    { to: '/blogs/user' },
+                    'My Blogs'
+                )
             ),
             _react2.default.createElement(
                 'li',
@@ -50130,7 +50197,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     };
 };
 
-exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)((0, _reactRouter.withRouter)(HamburgerDropdown));
+exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(HamburgerDropdown);
 
 /***/ }),
 /* 374 */
@@ -50582,6 +50649,10 @@ var BlogMiddleware = function BlogMiddleware(_ref) {
         dispatch = _ref.dispatch;
     return function (next) {
         return function (action) {
+            if (action.type === _blog_actions.REQUEST_USER_BLOGS) {
+                debugger;
+            }
+
             switch (action.type) {
                 case _blog_actions.CREATE_BLOG:
                     (0, _blog_api_util.createBlog)(action.blogs, dispatch);
@@ -50593,6 +50664,10 @@ var BlogMiddleware = function BlogMiddleware(_ref) {
 
                 case _blog_actions.REQUEST_BLOGS:
                     (0, _blog_api_util.fetchBlogs)(dispatch);
+                    return next(action);
+
+                case _blog_actions.REQUEST_USER_BLOGS:
+                    (0, _blog_api_util.fetchUserBlogs)(action.user, dispatch);
                     return next(action);
 
                 case _blog_actions.UPDATE_BLOG:
@@ -50698,6 +50773,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _defaultState = {
     index: {},
+    userBlogs: {},
     errors: [],
     blogIndex: 1
 };
@@ -50709,6 +50785,10 @@ var BlogReducer = function BlogReducer() {
     Object.freeze(oldState);
     var newState = (0, _merge2.default)({}, oldState);
 
+    if (action.type === _blog_actions.RECEIVE_USER_BLOGS) {
+        debugger;
+    }
+
     switch (action.type) {
         case _blog_actions.RECEIVE_BLOG:
             newState.index[action.blog.id] = action.blog;
@@ -50718,6 +50798,11 @@ var BlogReducer = function BlogReducer() {
         case _blog_actions.RECEIVE_BLOGS:
             newState.index = action.blogs;
             newState.blogIndex = action.blogIndex;
+            newState.errors = [];
+            return newState;
+
+        case _blog_actions.RECEIVE_USER_BLOGS:
+            newState.userBlogs = action.userBlogs;
             newState.errors = [];
             return newState;
 

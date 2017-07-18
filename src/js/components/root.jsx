@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, Route } from 'react-router';
+import { withRouter, Router, Route } from 'react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { isUserSignedIn } from 'blockstack';
 
@@ -8,11 +8,11 @@ import { isUserSignedIn } from 'blockstack';
 import App from './app';
 
 const Root = ({ store }) => (
-  <Provider store={ store }>
+<Provider store={ store }>
     <Router history={ createBrowserHistory() }>
-      <App />
+        <App/>
     </Router>
-  </Provider>
+</Provider>
 );
 
 export default Root;

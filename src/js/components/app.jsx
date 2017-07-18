@@ -11,16 +11,7 @@ import BlogForm from './blogs/blog_form/blog_form_container';
 import Blog from './blogs/blog';
 import UserBlogs from './blogs/user_blogs';
 
-import {
-    isSignInPending,
-    signUserIn,
-    isUserSignedIn,
-    loadUserData,
-    Person,
-    handlePendingSignIn
-} from 'blockstack';
 import { requestBlogs } from '../actions/blog_actions';
-import { receiveCurrentUser } from '../actions/session_actions';
 
 class App extends React.Component {
     constructor(props) {
@@ -28,13 +19,6 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        if (isUserSignedIn()) {
-            this.props.receiveCurrentUser(loadUserData());
-        } else if (isSignInPending()) {
-            handlePendingSignIn(userData => {
-                window.location = window.location.origin;
-            });
-        }
         this.props.requestBlogs();
     }
 

@@ -2,12 +2,14 @@ import merge from 'lodash/merge';
 import {
   RECEIVE_BLOG,
   RECEIVE_BLOGS,
+  RECEIVE_USER_BLOGS,
   RECEIVE_BLOG_ERRORS,
   REMOVE_BLOG
 } from '../actions/blog_actions';
 
 const _defaultState = {
     index: {},
+    userBlogs: {},
     errors: [],
     blogIndex: 1
 };
@@ -15,7 +17,11 @@ const _defaultState = {
 const BlogReducer = (oldState = _defaultState, action) => {
     Object.freeze(oldState);
     let newState = merge({}, oldState);
-    
+
+    if (action.type === RECEIVE_USER_BLOGS) {
+        debugger;
+    }
+
     switch(action.type) {
         case RECEIVE_BLOG:
             newState.index[action.blog.id] = action.blog;
@@ -25,6 +31,11 @@ const BlogReducer = (oldState = _defaultState, action) => {
         case RECEIVE_BLOGS:
             newState.index = action.blogs;
             newState.blogIndex = action.blogIndex;
+            newState.errors = [];
+            return newState;
+
+        case RECEIVE_USER_BLOGS:
+            newState.userBlogs = action.userBlogs;
             newState.errors = [];
             return newState;
 

@@ -16,6 +16,12 @@ export const requestBlogs = tags => ({
   tags
 });
 
+export const REQUEST_USER_BLOGS = 'REQUEST_USER_BLOGS';
+export const requestUserBlogs = user => ({
+    type: REQUEST_USER_BLOGS,
+    user
+});
+
 export const UPDATE_BLOG = 'UPDATE_BLOG';
 export const updateBlog = (blog, router) => ({
   type: UPDATE_BLOG,
