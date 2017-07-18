@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import AboutUser from '../users/about_user';
 import CommentForm from '../comments/comment_form';
@@ -8,52 +9,46 @@ class Blog extends React.Component {
     constructor(props) {
         super(props);
 
-        this.mapBlog = this.mapBlog.bind(this);
+        this.state = {
+            blog: {}
+        };
     }
 
-    componentDidMount() {
-        // fetch Blog by id in the route: '/blogs/:id'
-        // this.props.requestBlog(this.props.routeParams.blogId);
-    }
-
-    mapBlog() {
-        // if (!this.props.blogs[this.props.routeParams.blogId]) { return null; }
-        // return this.props.blogs[this.props.routeParams.blogId];
-        return {};
+    componentWillReceiveProps(nextProps) {
+        let id = nextProps.history.location.pathname.substring(7)[0];
+        let blog = nextProps.blogs[id];
+        if (blog) { this.setState({ blog: blog }); }
     }
 
     render() {
-        let blog = this.mapBlog();
-        if (!blog) {
-            return (
-                <div></div>
-            );
-        } else {
-            return (
-                <section id='layout'>
-                    <div id='blog' className=''>
-                        <h3 id='blog-title' className='blog-show-section'>
-                            {/* blog.title */}
-                            Blog Title
-                        </h3>
+        let blog = this.state.blog;
 
-                        <img id='blog-img' alt='Blog Image' className='blog-show-section' src='' />
+        return (
+            <section id='layout'>
+                <div id='blog' className=''>
+                    <h3 id='blog-title' className='blog-show-section'>
+                        { blog.title }
+                    </h3>
 
-                        <p id='blog-body' className='blog-show-section'>
-                            {/* blog.body */}
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
+                    <img id='blog-img' alt='Blog Image' className='blog-show-section' src={ blog.imageUrl } />
 
-                        <div className='blog-show-section'>
-                            <AboutUser />
-                        </div>
+                    <p id='blog-body' className='blog-show-section'>
+                        { blog.body }
+                    </p>
 
-                        <CommentForm />
+                    <div className='blog-show-section'>
+                        <AboutUser />
                     </div>
-                </section>
-            );
-        }
+
+                    {/* <CommentForm /> */}
+                </div>
+            </section>
+        );
     }
 }
 
-export default Blog;
+const mapStateToProps = state => ({
+    blogs: state.blogs.index
+});
+
+export default connect(mapStateToProps, null)(Blog);

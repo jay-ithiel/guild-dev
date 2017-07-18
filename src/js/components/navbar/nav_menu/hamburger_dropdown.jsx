@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 import { signout } from '../../../actions/session_actions';
 
 const close = e => {
@@ -15,16 +16,28 @@ const HamburgerDropdown = props => (
         </span>
 
         <ul id='hamburger-dropdown' className=''>
-            <li onClick={ () => null }>My Blogs</li>
-            <li onClick={ () => null }>Profile</li>
+            <li onClick={ close }>
+                <Link to={`/blogs/user`}>My Blogs</Link>
+            </li>
+
+            <li onClick={ close }>
+                <Link to={`/users/${props.currentUser.username}`}>Profile</Link>
+            </li>
+
             <li onClick={ props.signout }>Log Out</li>
         </ul>
     </div>
 );
 
+const mapStateToProps = state => ({
+    currentUser: state.session.currentUser
+});
+
 const mapDispatchToProps = dispatch => ({
     signout: () => dispatch(signout())
 });
 
-// export default withRouter(HamburgerDropdown);
-export default connect(null, mapDispatchToProps)(HamburgerDropdown);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HamburgerDropdown);

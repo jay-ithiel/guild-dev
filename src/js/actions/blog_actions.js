@@ -1,7 +1,7 @@
 export const CREATE_BLOG = 'CREATE_BLOG';
-export const createBlog = blog => ({
+export const createBlog = blogs => ({
   type: CREATE_BLOG,
-  blog
+  blogs
 });
 
 export const REQUEST_BLOG = 'REQUEST_BLOG';
@@ -14,6 +14,12 @@ export const REQUEST_BLOGS = 'REQUEST_BLOGS';
 export const requestBlogs = tags => ({
   type: REQUEST_BLOGS,
   tags
+});
+
+export const REQUEST_USER_BLOGS = 'REQUEST_USER_BLOGS';
+export const requestUserBlogs = user => ({
+    type: REQUEST_USER_BLOGS,
+    user
 });
 
 export const UPDATE_BLOG = 'UPDATE_BLOG';
@@ -45,6 +51,12 @@ export const RECEIVE_BLOGS = 'RECEIVE_BLOGS';
 export const receiveBlogs = blogs => ({
   type: RECEIVE_BLOGS,
   blogs
+});
+
+export const RECEIVE_USER_BLOGS = 'RECEIVE_USER_BLOGS';
+export const receiveUserBlogs = userBlogs => ({
+    type: RECEIVE_BLOGS,
+    userBlogs
 });
 
 export const RECEIVE_BLOG_ERRORS = 'RECEIVE_BLOG_ERRORS';

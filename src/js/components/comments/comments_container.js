@@ -16,4 +16,7 @@ const mapDispatchToProps = dispatch => ({
     deleteComment: id => dispatch(deleteComment(id))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Comments);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Comments);

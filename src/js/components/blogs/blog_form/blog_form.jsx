@@ -1,20 +1,20 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { isUserSignedIn } from 'blockstack';
-import * as blockstack from 'blockstack';
+
 import Blog from '../../../../models/blog.ts';
-global.Blog = Blog;
-global.blockstack = blockstack;
 
 class BlogForm extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            id: null,
             title: '',
             imageUrl: '',
             body: '',
-            authorId: ''
+            authorId: '',
+            updatedAt: ''
         };
 
         this.actionType = (props.history.location.pathname === '/blogs/new/') ? 'Create' : 'Update';
@@ -22,30 +22,36 @@ class BlogForm extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componentDidMount() {
+    componentWillReceiveProps(nextProps) {
         if (!isUserSignedIn()) {
             this.props.history.push('/signin');
         } else {
-            this.state.authorId = this.props.currentUser.name;
+            this.setState({ authorId: nextProps.currentUser.username });
         }
-        // if !props.isNewBlog, dispatch requestBlog to edit
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        let blog = new Blog(
-            this.state.title,
-            this.state.imageUrl,
-            this.state.body,
-            this.state.authorId
-        );
-        debugger;
-        // this.props.createBlog(this.state);
-        this.props.createBlog(blog);
+
+        if (this.actionType === 'Create') {
+            this.state.id = this.props.blogIndex + 1;
+
+            let blog = new Blog(
+                this.state.id,
+                this.state.title,
+                this.state.imageUrl,
+                this.state.body,
+                this.state.authorId
+            );
+
+            this.props.blogs[blog.id] = blog;
+        }
+
+        this.props.createBlog(this.props.blogs);
     }
 
     handleChange(field) {
-        return e => this.setState({ [field]: e.target.value }) ;
+        return e => this.setState({ [field]: e.target.value });
     }
 
     render() {

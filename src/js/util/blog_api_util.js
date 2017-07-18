@@ -1,33 +1,84 @@
-import * as blockstack from 'blockstack';
+import {
+    getFile,
+    putFile
+} from 'blockstack';
+
 import {
     RECEIVE_BLOG,
-    RECEIVE_BLOGS
+    RECEIVE_BLOGS,
+    RECEIVE_USER_BLOGS
 } from '../actions/blog_actions';
+
 var STORAGE_FILE = 'blogs.json';
 
-export const createBlog = (blog, dispatch) => {
-    debugger;
-    // blockstack.putFile('../../blogs_storage.json', JSON.stringify(blog));
-    blockstack.putFile(STORAGE_FILE, JSON.stringify(blog)).then((blogInfo) => {
-        console.log('dispatching BLOG SAVED action');
-        debugger;
-        dispatch({
-            type: 'BLOG_SAVED'
-        });
+export const createBlog = (blogs, dispatch) => {
+    putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
+
     });
 };
 
 export const fetchBlogs = dispatch => {
-    var blogs;
-    blockstack.getFile(STORAGE_FILE).then((blogItems) => {
+    var blogs = {}, blogIndex;
+
+    getFile(STORAGE_FILE).then(blogItems => {
         blogItems = JSON.parse(blogItems || '[]');
-        blogItems.forEach((blog, index) => {
-            blog.id = index;
+
+        Object.keys(blogItems).forEach((id, index) => {
+            blogItems[id].id = index+1;
+            blogIndex = index+1;
         });
+
         blogs = blogItems;
+
+        dispatch({
+            type: RECEIVE_BLOGS,
+            blogs,
+            blogIndex
+        });
     });
-    dispatch({
-        type: RECEIVE_BLOGS,
-        blogs
+};
+
+export const fetchUserBlogs = (user, dispatch) => {
+    var userBlogs = {};
+
+    getFile(STORAGE_FILE).then(blogItems => {
+        blogItems = JSON.parse(blogItems || '[]');
+
+        Object.keys(blogItems).forEach(id => {
+            if (blogItems[id].authorId === user.username) {
+                userBlogs[id] = blogItems[id];
+            }
+        });
+
+        dispatch({
+            type: RECEIVE_USER_BLOGS,
+            userBlogs
+        });
+    });
+};
+
+export const deleteBlog = (id, dispatch) => {
+    var blogs = {}, blogIndex;
+
+    getFile(STORAGE_FILE).then(blogItems => {
+        blogItems = JSON.parse(blogItems || '[]');
+
+        Object.keys(blogItems).forEach((blogId, index) => {
+            if (parseInt(blogId) !== id) {
+                blogs[blogId] = blogItems[blogId];
+            }
+        });
+
+        blogIndex = Object.keys(blogs).length;
+
+        putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
+            if (isBlogSaved) {
+                dispatch({
+                    type: RECEIVE_BLOGS,
+                    blogs,
+                    blogIndex
+                });
+            }
+        });
     });
 };

@@ -1,12 +1,13 @@
 import React from 'react';
 import SearchModal from './search_modal';
+import SearchSVG from 'react-icons/lib/fa/search';
 
 const NavSearch = () => (
   <div id='nav-search' className='border-box-sizing'>
-    <img id='search-icon'
+    <SearchSVG size={ 21 }
+        id='search-icon'
         className='btn'
         onClick={ () => $('#search-modal-container').fadeIn() }
-        src='https://res.cloudinary.com/ddgtwtbre/image/upload/v1499115986/search-icon_dwgh09.png'
     />
 
     <SearchModal />

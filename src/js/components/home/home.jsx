@@ -4,7 +4,7 @@ import Blogs from '../blogs/blogs';
 
 const Home = () => (
     <section id='home'>
-        <Blogs />
+        <Blogs/>
     </section>
 );
 

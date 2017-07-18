@@ -11,11 +11,13 @@ import * as blockstack from 'blockstack';
 const mapStateToProps = state => ({
     isUserSignedIn: blockstack.isUserSignedIn(),
     currentUser: state.session.currentUser,
-    blogErrors: state.blog.errors
+    blogs: state.blogs.index,
+    blogErrors: state.blogs.errors,
+    blogIndex: state.blogs.blogIndex
 });
 
 const mapDispatchToProps = dispatch => ({
-    createBlog: blog => dispatch(createBlog(blog)),
+    createBlog: blogs => dispatch(createBlog(blogs)),
     updateBlog: blog => dispatch(updateBlog(blog)),
     requestBlog: id => dispatch(requestBlog(id)),
     requestBlogs: () => dispatch(requestBlogs())
