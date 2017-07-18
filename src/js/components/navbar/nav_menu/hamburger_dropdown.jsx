@@ -16,18 +16,28 @@ const HamburgerDropdown = props => (
         </span>
 
         <ul id='hamburger-dropdown' className=''>
-            <li onClick={close}><Link to='/blogs/user'>My Blogs</Link></li>
-            <li onClick={close}>Profile</li>
+            <li onClick={ close }>
+                <Link to={`/blogs/${props.currentUser.username}`}>My Blogs</Link>
+            </li>
+
+            <li onClick={ close }>
+                <Link to={`/users/${props.currentUser.username}`}>Profile</Link>
+            </li>
+
             <li onClick={ props.signout }>Log Out</li>
         </ul>
     </div>
 );
+
+const mapStateToProps = state => ({
+    currentUser: state.session.currentUser
+});
 
 const mapDispatchToProps = dispatch => ({
     signout: () => dispatch(signout())
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(HamburgerDropdown);
