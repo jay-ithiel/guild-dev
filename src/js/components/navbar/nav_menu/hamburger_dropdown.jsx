@@ -17,7 +17,7 @@ const HamburgerDropdown = props => (
 
         <ul id='hamburger-dropdown' className=''>
             <li onClick={ close }>
-                <Link to={`/blogs/${props.currentUser.username}`}>My Blogs</Link>
+                <Link to={`/blogs/user`}>My Blogs</Link>
             </li>
 
             <li onClick={ close }>

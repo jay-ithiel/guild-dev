@@ -49326,7 +49326,7 @@ var App = function (_React$Component) {
                     _react2.default.createElement(_reactRouter.Route, { path: '/signin', component: _signin_page2.default }),
                     _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/blogs/new', component: _blog_form_container2.default }),
                     _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/blogs/edit/:id', component: _blog_form_container2.default }),
-                    _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/blogs/:username', component: _user_blogs2.default }),
+                    _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/blogs/user', component: _user_blogs2.default }),
                     _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/blogs/:id', component: _blog2.default }),
                     _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/users/:username', component: _profile2.default })
                 )
@@ -49727,8 +49727,8 @@ var BlogLinkActions = function (_React$Component) {
                 'div',
                 null,
                 _react2.default.createElement(
-                    'span',
-                    null,
+                    _reactRouterDom.Link,
+                    { to: '/blogs/edit/' + this.props.blog.id },
                     'Edit'
                 ),
                 _react2.default.createElement(
@@ -50396,7 +50396,7 @@ var HamburgerDropdown = function HamburgerDropdown(props) {
                 { onClick: close },
                 _react2.default.createElement(
                     _reactRouterDom.Link,
-                    { to: '/blogs/' + props.currentUser.username },
+                    { to: '/blogs/user' },
                     'My Blogs'
                 )
             ),

@@ -18,7 +18,7 @@ class BlogLinkActions extends React.Component {
     render() {
         return !this.props.isUserBlogs ? <div></div> : (
             <div>
-                <span>Edit</span>
+                <Link to={`/blogs/edit/${this.props.blog.id}`}>Edit</Link>
                 <span onClick={ this.handleDelete }>Delete</span>
             </div>
         );
