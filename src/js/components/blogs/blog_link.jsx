@@ -9,7 +9,7 @@ const BlogLink = ({ blog, isUserBlogs }) => (
             <img src={ blog.imageUrl } alt='Blog Image' className='blog-link-img'/>
         </div>
 
-        <div className='blog-link-info'>
+        <div className='blog-link-info position-relative'>
             <h4 id='blog-link-title'>{ blog.title }</h4>
 
             <p id='blog-link-text'>

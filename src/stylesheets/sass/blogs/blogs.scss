@@ -49,6 +49,17 @@
     position: relative;
 }
 
+#blog-link-actions {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.blog-link-action {
+
+}
 
 @media screen and (min-width: 768px) {
     #blog-link {
