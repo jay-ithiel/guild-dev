@@ -23,9 +23,9 @@ export const requestUserBlogs = user => ({
 });
 
 export const UPDATE_BLOG = 'UPDATE_BLOG';
-export const updateBlog = (blog, router) => ({
+export const updateBlog = (blogs, router) => ({
   type: UPDATE_BLOG,
-  blog,
+  blogs,
   router
 });
 

@@ -14,12 +14,16 @@ import {
 
 import {
     createBlog,
+    updateBlog,
     fetchBlogs,
     fetchUserBlogs,
     deleteBlog
 } from '../util/blog_api_util';
 
 const BlogMiddleware = ({ getState, dispatch }) => next => action => {
+    if (action.type === UPDATE_BLOG) {
+        debugger;
+    }
     switch(action.type) {
         case CREATE_BLOG:
             createBlog(action.blogs, dispatch);
@@ -38,7 +42,7 @@ const BlogMiddleware = ({ getState, dispatch }) => next => action => {
             return next(action);
 
         case UPDATE_BLOG:
-
+            updateBlog(action.blogs, dispatch);
             return next(action);
 
         case DELETE_BLOG:

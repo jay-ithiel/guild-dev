@@ -17,6 +17,12 @@ export const createBlog = (blogs, dispatch) => {
     });
 };
 
+export const updateBlog = (blogs, dispatch) => {
+    putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
+
+    });
+};
+
 export const fetchBlogs = dispatch => {
     var blogs = {}, blogIndex;
 

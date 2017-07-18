@@ -18,36 +18,76 @@ class BlogForm extends React.Component {
         };
 
         this.actionType = (props.history.location.pathname === '/blogs/new/') ? 'Create' : 'Update';
+        this.redirectUnlessLoggedIn = this.redirectUnlessLoggedIn.bind(this);
+        this.setBlogToEdit = this.setBlogToEdit.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
+    componentWillMount() {
+        this.redirectUnlessLoggedIn();
+        if (Object.keys(this.props.blogs).length > 0) {
+            this.setBlogToEdit();
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
+        // this.redirectUnlessLoggedIn();
+        this.setBlogToEdit(nextProps);
+    }
+
+    redirectUnlessLoggedIn() {
         if (!isUserSignedIn()) {
             this.props.history.push('/signin');
-        } else {
-            this.setState({ authorId: nextProps.currentUser.username });
         }
+    }
+
+    setBlogToEdit(nextProps = this.props.blogs) {
+        if (this.state.id === null && this.actionType === 'Update') {
+            let blog = nextProps.blogs[
+                parseInt( this.props.history.location.pathname.substring(12) )
+            ];
+
+            this.setState({
+                id: blog.id,
+                title: blog.title,
+                imageUrl: blog.imageUrl,
+                body: blog.body,
+                authorId: blog.authorId,
+                updatedAt: blog.updatedAt
+            });
+        }
+    }
+
+    dispatchCreateBlog() {
+        this.state.id = this.props.blogIndex + 1;
+
+        let blog = new Blog(
+            this.state.id,
+            this.state.title,
+            this.state.imageUrl,
+            this.state.body,
+            this.props.currentUser.username
+        );
+
+        this.props.blogs[blog.id] = blog;
+
+        this.props.createBlog(this.props.blogs);
+    }
+
+    dispatchUpdateBlog() {
+        this.props.blogs[this.state.id] = this.state;
+        this.props.updateBlog(this.props.blogs);
     }
 
     handleSubmit(e) {
         e.preventDefault();
 
         if (this.actionType === 'Create') {
-            this.state.id = this.props.blogIndex + 1;
-
-            let blog = new Blog(
-                this.state.id,
-                this.state.title,
-                this.state.imageUrl,
-                this.state.body,
-                this.state.authorId
-            );
-
-            this.props.blogs[blog.id] = blog;
+            this.dispatchCreateBlog();
+        } else {
+            this.dispatchUpdateBlog();
         }
-
-        this.props.createBlog(this.props.blogs);
     }
 
     handleChange(field) {
