@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router';
+import { Switch, withRouter, Route } from 'react-router';
 // Loads dependencies to compile SASS to CSS
 require("!style-loader!css-loader!sass-loader!../../stylesheets/sass/all.scss");
 
@@ -42,16 +42,19 @@ class App extends React.Component {
         return (
             <div id='app' className=''>
                 <Navbar />
-                <Route exact path='/' component={Home}></Route>
-                <Route path='/signin' component={SignInPage}></Route>
-                <Route exact path='/blogs/new'  component={BlogForm}></Route>
-                <Route exact path='/blogs/edit/:id' component={BlogForm}></Route>
-                <Route exact path='/blogs/user' component={UserBlogs}></Route>
-                <Route exact path='/blogs/:id' component={Blog}></Route>
 
-                {/*
-                    <Route path='/profile' component={ Profile }></Route>
-                */}
+                <Switch>
+                    <Route exact path='/' component={Home}></Route>
+                    <Route path='/signin' component={SignInPage}></Route>
+                    <Route exact path='/blogs/new'  component={BlogForm}></Route>
+                    <Route exact path='/blogs/edit/:id' component={BlogForm}></Route>
+                    <Route exact path='/blogs/user' component={UserBlogs}></Route>
+                    <Route exact path='/blogs/:id' component={Blog}></Route>
+
+                    {/*
+                        <Route path='/profile' component={ Profile }></Route>
+                    */}
+                </Switch>
             </div>
         );
     }
@@ -68,7 +71,7 @@ const mapDispatchToProps = dispatch => ({
     requestBlogs: () => dispatch(requestBlogs())
 });
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(App);
+)(App));

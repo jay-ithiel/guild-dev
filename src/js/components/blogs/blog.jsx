@@ -40,7 +40,7 @@ class Blog extends React.Component {
                         <AboutUser />
                     </div>
 
-                    <CommentForm />
+                    {/* <CommentForm /> */}
                 </div>
             </section>
         );

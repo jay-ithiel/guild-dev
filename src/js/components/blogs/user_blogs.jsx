@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 class UserBlogs extends React.Component {
     constructor(props) {
@@ -9,13 +10,22 @@ class UserBlogs extends React.Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        
+    }
+
     render() {
         return (
             <section id='user-blogs'>
-                User Blogs
+
             </section>
         );
     }
 }
+
+const mapStateToProps = state => ({
+    currentUser: state.session.currentUser,
+    blogs: state.blogs.index
+});
 
 export default UserBlogs;

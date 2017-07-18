@@ -47,6 +47,12 @@ export const receiveBlogs = blogs => ({
   blogs
 });
 
+export const RECEIVE_USER_BLOGS = 'RECEIVE_USER_BLOGS';
+export const receiveUserBlogs = userBlogs => ({
+    type: RECEIVE_BLOGS,
+    userBlogs
+});
+
 export const RECEIVE_BLOG_ERRORS = 'RECEIVE_BLOG_ERRORS';
 export const receiveBlogErrors = (errors) => ({
   type: RECEIVE_BLOG_ERRORS,

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 
 import BlogLink from './blog_link';
 import { requestBlogs } from '../../actions/blog_actions';
@@ -22,7 +21,7 @@ class Blogs extends React.Component {
 
     mapBlogLinks() {
         return Object.keys(this.state.blogs).map((blogId, index) => (
-            <BlogLink location={ this.props.history.location } key={index} blog={ this.state.blogs[blogId] }/>
+            <BlogLink key={index} blog={ this.state.blogs[blogId] }/>
         ));
     }
 
@@ -46,4 +45,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withRouter(Blogs));
+)(Blogs);
