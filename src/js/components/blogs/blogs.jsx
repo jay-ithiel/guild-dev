@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { isUserSignedIn } from 'blockstack';
+import { isUserSignedIn, isSignInPending } from 'blockstack';
 import BlogLink from './blog_link';
 import SignInPage from '../session/signin_page';
 import { requestBlogs } from '../../actions/blog_actions';
@@ -27,7 +27,7 @@ class Blogs extends React.Component {
     }
 
     render() {
-        if (!isUserSignedIn()) { return <SignInPage/> }
+        if (!isUserSignedIn() && !isSignInPending()) { return <SignInPage/> }
 
         let blogLinks = this.mapBlogLinks();
         return blogLinks.length === 0 ? (

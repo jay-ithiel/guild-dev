@@ -104,6 +104,7 @@ class BlogForm extends React.Component {
                         onChange={ this.handleChange('title') }
                         value={ this.state.title }
                         placeholder='Title'
+                        maxLength='40'
                     />
 
                     <div id='add-img-btn' className='blog-input btn'>
@@ -118,7 +119,7 @@ class BlogForm extends React.Component {
                         className='blog-input'
                         onChange={ this.handleChange('body') }
                         value={ this.state.body }
-                        placeholder='Body'
+                        placeholder='Write your blog here...'
                     />
 
                     <button id='blog-submit' className='btn primary-btn blog-input'>{this.actionType} Blog</button>

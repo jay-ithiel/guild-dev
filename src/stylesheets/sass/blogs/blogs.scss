@@ -13,23 +13,11 @@
 #blog-link {
     width: 80vw;
     height: 120vw;
+    min-height: 325px;
+    min-width: 216px;
     background-color: whitesmoke;
     margin: 20px auto;
     cursor: pointer;
-}
-
-@media screen and (min-width: 450px) {
-    #blogs {
-        width: 100vw;
-        padding: 3vw;
-        flex-direction: row;
-        justify-content: flex-start;
-    }
-
-    #blog-link {
-        width: 40vw;
-        height: 60vw;
-    }
 }
 
 .blog-content {
@@ -61,24 +49,6 @@
 
 }
 
-@media screen and (min-width: 768px) {
-    #blog-link {
-        width: 26vw;
-        height: 39vw;
-    }
-
-    .blog-content {
-        width: 90%;
-    }
-}
-
-@media screen and (min-width: 1100px) {
-    #blog-link {
-        max-width: 340px;
-        max-height: 500px;
-    }
-}
-
 .blog-link-img-box {
     height: 45%;
     width: 100%;
@@ -97,7 +67,7 @@
 }
 
 #blog-link-title {
-    font-size: 22px;
+    font-size: 23px;
     font-weight: 500;
     letter-spacing: 1px;
     line-height: 22px;
@@ -120,4 +90,57 @@
     font-weight: 100;
     letter-spacing: 1px;
     line-height: 22px;
+}
+
+// Small screen
+@media screen and (min-width: 450px) {
+    #blogs {
+        width: 100vw;
+        padding: 3vw;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    #blog-link {
+        width: 43vw;
+        height: 75vw;
+    }
+}
+
+@media screen and (min-width: 451px) and (max-width: 600px) {
+    #blog-link-title {
+        font-size: 17px;
+    }
+
+    #blog-link-body-intro {
+        font-size: 14px;
+        line-height: 18px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #blog-link {
+        width: 28vw;
+        height: 43vw;
+    }
+
+    .blog-content {
+        width: 90%;
+    }
+
+    #blog-link-title {
+        font-size: 20px;
+    }
+
+    #blog-link-body-intro {
+        font-size: 15px;
+        line-height: 19px;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    #blog-link {
+        max-width: 340px;
+        max-height: 500px;
+    }
 }
