@@ -1,6 +1,7 @@
+@import 'blog_submit_button.scss';
+
 #blog-form-container {
     width: 100vw;
-    min-height: 100vh;
     height: auto;
     padding-bottom: 40px;
     display: flex;
@@ -12,14 +13,15 @@
     width: 80%;
     max-width: 650px;
     background-color: #fff;
-
     display: flex;
     flex-direction: column;
+    padding-top: 15px;
 }
 
 .blog-input {
     min-width: 100%;
     box-sizing: border-box;
+
     padding: 7px;
     border: none;
     border-bottom: 1px solid #eee;
@@ -31,15 +33,28 @@
 }
 
 #blog-title-input {
-    margin-top: 25px;
     height: 50px;
     font-size: 30px;
-    font-weight: 300;
+    font-weight: 500;
     letter-spacing: 2px;
 }
 
+#blog-intro-input {
+    height: 40px;
+    font-size: 15px;
+    font-weight: 100;
+    letter-spacing: 1px;
+}
+
+#blog-body-input {
+    min-height: 275px;
+    font-size: 17px;
+    padding-top: 15px;
+    border-bottom: 1px solid #eee;
+}
+
 #add-img-btn {
-    height: 240px;
+    height: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,19 +62,10 @@
 }
 
 #add-img-icon {
-    height: 100px;
-}
-
-#blog-body-input {
-    min-height: 300px;
-    font-size: 17px;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-}
-
-#blog-submit {
     height: 50px;
-    font-size: 19px;
-    font-weight: 500;
-    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.blog-form-label {
+    margin: 2px 0;
 }

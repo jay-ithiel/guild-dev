@@ -1,8 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { isUserSignedIn } from 'blockstack';
-
+import Camera from 'react-icons/lib/fa/camera';
 import Blog from '../../../../models/blog.ts';
+import SubmitBlogButton from './submit_blog_button';
 
 class BlogForm extends React.Component {
     constructor(props) {
@@ -11,35 +12,34 @@ class BlogForm extends React.Component {
         this.state = {
             id: null,
             title: '',
-            imageUrl: '',
+            blogIntro: '',
             body: '',
+            imageUrl: '',
             authorId: '',
-            updatedAt: ''
+            updatedAt: '',
+            isSubmitButtonActive: true
         };
 
-        this.actionType = (props.history.location.pathname === '/blogs/new/') ? 'Create' : 'Update';
+        this.actionType = (props.history.location.pathname === '/blogs/new/') ? 'Publish' : 'Update';
         this.redirectUnlessLoggedIn = this.redirectUnlessLoggedIn.bind(this);
         this.setBlogToEdit = this.setBlogToEdit.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.redirectUnlessLoggedIn();
-        if (Object.keys(this.props.blogs).length > 0) {
-            this.setBlogToEdit();
-        }
+        if (Object.keys(this.props.blogs).length > 0) { this.setBlogToEdit(); }
     }
 
     componentWillReceiveProps(nextProps) {
-        // this.redirectUnlessLoggedIn();
+        if (nextProps.currentUser) {
+            this.setState({ authorId: nextProps.currentUser.username });
+        }
         this.setBlogToEdit(nextProps);
     }
 
     redirectUnlessLoggedIn() {
-        if (!isUserSignedIn()) {
-            this.props.history.push('/signin');
-        }
+        if (!isUserSignedIn()) { this.props.history.push('/signin'); }
     }
 
     setBlogToEdit(nextProps = this.props.blogs) {
@@ -51,43 +51,80 @@ class BlogForm extends React.Component {
             this.setState({
                 id: blog.id,
                 title: blog.title,
-                imageUrl: blog.imageUrl,
+                blogIntro: blog.blogIntro,
                 body: blog.body,
+                imageUrl: blog.imageUrl,
                 authorId: blog.authorId,
                 updatedAt: blog.updatedAt
             });
         }
     }
 
-    dispatchCreateBlog() {
-        this.state.id = this.props.blogIndex + 1;
+    hasErrors() {
+        let hasErrors = false;
 
-        let blog = new Blog(
-            this.state.id,
-            this.state.title,
-            this.state.imageUrl,
-            this.state.body,
-            this.props.currentUser.username
-        );
+        if (this.state.title.length <= 0) {
+            hasErrors = true;
+            $('#blog-title-error').fadeIn();
+            $('#blog-title-label').addClass('outline-red');
+        }
+        else {
+            $('#blog-title-error').fadeOut();
+            $('#blog-title-label').removeClass('outline-red');
+        }
 
-        this.props.blogs[blog.id] = blog;
 
-        this.props.createBlog(this.props.blogs);
+        if (this.state.blogIntro.length <= 0) {
+            hasErrors = true;
+            $('#blog-intro-error').fadeIn();
+            $('#blog-intro-label').addClass('outline-red');
+        }
+        else {
+            $('#blog-intro-error').fadeOut();
+            $('#blog-intro-label').removeClass('outline-red');
+        }
+
+
+        if (this.state.body.length <= 0) {
+            hasErrors = true;
+            $('#blog-body-error').fadeIn();
+            $('#blog-body-label').addClass('outline-red');
+        } else {
+            $('#blog-body-error').fadeOut();
+            $('#blog-body-label').removeClass('outline-red');
+        }
+
+
+        if (this.state.imageUrl.length <= 0) {
+            this.state.imageUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1500153014/blog-default-img_d3ke0j.jpg';
+        }
+
+        return hasErrors;
     }
 
-    dispatchUpdateBlog() {
-        this.props.blogs[this.state.id] = this.state;
-        this.props.updateBlog(this.props.blogs);
+    processForm() {
+        let blog = this.state;
+        if (this.actionType === 'Publish') {
+            this.state.id = this.props.blogIndex + 1;
+            blog = new Blog(
+                this.state.id,
+                this.state.title,
+                this.state.blogIntro,
+                this.state.body,
+                this.state.imageUrl,
+                this.props.currentUser.username
+            );
+        }
+
+        this.props.blogs[blog.id] = blog;
+        this.props.saveBlogs(this.props.blogs);
+        this.setState({ isSubmitButtonActive: false });
     }
 
     handleSubmit(e) {
         e.preventDefault();
-
-        if (this.actionType === 'Create') {
-            this.dispatchCreateBlog();
-        } else {
-            this.dispatchUpdateBlog();
-        }
+        // Check form for errors. If hasErrors returns false, there are no errors, so we can process the form
+        if (!this.hasErrors()) { this.processForm() }
     }
 
     handleChange(field) {
@@ -97,32 +134,46 @@ class BlogForm extends React.Component {
     render() {
         return (
             <div id='blog-form-container'>
-                <form id='blog-form' onSubmit={ this.handleSubmit }>
-                    <input type='text'
+                <form id='blog-form' onSubmit={ this.handleSubmit.bind(this) }>
+
+                    <label id='blog-title-label' className='blog-form-label'>
+                        <span id='blog-title-error' className='error-message'>Title cannot be blank</span>
+                        <input type='text'
                         id='blog-title-input'
-                        className='blog-input'
+                        className='blog-input black'
                         onChange={ this.handleChange('title') }
                         value={ this.state.title }
                         placeholder='Title'
-                        maxLength='40'
-                    />
+                        maxLength='30'/>
+                    </label>
 
-                    <div id='add-img-btn' className='blog-input btn'>
-                        <img id='add-img-icon'
-                            src='https://res.cloudinary.com/ddgtwtbre/image/upload/v1499124357/cam-icon_cztsyy.png'
-                        />
-                        <h4 className='title-2'>Add Image</h4>
-                    </div>
+                    <label id='blog-intro-label' className='blog-form-label'>
+                        <span id='blog-intro-error' className='error-message'>Blog intro cannot be blank</span>
+                        <input type='text'
+                        id='blog-intro-input'
+                        className='blog-input black'
+                        onChange={ this.handleChange('blogIntro') }
+                        value={ this.state.blogIntro }
+                        placeholder='Summarize your blog in 1 or 2 sentences...'
+                        maxLength='50'/>
+                    </label>
 
-                    <textarea type='text'
+                    <label id='blog-body-label' className='blog-form-label'>
+                        <span id='blog-body-error' className='error-message'>Blog body cannot be blank</span>
+                        <textarea type='text'
                         id='blog-body-input'
-                        className='blog-input'
+                        className='blog-input black'
                         onChange={ this.handleChange('body') }
                         value={ this.state.body }
-                        placeholder='Write your blog here...'
-                    />
+                        placeholder='Write your blog here...'/>
+                    </label>
 
-                    <button id='blog-submit' className='btn primary-btn blog-input'>{this.actionType} Blog</button>
+                    <div id='add-img-btn' className='blog-input btn'>
+                        <Camera id='add-img-icon' size={50}/>
+                        <h4 className='title-2'>Add Cover Photo</h4>
+                    </div>
+
+                    <SubmitBlogButton actionType={this.actionType} isActive={this.state.isSubmitButtonActive}/>
                 </form>
             </div>
         );

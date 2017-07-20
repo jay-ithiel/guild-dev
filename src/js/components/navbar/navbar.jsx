@@ -9,8 +9,7 @@ const Navbar = props => (
   <nav id='navbar'>
     <Logo />
     <div id='navdiv' className='flex justify-between align-center'>
-        <NavSearch />
-        <a href='/blogs/new' className='white bold'>Write a blog</a>
+        {/* <NavSearch /> */}
         <NavMenu />
     </div>
   </nav>

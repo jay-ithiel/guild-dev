@@ -25,6 +25,10 @@
     font-weight: 100;
 }
 
+.thin {
+    font-weight: 400;
+}
+
 .bold {
     font-weight: 700;
 }
@@ -43,4 +47,21 @@
 
 .white {
     color: #fff;
+}
+
+.black {
+    color: #000;
+}
+
+.error-message {
+    font-size: 13px;
+    font-weight: 100;
+    color: #ff0000;
+    padding: 3px;
+    display: none;
+}
+
+.outline-red {
+    border: 1px solid red !important;
+    border-radius: 2px;
 }

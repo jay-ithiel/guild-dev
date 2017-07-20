@@ -1,3 +1,9 @@
+export const SAVE_BLOGS = 'SAVE_BLOGS';
+export const saveBlogs = blogs => ({
+    type: SAVE_BLOGS,
+    blogs
+});
+
 export const CREATE_BLOG = 'CREATE_BLOG';
 export const createBlog = blogs => ({
   type: CREATE_BLOG,

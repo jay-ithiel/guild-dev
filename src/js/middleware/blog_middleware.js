@@ -5,6 +5,7 @@ import {
   REQUEST_USER_BLOGS,
   UPDATE_BLOG,
   DELETE_BLOG,
+  SAVE_BLOGS,
   receiveBlog,
   receiveBlogs,
   receiveUserBlogs,
@@ -17,11 +18,16 @@ import {
     updateBlog,
     fetchBlogs,
     fetchUserBlogs,
-    deleteBlog
+    deleteBlog,
+    saveBlogs
 } from '../util/blog_api_util';
 
 const BlogMiddleware = ({ getState, dispatch }) => next => action => {
     switch(action.type) {
+        case SAVE_BLOGS:
+            saveBlogs(action.blogs, dispatch);
+            return next(action);
+
         case CREATE_BLOG:
             createBlog(action.blogs, dispatch);
             return next(action);

@@ -1,0 +1,32 @@
+// $primary-color: #43bd7e;;
+$primary-color: #fff;
+@import '../loaders.css/src/animations/ball-clip-rotate.scss';
+
+.loader-hidden {
+  display: none;
+}
+.loader-active {
+  display: block;
+}
+
+#blog-submit {
+    height: 50px;
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: 2px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: all .2s ease-in;
+    background-color: #43bd7e;
+    cursor: pointer;
+}
+
+.inactive {
+    transition: all .2s ease-in ;
+    background-color: #aaa !important;
+    color: $primary-color !important;
+    cursor: default !important;
+}

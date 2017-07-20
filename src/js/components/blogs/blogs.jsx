@@ -16,6 +16,10 @@ class Blogs extends React.Component {
         this.mapBlogLinks = this.mapBlogLinks.bind(this);
     }
 
+    componentDidMount() {
+        this.props.requestBlogs();
+    }
+
     componentWillReceiveProps(nextProps) {
         this.setState({ blogs: nextProps.blogs });
     }

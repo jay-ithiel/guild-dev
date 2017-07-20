@@ -11,6 +11,14 @@ import {
 
 var STORAGE_FILE = 'blogs.json';
 
+export const saveBlogs = (blogs, dispatch) => {
+    putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
+        if (isBlogSaved) {
+            window.location = window.location.origin;
+        }
+    });
+}
+
 export const createBlog = (blogs, dispatch) => {
     putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
 

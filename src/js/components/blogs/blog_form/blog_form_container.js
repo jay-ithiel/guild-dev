@@ -3,6 +3,7 @@ import BlogForm from './blog_form';
 import {
     createBlog,
     updateBlog,
+    saveBlogs,
     requestBlog,
     requestBlogs
 } from '../../../actions/blog_actions';
@@ -19,6 +20,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     createBlog: blogs => dispatch(createBlog(blogs)),
     updateBlog: blog => dispatch(updateBlog(blog)),
+    saveBlogs: blogs => dispatch(saveBlogs(blogs)),
     requestBlog: id => dispatch(requestBlog(id)),
     requestBlogs: () => dispatch(requestBlogs())
 });
