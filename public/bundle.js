@@ -26978,7 +26978,7 @@ var BlogLink = function BlogLink(_ref) {
             _react2.default.createElement(
                 'div',
                 { id: 'blog-link-body-intro' },
-                (0, _helper_methods.characterLimit)(blog.body),
+                blog.blogIntro ? blog.blogIntro : (0, _helper_methods.characterLimit)(blog.body),
                 '...'
             ),
             _react2.default.createElement(_blog_link_actions2.default, { blog: blog, isUserBlogs: isUserBlogs })
@@ -49655,7 +49655,6 @@ var BlogForm = function (_React$Component) {
         };
 
         _this.actionType = props.history.location.pathname === '/blogs/new/' ? 'Publish' : 'Update';
-        _this.redirectUnlessLoggedIn = _this.redirectUnlessLoggedIn.bind(_this);
         _this.setBlogToEdit = _this.setBlogToEdit.bind(_this);
         _this.handleChange = _this.handleChange.bind(_this);
         return _this;
@@ -49664,7 +49663,9 @@ var BlogForm = function (_React$Component) {
     _createClass(BlogForm, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            this.redirectUnlessLoggedIn();
+            if (!(0, _blockstack.isUserSignedIn)()) {
+                this.props.history.push('/signin');
+            }
             if (Object.keys(this.props.blogs).length > 0) {
                 this.setBlogToEdit();
             }
@@ -49672,17 +49673,7 @@ var BlogForm = function (_React$Component) {
     }, {
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
-            if (nextProps.currentUser) {
-                this.setState({ authorId: nextProps.currentUser.username });
-            }
             this.setBlogToEdit(nextProps);
-        }
-    }, {
-        key: 'redirectUnlessLoggedIn',
-        value: function redirectUnlessLoggedIn() {
-            if (!(0, _blockstack.isUserSignedIn)()) {
-                this.props.history.push('/signin');
-            }
         }
     }, {
         key: 'setBlogToEdit',
@@ -49702,44 +49693,6 @@ var BlogForm = function (_React$Component) {
                     updatedAt: blog.updatedAt
                 });
             }
-        }
-    }, {
-        key: 'hasErrors',
-        value: function hasErrors() {
-            var hasErrors = false;
-
-            if (this.state.title.length <= 0) {
-                hasErrors = true;
-                $('#blog-title-error').fadeIn();
-                $('#blog-title-label').addClass('outline-red');
-            } else {
-                $('#blog-title-error').fadeOut();
-                $('#blog-title-label').removeClass('outline-red');
-            }
-
-            if (this.state.blogIntro.length <= 0) {
-                hasErrors = true;
-                $('#blog-intro-error').fadeIn();
-                $('#blog-intro-label').addClass('outline-red');
-            } else {
-                $('#blog-intro-error').fadeOut();
-                $('#blog-intro-label').removeClass('outline-red');
-            }
-
-            if (this.state.body.length <= 0) {
-                hasErrors = true;
-                $('#blog-body-error').fadeIn();
-                $('#blog-body-label').addClass('outline-red');
-            } else {
-                $('#blog-body-error').fadeOut();
-                $('#blog-body-label').removeClass('outline-red');
-            }
-
-            if (this.state.imageUrl.length <= 0) {
-                this.state.imageUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1500153014/blog-default-img_d3ke0j.jpg';
-            }
-
-            return hasErrors;
         }
     }, {
         key: 'processForm',
@@ -50825,7 +50778,7 @@ var UserNavMenu = function UserNavMenu() {
         { id: 'user-nav-menu' },
         _react2.default.createElement(
             'a',
-            { href: '/blogs/new', className: 'white skinny' },
+            { href: '/blogs/new', className: 'white skinny letter-space-1' },
             'Write a blog'
         ),
         _react2.default.createElement(_hamburger_menu2.default, null)

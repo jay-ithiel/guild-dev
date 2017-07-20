@@ -21,7 +21,7 @@ const BlogLink = ({ blog, isUserBlogs }) => (
             </p>
 
             <div id='blog-link-body-intro'>
-                { characterLimit(blog.body) }...
+                { blog.blogIntro ? blog.blogIntro : characterLimit(blog.body) }...
             </div>
 
             <BlogLinkActions blog={ blog } isUserBlogs={ isUserBlogs }/>
