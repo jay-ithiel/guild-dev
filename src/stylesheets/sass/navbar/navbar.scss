@@ -22,6 +22,7 @@
     z-index: 1000000000000;
 }
 
-#navbar > div {
-    width: 190px;
+#navdiv {
+    min-width: 190px;
+    position: relative;
 }

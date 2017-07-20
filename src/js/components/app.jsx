@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, withRouter, Route } from 'react-router';
+
 // Loads dependencies to compile SASS to CSS
 require("!style-loader!css-loader!sass-loader!../../stylesheets/sass/all.scss");
 
