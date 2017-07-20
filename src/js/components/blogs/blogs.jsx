@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { isUserSignedIn } from 'blockstack';
 import BlogLink from './blog_link';
+import SignInPage from '../session/signin_page';
 import { requestBlogs } from '../../actions/blog_actions';
 
 class Blogs extends React.Component {
@@ -11,7 +12,7 @@ class Blogs extends React.Component {
         this.state = {
             blogs: {}
         };
-        
+
         this.mapBlogLinks = this.mapBlogLinks.bind(this);
     }
 
@@ -20,17 +21,24 @@ class Blogs extends React.Component {
     }
 
     mapBlogLinks() {
-        return Object.keys(this.state.blogs).reverse().map((blogId, index) => (
-            <BlogLink key={index} blog={ this.state.blogs[blogId] }/>
+        return Object.keys(this.props.blogs).reverse().map((blogId, index) => (
+            <BlogLink key={index} blog={ this.props.blogs[blogId] }/>
         ));
     }
 
     render() {
-        return (
+        if (!isUserSignedIn()) { return <SignInPage/> }
+
+        let blogLinks = this.mapBlogLinks();
+        return blogLinks.length === 0 ? (
             <ul id='blogs' className='border-box-sizing'>
-                { this.mapBlogLinks() }
+                No blogs have been written yet. Be the first to write one!
             </ul>
-        );
+        ) : (
+            <ul id='blogs' className='border-box-sizing'>
+                { blogLinks }
+            </ul>
+        )
     }
 }
 

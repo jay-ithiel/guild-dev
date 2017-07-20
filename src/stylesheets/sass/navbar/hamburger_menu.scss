@@ -49,7 +49,11 @@
     letter-spacing: 1px;
 }
 
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 700px) {
+    .close-modal {
+        display: none;
+    }
+
     #hamburger-dropdown-container {
         top: 70px;
         right: 0;

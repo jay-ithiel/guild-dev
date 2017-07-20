@@ -18,7 +18,7 @@ class SignIn extends React.Component {
     render() {
         return (
             <div id='signin'>
-                <button onClick={ this.props.signin } className='btn primary-btn-light shadow-button'>
+                <button onClick={ this.props.signin } className='btn primary-btn'>
                     Sign In With Blockstack
                 </button>
             </div>

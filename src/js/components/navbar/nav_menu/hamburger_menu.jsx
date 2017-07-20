@@ -5,7 +5,9 @@ import HamburgerDropdown from './hamburger_dropdown';
 const dropdown = () => {
     let hamburgerDropdown = $('#hamburger-dropdown-container');
     hamburgerDropdown.fadeIn();
-    hamburgerDropdown.mouseleave(() => hamburgerDropdown.slideUp());
+    hamburgerDropdown.mouseleave(() => {
+        $(window).width() >= 700 ? hamburgerDropdown.slideUp() : hamburgerDropdown.fadeOut();
+    });
 };
 
 const HamburgerMenu = () => (

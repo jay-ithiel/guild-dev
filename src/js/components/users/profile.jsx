@@ -1,8 +1,9 @@
 import React from 'react';
+import AboutUser from './about_user';
 
 const Profile = () => (
     <section id='profile'>
-        Profile
+        <AboutUser/>
     </section>
 );
 
