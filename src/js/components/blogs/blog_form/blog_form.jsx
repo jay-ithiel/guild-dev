@@ -22,6 +22,7 @@ class BlogForm extends React.Component {
 
         this.actionType = props.history.location.pathname === '/blogs/new/' ? 'Publish' : 'Update';
         this.setBlogToEdit = this.setBlogToEdit.bind(this);
+        this.hasErrors = this.hasErrors.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -36,7 +37,6 @@ class BlogForm extends React.Component {
 
     setBlogToEdit(nextProps = this.props.blogs) {
         if (this.state.id === null && this.actionType === 'Update') {
-
             let blog = nextProps.blogs[
                 parseInt( this.props.history.location.pathname.substring(12) )
             ];
@@ -51,6 +51,49 @@ class BlogForm extends React.Component {
                 updatedAt: blog.updatedAt
             });
         }
+    }
+
+    hasErrors() {
+        // Refactor this function
+        let hasErrors = false;
+
+        if (this.state.title.length <= 0) {
+            hasErrors = true;
+            $('#blog-title-error').fadeIn();
+            $('#blog-title-label').addClass('outline-red');
+        }
+        else {
+            $('#blog-title-error').fadeOut();
+            $('#blog-title-label').removeClass('outline-red');
+        }
+
+
+        if (this.state.blogIntro.length <= 0) {
+            hasErrors = true;
+            $('#blog-intro-error').fadeIn();
+            $('#blog-intro-label').addClass('outline-red');
+        }
+        else {
+            $('#blog-intro-error').fadeOut();
+            $('#blog-intro-label').removeClass('outline-red');
+        }
+
+
+        if (this.state.body.length <= 0) {
+            hasErrors = true;
+            $('#blog-body-error').fadeIn();
+            $('#blog-body-label').addClass('outline-red');
+        } else {
+            $('#blog-body-error').fadeOut();
+            $('#blog-body-label').removeClass('outline-red');
+        }
+
+
+        if (this.state.imageUrl.length <= 0) {
+            this.state.imageUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1500153014/blog-default-img_d3ke0j.jpg';
+        }
+
+        return hasErrors;
     }
 
     processForm() {
