@@ -36,7 +36,7 @@ class BlogForm extends React.Component {
 
     setBlogToEdit(nextProps = this.props.blogs) {
         if (this.state.id === null && this.actionType === 'Update') {
-            debugger;
+
             let blog = nextProps.blogs[
                 parseInt( this.props.history.location.pathname.substring(12) )
             ];

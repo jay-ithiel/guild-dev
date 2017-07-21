@@ -49698,7 +49698,7 @@ var BlogForm = function (_React$Component) {
             var nextProps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.props.blogs;
 
             if (this.state.id === null && this.actionType === 'Update') {
-                debugger;
+
                 var blog = nextProps.blogs[parseInt(this.props.history.location.pathname.substring(12))];
 
                 this.setState({
