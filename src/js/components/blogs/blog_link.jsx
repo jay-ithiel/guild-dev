@@ -55,7 +55,11 @@ const BlogLink = ({ blog, isUserBlogs }) => (
                 { blog.blogIntro ? blog.blogIntro : characterLimit(blog.body) }...
             </div>
 
-            <span className='skinny small letter-space-1 grey dark-hover transition-2s-ease-in'>Read more...</span>
+            {
+                isUserBlogs ? <div></div> : (
+                    <span className='skinny small letter-space-1 grey dark-hover transition-2s-ease-in'>Read more...</span>
+                )
+            }
 
             <BlogLinkActions blog={ blog } isUserBlogs={ isUserBlogs }/>
         </Link>

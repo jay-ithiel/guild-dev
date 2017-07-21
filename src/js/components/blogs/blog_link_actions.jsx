@@ -23,8 +23,8 @@ class BlogLinkActions extends React.Component {
     render() {
         return !this.props.isUserBlogs ? <div></div> : (
             <div id='blog-link-actions' className='flex-between align-center'>
-                <span className='blog-link-action' onClick={ this.redirectToEdit }>Edit</span>
-                <span className='blog-link-action' onClick={ this.handleDelete }>Delete</span>
+                <button id='blog-link-action' className='btn' onClick={ this.redirectToEdit }>Edit</button>
+                <button id='blog-link-action' className='btn' onClick={ this.handleDelete }>Delete</button>
             </div>
         );
     }
