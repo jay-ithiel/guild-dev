@@ -40,6 +40,7 @@ class Blogs extends React.Component {
             </ul>
         ) : (
             <ul id='blogs' className='border-box-sizing'>
+                <h4 className='blogs-section-head'>Recent Blogs</h4>
                 { blogLinks }
             </ul>
         )

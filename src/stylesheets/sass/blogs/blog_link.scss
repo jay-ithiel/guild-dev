@@ -3,6 +3,7 @@
 // Default small screen layout
 #blog-link {
     width: 100vw;
+    max-width: 640px;
     height: auto;
 
     background-color: #fff;
@@ -16,6 +17,7 @@
 
 .blog-link-img-box {
     height: 30vw;
+    max-height: 179.39px;
     width: 100%;
 
     background-position: center;
@@ -37,6 +39,7 @@
     color: #777;
     margin-bottom: 20px;
 }
+
 
 // OLD blog-link css
 // #blog-link {
