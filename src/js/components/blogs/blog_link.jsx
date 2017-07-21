@@ -37,7 +37,7 @@ import AboutBlog from './about_blog';
 // );
 
 const BlogLink = ({ blog, isUserBlogs }) => (
-    <section id='blog-link' >
+    <section id='blog-link' className='position-relative' >
         <Link className='blog-link-info position-relative' to={`/blogs/${blog.id}`}>
             <AboutBlog authorId={ blog.authorId } date={ parseDateTime(blog.updatedAt) }/>
 
@@ -61,8 +61,8 @@ const BlogLink = ({ blog, isUserBlogs }) => (
                 )
             }
 
-            <BlogLinkActions blog={ blog } isUserBlogs={ isUserBlogs }/>
         </Link>
+        <BlogLinkActions blog={ blog } isUserBlogs={ isUserBlogs }/>
     </section>
 );
 

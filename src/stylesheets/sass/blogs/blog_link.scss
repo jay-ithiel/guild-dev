@@ -40,12 +40,39 @@
     margin-bottom: 20px;
 }
 
+#blog-link-actions {
+    width: 75px;
+    padding-right: 10px;
+
+    // position: absolute;
+    // top: 15px;
+    // right: 20px;
+    float: right;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 #blog-link-action {
-    height: 35px;
-    width: 100px;
-    border: 1px solid grey;
-    border-radius: 20px;
-    font-size: 14px;
+    height: 23px;
+    width: 23px;
+    // width: 100px;
+    // border: 1px solid grey;
+    // border-radius: 20px;
+    z-index: 10;
+}
+
+#blog-link-action:hover {
+    color: #000;
+}
+
+#blog-link-svg {
+    color: #aaa;
+}
+
+#blog-link-svg:hover {
+    color: #000;
 }
 
 // OLD blog-link css

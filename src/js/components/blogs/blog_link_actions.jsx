@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { deleteBlog } from '../../actions/blog_actions';
+
+import EditSVG from 'react-icons/lib/fa/edit';
+import TrashSVG from 'react-icons/lib/fa/trash';
 
 class BlogLinkActions extends React.Component {
     constructor(props) {
@@ -23,8 +27,12 @@ class BlogLinkActions extends React.Component {
     render() {
         return !this.props.isUserBlogs ? <div></div> : (
             <div id='blog-link-actions' className='flex-between align-center'>
-                <button id='blog-link-action' className='btn' onClick={ this.redirectToEdit }>Edit</button>
-                <button id='blog-link-action' className='btn' onClick={ this.handleDelete }>Delete</button>
+                <button id='blog-link-action' className='btn margin-top-4' onClick={ this.redirectToEdit }>
+                    <EditSVG id='blog-link-svg' className='transition-2s-ease-in' size={24}/>
+                </button>
+                <button id='blog-link-action' className='btn' onClick={ this.handleDelete }>
+                    <TrashSVG id='blog-link-svg' className='transition-2s-ease-in' size={24}/>
+                </button>
             </div>
         );
     }
@@ -34,4 +42,4 @@ const mapDispatchToProps = dispatch => ({
     deleteBlog: id => dispatch(deleteBlog(id))
 });
 
-export default connect(null, mapDispatchToProps)(BlogLinkActions);
+export default withRouter(connect(null, mapDispatchToProps)(BlogLinkActions));
