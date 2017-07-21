@@ -21,6 +21,10 @@
     letter-spacing: 1px;
 }
 
+.small {
+    font-size: 13px;
+}
+
 .skinny {
     font-weight: 100;
 }
@@ -49,6 +53,14 @@
     color: #fff;
 }
 
+.lightgrey {
+    color: lightgrey;
+}
+
+.grey {
+    color: grey;
+}
+
 .black {
     color: #000;
 }
@@ -64,4 +76,12 @@
 .outline-red {
     border: 1px solid red !important;
     border-radius: 2px;
+}
+
+.dark-hover:hover {
+    color: #000;
+}
+
+.bold-hover:hover {
+    font-weight: 400;
 }
