@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { parseDateTime, characterLimit } from '../../util/helper_methods.js';
+import { parseDateTime, characterLimit } from '../../../util/helper_methods.js';
 import BlogLinkActions from './blog_link_actions';
 import AboutBlog from './about_blog';
 
@@ -60,8 +60,8 @@ const BlogLink = ({ blog, isUserBlogs }) => (
                     <span className='skinny small letter-space-1 grey dark-hover transition-2s-ease-in'>Read more...</span>
                 )
             }
-
         </Link>
+
         <BlogLinkActions blog={ blog } isUserBlogs={ isUserBlogs }/>
     </section>
 );

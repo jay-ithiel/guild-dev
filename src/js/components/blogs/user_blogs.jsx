@@ -1,11 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { requestUserBlogs } from '../../actions/blog_actions';
-import BlogLink from './blog_link';
+import BlogLink from './blog_link/blog_link';
 
 class UserBlogs extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            userBlogs: {}
+        }
 
         this.mapBlogLink = this.mapBlogLinks.bind(this);
     }
@@ -14,9 +18,17 @@ class UserBlogs extends React.Component {
         this.props.requestUserBlogs(this.props.currentUser);
     }
 
+    componentDidUpdate() {
+        this.props.requestUserBlogs(this.props.currentUser);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({ userBlogs: nextProps.userBlogs });
+    }
+
     mapBlogLinks() {
-        return Object.keys(this.props.userBlogs).map((blogId, index) => (
-            <BlogLink key={index} blog={ this.props.userBlogs[blogId] } isUserBlogs={true}/>
+        return Object.keys(this.state.userBlogs).map((blogId, index) => (
+            <BlogLink key={index} blog={ this.state.userBlogs[blogId] } isUserBlogs={true}/>
         ));
     }
 
@@ -31,6 +43,7 @@ class UserBlogs extends React.Component {
 
 const mapStateToProps = state => ({
     currentUser: state.session.currentUser,
+    blogs: state.blogs.index,
     userBlogs: state.blogs.userBlogs
 });
 

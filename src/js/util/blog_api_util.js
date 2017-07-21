@@ -1,7 +1,4 @@
-import {
-    getFile,
-    putFile
-} from 'blockstack';
+import { getFile, putFile } from 'blockstack';
 
 import {
     RECEIVE_BLOG,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { deleteBlog } from '../../actions/blog_actions';
+import { deleteBlog } from '../../../actions/blog_actions';
 
 import EditSVG from 'react-icons/lib/fa/edit';
 import TrashSVG from 'react-icons/lib/fa/trash';
