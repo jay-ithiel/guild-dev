@@ -89,3 +89,9 @@
         display: none;
     }
 }
+
+.inactive {
+    transition: all .2s ease-in;
+    cursor: default !important;
+    box-shadow: none !important;
+}

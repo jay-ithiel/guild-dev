@@ -37,10 +37,7 @@ class BlogLinkActions extends React.Component {
                     <EditSVG id='blog-link-svg' className='transition-2s-ease-in' size={24}/>
                 </button>
 
-                <button id='blog-link-action' className='btn' onClick={ this.handleDelete }>
-                    <TrashSVG id='blog-link-svg' className='transition-2s-ease-in' size={24}/>
-                </button>
-
+                <DeleteBlogButton isActive={ this.state.isDeleteButtonActive } handleDelete={ this.handleDelete }/>
             </div>
         );
     }

@@ -7,7 +7,7 @@ const SubmitBlogButton = ({ actionType, isActive }) => {
             {actionType} Blog
         </button>
     ) : (
-        <button id='blog-submit' className='btn skinny inactive'>
+        <button id='blog-submit' className='btn skinny inactive blog-submit-inactive'>
             Publishing... <Loader type="ball-clip-rotate" active/>
         </button>
     )

@@ -3,7 +3,8 @@ import { getFile, putFile } from 'blockstack';
 import {
     RECEIVE_BLOG,
     RECEIVE_BLOGS,
-    RECEIVE_USER_BLOGS
+    RECEIVE_USER_BLOGS,
+    REMOVE_BLOG
 } from '../actions/blog_actions';
 
 var STORAGE_FILE = 'blogs.json';
@@ -58,6 +59,9 @@ export const fetchUserBlogs = (user, dispatch) => {
 export const deleteBlog = (id, dispatch) => {
     var blogs = {}, blogIndex;
 
+    console.log('stop delete');
+    return;
+
     getFile(STORAGE_FILE).then(blogItems => {
         blogItems = JSON.parse(blogItems || '[]');
 
@@ -71,12 +75,18 @@ export const deleteBlog = (id, dispatch) => {
 
         putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
             if (isBlogSaved) {
-                // Should dispatch BLOG_DELETED action
+                // Should dispatch REMOVE_BLOG action
+                debugger;
                 dispatch({
-                    type: RECEIVE_BLOGS,
+                    REMOVE_BLOG,
                     blogs,
                     blogIndex
                 });
+                // dispatch({
+                //     type: RECEIVE_BLOGS,
+                //     blogs,
+                //     blogIndex
+                // });
             }
         });
     });
