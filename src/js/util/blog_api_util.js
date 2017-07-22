@@ -72,6 +72,7 @@ export const deleteBlog = (id, dispatch) => {
 
         putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
             if (isBlogSaved) {
+                // Should dispatch BLOG_DELETED action
                 dispatch({
                     type: RECEIVE_BLOGS,
                     blogs,

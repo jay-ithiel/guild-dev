@@ -17,8 +17,7 @@ class BlogForm extends React.Component {
             imageUrl: '',
             authorId: '',
             updatedAt: '',
-            isSubmitButtonActive: true,
-
+            isSubmitButtonActive: true
         };
 
         this.actionType = props.history.location.pathname === '/blogs/new/' ? 'Publish' : 'Update';

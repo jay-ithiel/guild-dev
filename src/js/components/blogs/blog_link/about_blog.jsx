@@ -1,8 +1,9 @@
 import React from 'react';
+import { loadUserData } from 'blockstack';
 
-const AboutBlog = ({ authorId, date}) => (
+const AboutBlog = ({ authorId, authorImageUrl='', date}) => (
     <section id='about-blog'>
-        <div id='about-blog-img'></div>
+        <img id='about-blog-img' src={authorImageUrl}/>
         <div id='about-blog-info'>
             <span>{authorId}</span>
             <span>{date}</span>
