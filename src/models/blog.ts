@@ -4,9 +4,11 @@ import Comment from './comment';
 class Blog {
     public id: number;
     public title: string;
+    public blogIntro: string;
     public body: string;
     public imageUrl: string;
     public authorId: number;
+    public authorImageUrl: string;
     public createdAt: string;
     public updatedAt: string;
     public comments: Comment[] = [];
@@ -14,16 +16,20 @@ class Blog {
     constructor(
         id: number,
         title: string,
-        imageUrl: string,
+        blogIntro: string,
         body: string,
+        imageUrl: string,
         authorId: number,
+        authorImageUrl: string,
         updatedAt: string,
     ) {
         this.id = id;
         this.title = title;
+        this.blogIntro = blogIntro;
         this.body = body;
         this.imageUrl = (imageUrl.length > 0) ? imageUrl : 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1500153014/blog-default-img_d3ke0j.jpg' ;
         this.authorId = authorId;
+        this.authorImageUrl = authorImageUrl;
         this.createdAt = `${new Date()}`;
         this.updatedAt = this.createdAt;
     }

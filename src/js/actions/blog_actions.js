@@ -1,13 +1,7 @@
-export const CREATE_BLOG = 'CREATE_BLOG';
-export const createBlog = blogs => ({
-  type: CREATE_BLOG,
-  blogs
-});
-
-export const REQUEST_BLOG = 'REQUEST_BLOG';
-export const requestBlog = id => ({
-  type: REQUEST_BLOG,
-  id
+export const SAVE_BLOGS = 'SAVE_BLOGS';
+export const saveBlogs = blogs => ({
+    type: SAVE_BLOGS,
+    blogs
 });
 
 export const REQUEST_BLOGS = 'REQUEST_BLOGS';
@@ -22,13 +16,6 @@ export const requestUserBlogs = user => ({
     user
 });
 
-export const UPDATE_BLOG = 'UPDATE_BLOG';
-export const updateBlog = (blog, router) => ({
-  type: UPDATE_BLOG,
-  blog,
-  router
-});
-
 export const DELETE_BLOG = 'DELETE_BLOG';
 export const deleteBlog = id => ({
   type: DELETE_BLOG,
@@ -39,12 +26,6 @@ export const REMOVE_BLOG = 'REMOVE_BLOG';
 export const removeBlog = id => ({
   type: REMOVE_BLOG,
   id
-});
-
-export const RECEIVE_BLOG = 'RECEIVE_BLOG';
-export const receiveBlog = blog => ({
-  type: RECEIVE_BLOG,
-  blog
 });
 
 export const RECEIVE_BLOGS = 'RECEIVE_BLOGS';

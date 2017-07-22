@@ -1,6 +1,5 @@
 import merge from 'lodash/merge';
 import {
-  RECEIVE_BLOG,
   RECEIVE_BLOGS,
   RECEIVE_USER_BLOGS,
   RECEIVE_BLOG_ERRORS,
@@ -19,11 +18,6 @@ const BlogReducer = (oldState = _defaultState, action) => {
     let newState = merge({}, oldState);
 
     switch(action.type) {
-        case RECEIVE_BLOG:
-            newState.index[action.blog.id] = action.blog;
-            newState.errors = [];
-            return newState;
-
         case RECEIVE_BLOGS:
             newState.index = action.blogs;
             newState.blogIndex = action.blogIndex;

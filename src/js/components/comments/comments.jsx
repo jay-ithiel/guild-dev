@@ -34,7 +34,7 @@ class Comments extends React.Component {
 
         return (
             <div>
-                <div className='blog-content'>
+                <div className=''>
                     <h3 className='header'>COMMENTS</h3>
                     <ul className='comments'>
                     { commentLis }
@@ -49,7 +49,7 @@ class Comments extends React.Component {
     //
     //     return (
     //         <div>
-    //             <div id='blog-content'>
+    //             <div id=''>
     //                 <h3 className='header'>COMMENTS</h3>
     //                 <ul id='comments'>
     //                     { commentLis }

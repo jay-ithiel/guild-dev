@@ -4,8 +4,8 @@
 #navbar {
     height: 70px;
     width: 100vw;
-    background-color: #fff;
-    box-shadow: 0 4px 2px -2px #777;
+    background-color: #43bd7e;
+    box-shadow: 2px 4px 7px -2px #aaa;
 
     position: fixed;
     top: 0;
@@ -17,12 +17,19 @@
     align-items: center;
 
     box-sizing: border-box;
-    padding: 0 15px;
-    padding-right: 25px;
+    padding: 0 25px;
 
     z-index: 1000000000000;
 }
 
-#navbar > div {
-    width: 190px;
+#navdiv {
+    min-width: 190px;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#user-nav-menu {
+    display: flex;
+    align-items: center;
 }

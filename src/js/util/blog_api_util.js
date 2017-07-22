@@ -1,7 +1,4 @@
-import {
-    getFile,
-    putFile
-} from 'blockstack';
+import { getFile, putFile } from 'blockstack';
 
 import {
     RECEIVE_BLOG,
@@ -11,11 +8,13 @@ import {
 
 var STORAGE_FILE = 'blogs.json';
 
-export const createBlog = (blogs, dispatch) => {
+export const saveBlogs = (blogs, dispatch) => {
     putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
-
+        if (isBlogSaved) {
+            window.location = window.location.origin;
+        }
     });
-};
+}
 
 export const fetchBlogs = dispatch => {
     var blogs = {}, blogIndex;
@@ -25,10 +24,9 @@ export const fetchBlogs = dispatch => {
 
         Object.keys(blogItems).forEach((id, index) => {
             blogItems[id].id = index+1;
+            blogs[index+1] = blogItems[id];
             blogIndex = index+1;
         });
-
-        blogs = blogItems;
 
         dispatch({
             type: RECEIVE_BLOGS,
@@ -73,6 +71,7 @@ export const deleteBlog = (id, dispatch) => {
 
         putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
             if (isBlogSaved) {
+                // Should dispatch BLOG_DELETED action
                 dispatch({
                     type: RECEIVE_BLOGS,
                     blogs,
