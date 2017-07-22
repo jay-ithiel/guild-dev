@@ -24,10 +24,9 @@ export const fetchBlogs = dispatch => {
 
         Object.keys(blogItems).forEach((id, index) => {
             blogItems[id].id = index+1;
+            blogs[index+1] = blogItems[id];
             blogIndex = index+1;
         });
-
-        blogs = blogItems;
 
         dispatch({
             type: RECEIVE_BLOGS,

@@ -16,6 +16,7 @@ class BlogForm extends React.Component {
             body: '',
             imageUrl: '',
             authorId: '',
+            authorImageUrl: '',
             updatedAt: '',
             isSubmitButtonActive: true
         };
@@ -48,6 +49,7 @@ class BlogForm extends React.Component {
                 body: blog.body,
                 imageUrl: blog.imageUrl,
                 authorId: blog.authorId,
+                authorImageUrl: blog.authorImageUrl,
                 updatedAt: blog.updatedAt
             });
         }
@@ -100,13 +102,19 @@ class BlogForm extends React.Component {
         let blog = this.state;
         if (this.actionType === 'Publish') {
             this.state.id = this.props.blogIndex + 1;
+
+            if (this.props.currentUser.profile.image) {
+                this.state.authorImageUrl = this.props.currentUser.profile.image[0].contentUrl;
+            }
+
             blog = new Blog(
                 this.state.id,
                 this.state.title,
                 this.state.blogIntro,
                 this.state.body,
                 this.state.imageUrl,
-                this.props.currentUser.username
+                this.props.currentUser.username,
+                this.state.authorImageUrl
             );
         }
 
@@ -151,7 +159,7 @@ class BlogForm extends React.Component {
                         onChange={ this.handleChange('title') }
                         value={ this.state.title }
                         placeholder='Title'
-                        maxLength='30'/>
+                        maxLength='50'/>
                     </label>
 
                     <label id='blog-body-label' className='blog-form-label position-relative' onClick={ this.toggleActiveLabel('body') }>

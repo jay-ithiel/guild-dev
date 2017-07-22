@@ -60,7 +60,9 @@ class Blogs extends React.Component {
 
         return blogLinks.length === 0 ? (
             <ul id='blogs' className='border-box-sizing'>
-                No blogs have been written yet. Be the first to write one!
+                <h4 className='blogs-section-head'>
+                    No blogs have been written yet. Be the first to write one!
+                </h4>
             </ul>
         ) : (
             <ul id='blogs' className='border-box-sizing'>

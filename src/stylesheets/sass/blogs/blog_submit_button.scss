@@ -1,5 +1,4 @@
-// $primary-color: #43bd7e;;
-$primary-color: #fff;
+$primary-color: #43bd7e;;
 @import '../loaders.css/src/animations/ball-clip-rotate.scss';
 
 .loader-hidden {
@@ -31,8 +30,10 @@ $primary-color: #fff;
 }
 
 .inactive {
-    transition: all .2s ease-in ;
-    background-color: #aaa !important;
+    transition: all .2s ease-in;
+    background-color: #eee !important;
+    border: 1px solid #aaa !important;
     color: $primary-color !important;
     cursor: default !important;
+    box-shadow: none !important;
 }
