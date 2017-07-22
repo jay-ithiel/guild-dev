@@ -10,7 +10,6 @@ import Home from './home/home';
 import SignInPage from './session/signin_page';
 import BlogForm from './blogs/blog_form/blog_form_container';
 import Blog from './blogs/blog';
-import UserBlogs from './blogs/user_blogs';
 import Blogs from './blogs/blogs';
 import Profile from './users/profile';
 
@@ -35,7 +34,6 @@ class App extends React.Component {
                     <Route path='/signin' component={SignInPage}></Route>
                     <Route exact path='/blogs/new'  component={BlogForm}></Route>
                     <Route exact path='/blogs/edit/:id' component={BlogForm}></Route>
-                    {/*<Route exact path='/blogs/user' component={UserBlogs}></Route>*/}
                     <Route exact path='/blogs/user' component={Blogs}></Route>
                     <Route exact path='/blogs/:id' component={Blog}></Route>
                     <Route exact path='/users/:username' component={Profile}></Route>

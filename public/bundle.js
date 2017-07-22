@@ -10464,22 +10464,6 @@ var saveBlogs = exports.saveBlogs = function saveBlogs(blogs) {
   };
 };
 
-var CREATE_BLOG = exports.CREATE_BLOG = 'CREATE_BLOG';
-var createBlog = exports.createBlog = function createBlog(blogs) {
-  return {
-    type: CREATE_BLOG,
-    blogs: blogs
-  };
-};
-
-var REQUEST_BLOG = exports.REQUEST_BLOG = 'REQUEST_BLOG';
-var requestBlog = exports.requestBlog = function requestBlog(id) {
-  return {
-    type: REQUEST_BLOG,
-    id: id
-  };
-};
-
 var REQUEST_BLOGS = exports.REQUEST_BLOGS = 'REQUEST_BLOGS';
 var requestBlogs = exports.requestBlogs = function requestBlogs(tags) {
   return {
@@ -10496,15 +10480,6 @@ var requestUserBlogs = exports.requestUserBlogs = function requestUserBlogs(user
   };
 };
 
-var UPDATE_BLOG = exports.UPDATE_BLOG = 'UPDATE_BLOG';
-var updateBlog = exports.updateBlog = function updateBlog(blogs, router) {
-  return {
-    type: UPDATE_BLOG,
-    blogs: blogs,
-    router: router
-  };
-};
-
 var DELETE_BLOG = exports.DELETE_BLOG = 'DELETE_BLOG';
 var deleteBlog = exports.deleteBlog = function deleteBlog(id) {
   return {
@@ -10518,14 +10493,6 @@ var removeBlog = exports.removeBlog = function removeBlog(id) {
   return {
     type: REMOVE_BLOG,
     id: id
-  };
-};
-
-var RECEIVE_BLOG = exports.RECEIVE_BLOG = 'RECEIVE_BLOG';
-var receiveBlog = exports.receiveBlog = function receiveBlog(blog) {
-  return {
-    type: RECEIVE_BLOG,
-    blog: blog
   };
 };
 
@@ -49410,10 +49377,6 @@ var _blog = __webpack_require__(366);
 
 var _blog2 = _interopRequireDefault(_blog);
 
-var _user_blogs = __webpack_require__(373);
-
-var _user_blogs2 = _interopRequireDefault(_user_blogs);
-
 var _blogs = __webpack_require__(372);
 
 var _blogs2 = _interopRequireDefault(_blogs);
@@ -49813,22 +49776,6 @@ var BlogForm = function (_React$Component) {
                     ),
                     _react2.default.createElement(
                         'label',
-                        { id: 'blog-intro-label', className: 'blog-form-label' },
-                        _react2.default.createElement(
-                            'span',
-                            { id: 'blog-intro-error', className: 'error-message' },
-                            'Blog intro cannot be blank'
-                        ),
-                        _react2.default.createElement('input', { type: 'text',
-                            id: 'blog-intro-input',
-                            className: 'blog-input black',
-                            onChange: this.handleChange('blogIntro'),
-                            value: this.state.blogIntro,
-                            placeholder: 'Summarize your blog in 1 or 2 sentences...',
-                            maxLength: '50' })
-                    ),
-                    _react2.default.createElement(
-                        'label',
                         { id: 'blog-body-label', className: 'blog-form-label' },
                         _react2.default.createElement(
                             'span',
@@ -49841,6 +49788,22 @@ var BlogForm = function (_React$Component) {
                             onChange: this.handleChange('body'),
                             value: this.state.body,
                             placeholder: 'Write your blog here...' })
+                    ),
+                    _react2.default.createElement(
+                        'label',
+                        { id: 'blog-intro-label', className: 'blog-form-label' },
+                        _react2.default.createElement(
+                            'span',
+                            { id: 'blog-intro-error', className: 'error-message' },
+                            'Blog intro cannot be blank'
+                        ),
+                        _react2.default.createElement('input', { type: 'text',
+                            id: 'blog-intro-input',
+                            className: 'blog-input black',
+                            onChange: this.handleChange('blogIntro'),
+                            value: this.state.blogIntro,
+                            placeholder: 'Introduction (Summarize your blog in 1 or 2 sentences)',
+                            maxLength: '50' })
                     ),
                     _react2.default.createElement(
                         'div',
@@ -50254,126 +50217,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRouter.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Blogs));
 
 /***/ }),
-/* 373 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(19);
-
-var _blog_actions = __webpack_require__(31);
-
-var _blog_link = __webpack_require__(185);
-
-var _blog_link2 = _interopRequireDefault(_blog_link);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Loader = __webpack_require__(712).Loader;
-
-var UserBlogs = function (_React$Component) {
-    _inherits(UserBlogs, _React$Component);
-
-    function UserBlogs(props) {
-        _classCallCheck(this, UserBlogs);
-
-        var _this = _possibleConstructorReturn(this, (UserBlogs.__proto__ || Object.getPrototypeOf(UserBlogs)).call(this, props));
-
-        _this.state = {
-            userBlogs: null
-        };
-
-        _this.mapBlogLink = _this.mapBlogLinks.bind(_this);
-        return _this;
-    }
-
-    _createClass(UserBlogs, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.props.requestUserBlogs(this.props.currentUser);
-        }
-    }, {
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            this.setState({ userBlogs: nextProps.userBlogs });
-        }
-    }, {
-        key: 'mapBlogLinks',
-        value: function mapBlogLinks() {
-            var _this2 = this;
-
-            return Object.keys(this.state.userBlogs).map(function (blogId, index) {
-                return _react2.default.createElement(_blog_link2.default, { key: index, blog: _this2.state.userBlogs[blogId], isUserBlogs: true });
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            if (this.state.userBlogs === null) {
-                return _react2.default.createElement(
-                    'ul',
-                    { id: 'blogs', className: 'border-box-sizing flex-center' },
-                    _react2.default.createElement(Loader, { type: 'ball-clip-rotate', id: 'blogs-loader', active: true })
-                );
-            }
-
-            return this.state.blogs === null ? _react2.default.createElement(
-                'ul',
-                { id: 'blogs', className: 'border-box-sizing flex-center' },
-                _react2.default.createElement(Loader, { type: 'ball-clip-rotate', id: 'blogs-loader', active: true })
-            ) : _react2.default.createElement(
-                'section',
-                { id: 'blogs', className: 'border-box-sizing' },
-                this.mapBlogLinks()
-            );
-
-            return _react2.default.createElement(
-                'section',
-                { id: 'blogs', className: 'border-box-sizing' },
-                this.mapBlogLinks()
-            );
-        }
-    }]);
-
-    return UserBlogs;
-}(_react2.default.Component);
-
-var mapStateToProps = function mapStateToProps(state) {
-    return {
-        currentUser: state.session.currentUser,
-        blogs: state.blogs.index,
-        userBlogs: state.blogs.userBlogs
-    };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-    return {
-        requestUserBlogs: function requestUserBlogs(user) {
-            return dispatch((0, _blog_actions.requestUserBlogs)(user));
-        }
-    };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(UserBlogs);
-
-/***/ }),
+/* 373 */,
 /* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -51237,24 +51081,12 @@ var BlogMiddleware = function BlogMiddleware(_ref) {
                     (0, _blog_api_util.saveBlogs)(action.blogs, dispatch);
                     return next(action);
 
-                case _blog_actions.CREATE_BLOG:
-                    (0, _blog_api_util.createBlog)(action.blogs, dispatch);
-                    return next(action);
-
-                case _blog_actions.REQUEST_BLOG:
-
-                    return next(action);
-
                 case _blog_actions.REQUEST_BLOGS:
                     (0, _blog_api_util.fetchBlogs)(dispatch);
                     return next(action);
 
                 case _blog_actions.REQUEST_USER_BLOGS:
                     (0, _blog_api_util.fetchUserBlogs)(action.user, dispatch);
-                    return next(action);
-
-                case _blog_actions.UPDATE_BLOG:
-                    (0, _blog_api_util.updateBlog)(action.blogs, dispatch);
                     return next(action);
 
                 case _blog_actions.DELETE_BLOG:
@@ -51369,11 +51201,6 @@ var BlogReducer = function BlogReducer() {
     var newState = (0, _merge2.default)({}, oldState);
 
     switch (action.type) {
-        case _blog_actions.RECEIVE_BLOG:
-            newState.index[action.blog.id] = action.blog;
-            newState.errors = [];
-            return newState;
-
         case _blog_actions.RECEIVE_BLOGS:
             newState.index = action.blogs;
             newState.blogIndex = action.blogIndex;
@@ -51515,7 +51342,7 @@ var signout = exports.signout = function signout() {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.deleteBlog = exports.fetchUserBlogs = exports.fetchBlogs = exports.updateBlog = exports.createBlog = exports.saveBlogs = undefined;
+exports.deleteBlog = exports.fetchUserBlogs = exports.fetchBlogs = exports.saveBlogs = undefined;
 
 var _blockstack = __webpack_require__(17);
 
@@ -51529,14 +51356,6 @@ var saveBlogs = exports.saveBlogs = function saveBlogs(blogs, dispatch) {
             window.location = window.location.origin;
         }
     });
-};
-
-var createBlog = exports.createBlog = function createBlog(blogs, dispatch) {
-    (0, _blockstack.putFile)(STORAGE_FILE, JSON.stringify(blogs)).then(function (isBlogSaved) {});
-};
-
-var updateBlog = exports.updateBlog = function updateBlog(blogs, dispatch) {
-    (0, _blockstack.putFile)(STORAGE_FILE, JSON.stringify(blogs)).then(function (isBlogSaved) {});
 };
 
 var fetchBlogs = exports.fetchBlogs = function fetchBlogs(dispatch) {

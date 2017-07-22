@@ -1,12 +1,8 @@
 import {
-  CREATE_BLOG,
-  REQUEST_BLOG,
   REQUEST_BLOGS,
   REQUEST_USER_BLOGS,
-  UPDATE_BLOG,
   DELETE_BLOG,
   SAVE_BLOGS,
-  receiveBlog,
   receiveBlogs,
   receiveUserBlogs,
   removeBlog,
@@ -14,12 +10,10 @@ import {
 } from '../actions/blog_actions';
 
 import {
-    createBlog,
-    updateBlog,
+    saveBlogs,
     fetchBlogs,
     fetchUserBlogs,
     deleteBlog,
-    saveBlogs
 } from '../util/blog_api_util';
 
 const BlogMiddleware = ({ getState, dispatch }) => next => action => {
@@ -28,24 +22,12 @@ const BlogMiddleware = ({ getState, dispatch }) => next => action => {
             saveBlogs(action.blogs, dispatch);
             return next(action);
 
-        case CREATE_BLOG:
-            createBlog(action.blogs, dispatch);
-            return next(action);
-
-        case REQUEST_BLOG:
-
-            return next(action);
-
         case REQUEST_BLOGS:
             fetchBlogs(dispatch);
             return next(action);
 
         case REQUEST_USER_BLOGS:
             fetchUserBlogs(action.user, dispatch);
-            return next(action);
-
-        case UPDATE_BLOG:
-            updateBlog(action.blogs, dispatch);
             return next(action);
 
         case DELETE_BLOG:

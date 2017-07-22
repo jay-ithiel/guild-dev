@@ -16,18 +16,6 @@ export const saveBlogs = (blogs, dispatch) => {
     });
 }
 
-export const createBlog = (blogs, dispatch) => {
-    putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
-
-    });
-};
-
-export const updateBlog = (blogs, dispatch) => {
-    putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
-
-    });
-};
-
 export const fetchBlogs = dispatch => {
     var blogs = {}, blogIndex;
 

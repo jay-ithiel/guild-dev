@@ -141,17 +141,6 @@ class BlogForm extends React.Component {
                         maxLength='30'/>
                     </label>
 
-                    <label id='blog-intro-label' className='blog-form-label'>
-                        <span id='blog-intro-error' className='error-message'>Blog intro cannot be blank</span>
-                        <input type='text'
-                        id='blog-intro-input'
-                        className='blog-input black'
-                        onChange={ this.handleChange('blogIntro') }
-                        value={ this.state.blogIntro }
-                        placeholder='Summarize your blog in 1 or 2 sentences...'
-                        maxLength='50'/>
-                    </label>
-
                     <label id='blog-body-label' className='blog-form-label'>
                         <span id='blog-body-error' className='error-message'>Blog body cannot be blank</span>
                         <textarea type='text'
@@ -160,6 +149,17 @@ class BlogForm extends React.Component {
                         onChange={ this.handleChange('body') }
                         value={ this.state.body }
                         placeholder='Write your blog here...'/>
+                    </label>
+
+                    <label id='blog-intro-label' className='blog-form-label'>
+                        <span id='blog-intro-error' className='error-message'>Blog intro cannot be blank</span>
+                        <input type='text'
+                        id='blog-intro-input'
+                        className='blog-input black'
+                        onChange={ this.handleChange('blogIntro') }
+                        value={ this.state.blogIntro }
+                        placeholder='Introduction (Summarize your blog in 1 or 2 sentences)'
+                        maxLength='50'/>
                     </label>
 
                     <div id='add-img-btn' className='blog-input btn'>
