@@ -17,7 +17,8 @@ class BlogForm extends React.Component {
             imageUrl: '',
             authorId: '',
             updatedAt: '',
-            isSubmitButtonActive: true
+            isSubmitButtonActive: true,
+
         };
 
         this.actionType = props.history.location.pathname === '/blogs/new/' ? 'Publish' : 'Update';
@@ -117,7 +118,7 @@ class BlogForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        // Check form for errors. If hasErrors returns false, there are no errors, so we can process the form
+        // Check form for errors. If hasErrors returns false, there are no errors so we can process the form
         if (!this.hasErrors()) { this.processForm() }
     }
 
@@ -125,13 +126,26 @@ class BlogForm extends React.Component {
         return e => this.setState({ [field]: e.target.value });
     }
 
+    toggleActiveLabel(inputName) {
+        return e => {
+            $('.hidden-label').fadeOut();
+            $(`#hidden-label-${inputName}`).fadeIn();
+        }
+    }
+
     render() {
         return (
             <div id='blog-form-container'>
                 <form id='blog-form' onSubmit={ this.handleSubmit.bind(this) }>
 
-                    <label id='blog-title-label' className='blog-form-label'>
-                        <span id='blog-title-error' className='error-message'>Title cannot be blank</span>
+                    <label id='blog-title-label' className='blog-form-label position-relative' onClick={ this.toggleActiveLabel('title') }>
+                        <h7 className='hidden-label' id='hidden-label-title'>
+                            Title
+                        </h7>
+                        <span id='blog-title-error' className='error-message'>
+                            Title cannot be blank
+                        </span>
+
                         <input type='text'
                         id='blog-title-input'
                         className='blog-input black'
@@ -141,8 +155,14 @@ class BlogForm extends React.Component {
                         maxLength='30'/>
                     </label>
 
-                    <label id='blog-body-label' className='blog-form-label'>
-                        <span id='blog-body-error' className='error-message'>Blog body cannot be blank</span>
+                    <label id='blog-body-label' className='blog-form-label position-relative' onClick={ this.toggleActiveLabel('body') }>
+                        <h7 className='hidden-label' id='hidden-label-body'>
+                            Body
+                        </h7>
+                        <span id='blog-body-error' className='error-message'>
+                            Blog body cannot be blank
+                        </span>
+
                         <textarea type='text'
                         id='blog-body-input'
                         className='blog-input black'
@@ -151,8 +171,14 @@ class BlogForm extends React.Component {
                         placeholder='Write your blog here...'/>
                     </label>
 
-                    <label id='blog-intro-label' className='blog-form-label'>
-                        <span id='blog-intro-error' className='error-message'>Blog intro cannot be blank</span>
+                    <label id='blog-intro-label' className='blog-form-label position-relative' onClick={ this.toggleActiveLabel('intro') }>
+                        <h7 className='hidden-label' id='hidden-label-intro'>
+                            Intro
+                        </h7>
+                        <span id='blog-intro-error' className='error-message'>
+                            Blog intro cannot be blank
+                        </span>
+
                         <input type='text'
                         id='blog-intro-input'
                         className='blog-input black'
@@ -162,7 +188,7 @@ class BlogForm extends React.Component {
                         maxLength='50'/>
                     </label>
 
-                    <div id='add-img-btn' className='blog-input btn'>
+                    <div id='add-img-btn' className='blog-input btn transition-2s-ease-in'>
                         <Camera id='add-img-icon' size={50}/>
                         <h4 className='title-2'>Add Cover Photo</h4>
                     </div>

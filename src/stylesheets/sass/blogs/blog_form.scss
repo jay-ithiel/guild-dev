@@ -10,7 +10,7 @@
 
 #blog-form {
     height: 100%;
-    width: 80%;
+    width: 75%;
     max-width: 650px;
     background-color: #fff;
     display: flex;
@@ -40,7 +40,7 @@
 }
 
 #blog-intro-input {
-    height: 40px;
+    height: 45px;
     font-size: 15px;
     font-weight: 100;
     letter-spacing: 1px;
@@ -61,11 +61,24 @@
     justify-content: center;
 }
 
+#add-img-btn:hover {
+    color: #43bd7e;
+    background-color: #eee;
+}
+
 #add-img-icon {
     height: 50px;
     margin-bottom: 5px;
 }
 
-.blog-form-label {
-    margin: 2px 0;
+
+.hidden-label {
+    display: none;
+    position: absolute;
+    top: 15px;
+    left: -50px;
+
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
