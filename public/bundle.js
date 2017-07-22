@@ -50185,7 +50185,7 @@ var Blogs = function (_React$Component) {
 
             return Object.keys(this.state.blogs).reverse().map(function (blogId, index) {
                 return _react2.default.createElement(_blog_link2.default, { key: index,
-                    blog: _this2.props.blogs[blogId],
+                    blog: _this2.state.blogs[blogId],
                     isUserBlogs: _this2.state.isUserBlogs });
             });
         }
@@ -50207,6 +50207,7 @@ var Blogs = function (_React$Component) {
             }
 
             var blogLinks = this.mapBlogLinks();
+
             return blogLinks.length === 0 ? _react2.default.createElement(
                 'ul',
                 { id: 'blogs', className: 'border-box-sizing' },
@@ -50214,7 +50215,11 @@ var Blogs = function (_React$Component) {
             ) : _react2.default.createElement(
                 'ul',
                 { id: 'blogs', className: 'border-box-sizing' },
-                _react2.default.createElement(
+                this.state.isUserBlogs ? _react2.default.createElement(
+                    'h4',
+                    { className: 'blogs-section-head' },
+                    'Your Blogs'
+                ) : _react2.default.createElement(
                     'h4',
                     { className: 'blogs-section-head' },
                     'Recent Blogs'

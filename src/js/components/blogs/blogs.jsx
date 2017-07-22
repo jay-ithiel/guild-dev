@@ -38,7 +38,7 @@ class Blogs extends React.Component {
     mapBlogLinks() {
         return Object.keys(this.state.blogs).reverse().map((blogId, index) => (
             <BlogLink key={index}
-                blog={ this.props.blogs[blogId] }
+                blog={ this.state.blogs[blogId] }
                 isUserBlogs={ this.state.isUserBlogs }/>
         ));
     }
@@ -57,13 +57,20 @@ class Blogs extends React.Component {
         }
 
         let blogLinks = this.mapBlogLinks();
+
         return blogLinks.length === 0 ? (
             <ul id='blogs' className='border-box-sizing'>
                 No blogs have been written yet. Be the first to write one!
             </ul>
         ) : (
             <ul id='blogs' className='border-box-sizing'>
-                <h4 className='blogs-section-head'>Recent Blogs</h4>
+                {
+                    this.state.isUserBlogs ? (
+                        <h4 className='blogs-section-head'>Your Blogs</h4>
+                    ) : (
+                        <h4 className='blogs-section-head'>Recent Blogs</h4>
+                    )
+                }
                 { blogLinks }
             </ul>
         )
