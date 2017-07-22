@@ -1,15 +1,21 @@
 @import 'blog_form.scss';
 @import 'blog_link.scss';
 @import 'blog_show.scss';
+$primary-color: #43bd7e;
+@import '../loaders.css/src/animations/ball-clip-rotate.scss';
 
 #blogs {
     width: 100vw;
+    min-height: 100vh;
     height: auto;
+
+    margin-top: -70px;
+    padding-top: 70px;
+    background-color: whitesmoke;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    background-color: whitesmoke;
 }
 
 .blogs-section-head {
@@ -22,4 +28,10 @@
     font-size: 18px;
     font-weight: 700;
     letter-spacing: 1px;
+}
+
+#blogs-loader {
+    background-color: lightgreen;
+    height: 100px;
+    width: 100px;
 }
