@@ -118,6 +118,8 @@ class BlogForm extends React.Component {
             );
         }
 
+        debugger;
+        
         this.props.blogs[blog.id] = blog;
         this.props.saveBlogs(this.props.blogs);
         this.setState({ isSubmitButtonActive: false });
