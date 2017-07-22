@@ -11271,70 +11271,71 @@ function unescapeJsonPointer(str) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 var SAVE_BLOGS = exports.SAVE_BLOGS = 'SAVE_BLOGS';
 var saveBlogs = exports.saveBlogs = function saveBlogs(blogs) {
-  return {
-    type: SAVE_BLOGS,
-    blogs: blogs
-  };
+    return {
+        type: SAVE_BLOGS,
+        blogs: blogs
+    };
 };
 
 var REQUEST_BLOGS = exports.REQUEST_BLOGS = 'REQUEST_BLOGS';
 var requestBlogs = exports.requestBlogs = function requestBlogs(tags) {
-  return {
-    type: REQUEST_BLOGS,
-    tags: tags
-  };
+    return {
+        type: REQUEST_BLOGS,
+        tags: tags
+    };
 };
 
 var REQUEST_USER_BLOGS = exports.REQUEST_USER_BLOGS = 'REQUEST_USER_BLOGS';
 var requestUserBlogs = exports.requestUserBlogs = function requestUserBlogs(user) {
-  return {
-    type: REQUEST_USER_BLOGS,
-    user: user
-  };
+    return {
+        type: REQUEST_USER_BLOGS,
+        user: user
+    };
 };
 
 var DELETE_BLOG = exports.DELETE_BLOG = 'DELETE_BLOG';
 var deleteBlog = exports.deleteBlog = function deleteBlog(id) {
-  return {
-    type: DELETE_BLOG,
-    id: id
-  };
+    return {
+        type: DELETE_BLOG,
+        id: id
+    };
 };
 
 var REMOVE_BLOG = exports.REMOVE_BLOG = 'REMOVE_BLOG';
 var removeBlog = exports.removeBlog = function removeBlog(id) {
-  return {
-    type: REMOVE_BLOG,
-    id: id
-  };
+    return {
+        type: REMOVE_BLOG,
+        id: id
+    };
 };
 
 var RECEIVE_BLOGS = exports.RECEIVE_BLOGS = 'RECEIVE_BLOGS';
-var receiveBlogs = exports.receiveBlogs = function receiveBlogs(blogs) {
-  return {
-    type: RECEIVE_BLOGS,
-    blogs: blogs
-  };
+var receiveBlogs = exports.receiveBlogs = function receiveBlogs(blogs, blogIndex) {
+    return {
+        type: RECEIVE_BLOGS,
+        blogs: blogs,
+        blogIndex: blogIndex
+    };
 };
 
 var RECEIVE_USER_BLOGS = exports.RECEIVE_USER_BLOGS = 'RECEIVE_USER_BLOGS';
 var receiveUserBlogs = exports.receiveUserBlogs = function receiveUserBlogs(userBlogs) {
-  return {
-    type: RECEIVE_BLOGS,
-    userBlogs: userBlogs
-  };
+    return {
+        type: RECEIVE_USER_BLOGS,
+        userBlogs: userBlogs
+    };
 };
 
 var RECEIVE_BLOG_ERRORS = exports.RECEIVE_BLOG_ERRORS = 'RECEIVE_BLOG_ERRORS';
 var receiveBlogErrors = exports.receiveBlogErrors = function receiveBlogErrors(errors) {
-  return {
-    type: RECEIVE_BLOG_ERRORS,
-    errors: errors
-  };
+    return {
+        type: RECEIVE_BLOG_ERRORS,
+        errors: errors
+    };
 };
 
 /***/ }),
@@ -27217,26 +27218,38 @@ var Blogs = function (_React$Component) {
             }
 
             var blogLinks = this.mapBlogLinks();
+            var blogsHead = this.state.isUserBlogs ? 'Your Blogs' : 'Recent Blogs';
 
             return blogLinks.length === 0 ? _react2.default.createElement(
-                'ul',
-                { id: 'blogs', className: 'border-box-sizing' },
-                _react2.default.createElement(
-                    'h4',
-                    { className: 'blogs-section-head' },
-                    'No blogs have been written yet. Be the first to write one!'
-                )
-            ) : _react2.default.createElement(
                 'ul',
                 { id: 'blogs', className: 'border-box-sizing' },
                 this.state.isUserBlogs ? _react2.default.createElement(
                     'h4',
                     { className: 'blogs-section-head' },
-                    'Your Blogs'
+                    'You haven\'t written any blogs yet.',
+                    ' ',
+                    _react2.default.createElement(
+                        'a',
+                        { className: 'primary-green underline-hover', href: '/blogs/new' },
+                        'Write a blog!'
+                    )
                 ) : _react2.default.createElement(
                     'h4',
                     { className: 'blogs-section-head' },
-                    'Recent Blogs'
+                    'No blogs have been written yet. Be the first to ',
+                    _react2.default.createElement(
+                        'a',
+                        { className: 'primary-green underline-hover', href: 'blogs/new' },
+                        'write a blog!'
+                    )
+                )
+            ) : _react2.default.createElement(
+                'ul',
+                { id: 'blogs', className: 'border-box-sizing' },
+                _react2.default.createElement(
+                    'h4',
+                    { className: 'blogs-section-head' },
+                    blogsHead
                 ),
                 blogLinks
             );
@@ -50394,10 +50407,6 @@ var _edit = __webpack_require__(709);
 
 var _edit2 = _interopRequireDefault(_edit);
 
-var _trash = __webpack_require__(711);
-
-var _trash2 = _interopRequireDefault(_trash);
-
 var _delete_blog_button = __webpack_require__(374);
 
 var _delete_blog_button2 = _interopRequireDefault(_delete_blog_button);
@@ -50458,11 +50467,6 @@ var BlogLinkActions = function (_React$Component) {
 
     return BlogLinkActions;
 }(_react2.default.Component);
-// <button id='blog-link-action' className='btn' onClick={ this.handleDelete }>
-//     <TrashSVG id='blog-link-svg' className='transition-2s-ease-in' size={24}/>
-// </button>
-
-// <DeleteBlogButton isActive={ this.state.isDeleteButtonActive } handleDelete={ this.handleDelete }/>
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
@@ -50494,9 +50498,6 @@ var _trash = __webpack_require__(711);
 var _trash2 = _interopRequireDefault(_trash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Loader = __webpack_require__(155).Loader;
-
 
 var DeleteBlogButton = function DeleteBlogButton(_ref) {
     var isActive = _ref.isActive,
@@ -51644,6 +51645,8 @@ exports.deleteBlog = exports.fetchUserBlogs = exports.fetchBlogs = exports.saveB
 
 var _blockstack = __webpack_require__(16);
 
+var _helper_methods = __webpack_require__(399);
+
 var _blog_actions = __webpack_require__(38);
 
 var STORAGE_FILE = 'blogs.json';
@@ -51651,7 +51654,7 @@ var STORAGE_FILE = 'blogs.json';
 var saveBlogs = exports.saveBlogs = function saveBlogs(blogs, dispatch) {
     (0, _blockstack.putFile)(STORAGE_FILE, JSON.stringify(blogs)).then(function (isBlogSaved) {
         if (isBlogSaved) {
-            window.location = window.location.origin;
+            window.location = '/blogs/user';
         }
     });
 };
@@ -51669,11 +51672,7 @@ var fetchBlogs = exports.fetchBlogs = function fetchBlogs(dispatch) {
             blogIndex = index + 1;
         });
 
-        dispatch({
-            type: _blog_actions.RECEIVE_BLOGS,
-            blogs: blogs,
-            blogIndex: blogIndex
-        });
+        dispatch((0, _blog_actions.receiveBlogs)(blogs, blogIndex));
     });
 };
 
@@ -51684,50 +51683,31 @@ var fetchUserBlogs = exports.fetchUserBlogs = function fetchUserBlogs(user, disp
         blogItems = JSON.parse(blogItems || '[]');
 
         Object.keys(blogItems).forEach(function (id) {
-            if (blogItems[id].authorId === user.username) {
+            if ((0, _helper_methods.isBlogAuthor)(blogItems[id], user)) {
                 userBlogs[id] = blogItems[id];
             }
         });
 
-        dispatch({
-            type: _blog_actions.RECEIVE_USER_BLOGS,
-            userBlogs: userBlogs
-        });
+        dispatch((0, _blog_actions.receiveUserBlogs)(userBlogs));
     });
 };
 
-var deleteBlog = exports.deleteBlog = function deleteBlog(id, dispatch) {
-    var blogs = {},
-        blogIndex;
-
-    console.log('stop delete');
-    return;
+var deleteBlog = exports.deleteBlog = function deleteBlog(targetId, dispatch) {
+    var userBlogs = {},
+        user = (0, _blockstack.loadUserData)();
 
     (0, _blockstack.getFile)(STORAGE_FILE).then(function (blogItems) {
         blogItems = JSON.parse(blogItems || '[]');
 
-        Object.keys(blogItems).forEach(function (blogId, index) {
-            if (parseInt(blogId) !== id) {
-                blogs[blogId] = blogItems[blogId];
+        Object.keys(blogItems).forEach(function (id) {
+            if ((0, _helper_methods.isBlogAuthor)(blogItems[id], user) && !(0, _helper_methods.isBlogToDelete)(id, targetId)) {
+                userBlogs[id] = blogItems[id];
             }
         });
 
-        blogIndex = Object.keys(blogs).length;
-
-        (0, _blockstack.putFile)(STORAGE_FILE, JSON.stringify(blogs)).then(function (isBlogSaved) {
+        (0, _blockstack.putFile)(STORAGE_FILE, JSON.stringify(userBlogs)).then(function (isBlogSaved) {
             if (isBlogSaved) {
-                // Should dispatch REMOVE_BLOG action
-                debugger;
-                dispatch({
-                    REMOVE_BLOG: _blog_actions.REMOVE_BLOG,
-                    blogs: blogs,
-                    blogIndex: blogIndex
-                });
-                // dispatch({
-                //     type: RECEIVE_BLOGS,
-                //     blogs,
-                //     blogIndex
-                // });
+                dispatch((0, _blog_actions.receiveUserBlogs)(userBlogs));
             }
         });
     });
@@ -51751,6 +51731,14 @@ var parseDateTime = exports.parseDateTime = function parseDateTime(dateTimeStrin
 
 var characterLimit = exports.characterLimit = function characterLimit(string) {
     return string.substring(0, 50);
+};
+
+var isBlogAuthor = exports.isBlogAuthor = function isBlogAuthor(blog, user) {
+    return blog.authorId === user.username;
+};
+
+var isBlogToDelete = exports.isBlogToDelete = function isBlogToDelete(id, targetId) {
+    return parseInt(id) === targetId;
 };
 
 /***/ }),
@@ -59305,7 +59293,7 @@ exports = module.exports = __webpack_require__(452)(undefined);
 
 
 // module
-exports.push([module.i, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  font-family: 'Lato', sans-serif;\n  vertical-align: baseline;\n  box-sizing: border-box; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\na {\n  text-decoration: none;\n  color: inherit; }\n\n#app {\n  padding-top: 70px; }\n\n#layout {\n  min-width: 100vw;\n  min-height: 100vh;\n  margin-top: -70px;\n  padding: 0 10vw;\n  padding-top: 70px; }\n\n.position-relative {\n  position: relative; }\n\n.position-absolute {\n  position: absolute; }\n\n.fit-img {\n  width: 100%;\n  height: 100%; }\n\n.center {\n  margin: 0 auto; }\n\n.full-screen {\n  min-width: 100vw;\n  min-height: 100vh;\n  margin-top: -70px;\n  padding-top: 70px; }\n\n.full {\n  width: 100%;\n  height: 100%; }\n\n.border-box-sizing {\n  box-sizing: border-box; }\n\n.content-half {\n  width: 50vw;\n  height: 50vh; }\n\n.display-none {\n  display: none; }\n\n.z1 {\n  z-index: 1;\n  width: 100%;\n  height: 100vh;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center; }\n\n.dark-veil {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2); }\n\n.margin-top-3 {\n  margin-top: 3px; }\n\n.margin-top-4 {\n  margin-top: 4px; }\n\n.transition-2s-ease-in {\n  transition: all .2s ease-in; }\n\n@media screen and (min-width: 1100px) {\n  .no-desktop {\n    display: none; } }\n\n.inactive {\n  transition: all .2s ease-in;\n  cursor: default !important;\n  box-shadow: none !important; }\n\n#logo {\n  height: 30px;\n  width: 30px; }\n\n#hamburger-menu {\n  height: 30px;\n  width: 30px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  cursor: pointer;\n  margin-left: 50px; }\n\n.hamburger-slab {\n  width: 100%;\n  height: 2px;\n  background-color: #fff; }\n\n#hamburger-dropdown-container {\n  width: 100vw;\n  height: 100vh;\n  background-color: #fff;\n  position: fixed;\n  top: 0;\n  right: 0;\n  display: none; }\n\n#hamburger-dropdown {\n  width: 80%;\n  height: 100%;\n  margin: 0 auto;\n  padding-top: 50px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: flex-start; }\n\n#hamburger-dropdown li {\n  height: 45px;\n  width: 100%;\n  margin: 10px;\n  background-color: #fff;\n  padding: 10px;\n  display: flex;\n  align-items: center;\n  font-size: 25px;\n  font-weight: 100;\n  letter-spacing: 1px;\n  transition: all .2s ease-in; }\n\n@media screen and (min-width: 500px) {\n  .close-modal {\n    display: none; }\n  #hamburger-dropdown-container {\n    top: 70px;\n    right: 0px;\n    width: auto;\n    height: auto; }\n  #hamburger-dropdown {\n    width: 250px;\n    height: auto;\n    padding-top: 0;\n    border-bottom-right-radius: 3px;\n    border-bottom-left-radius: 3px;\n    box-shadow: 0 4px 7px 1px #aaa; }\n  #hamburger-dropdown li {\n    margin: 0;\n    border: 1px solid transparent;\n    border-bottom: 1px solid #e7e7e7;\n    background-color: #fcfcfc;\n    font-size: 15px; }\n  #hamburger-dropdown li:hover {\n    color: #fff;\n    background-color: #43bd7e;\n    border: 1px solid #43bd7e;\n    transition: all .2s ease-in; }\n  #hamburger-dropdown li:last-child {\n    border-bottom: 0;\n    border-bottom-right-radius: 3px;\n    border-bottom-left-radius: 3px; } }\n\n#navbar {\n  height: 70px;\n  width: 100vw;\n  background-color: #43bd7e;\n  box-shadow: 2px 4px 7px -2px #aaa;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  padding: 0 25px;\n  z-index: 1000000000000; }\n\n#navdiv {\n  min-width: 190px;\n  position: relative;\n  display: flex;\n  justify-content: flex-end; }\n\n#user-nav-menu {\n  display: flex;\n  align-items: center; }\n\n@keyframes rotate {\n  0% {\n    transform: rotate(0deg); }\n  50% {\n    transform: rotate(180deg); }\n  100% {\n    transform: rotate(360deg); } }\n\n.ball-clip-rotate > div {\n  background-color: #43bd7e;\n  width: 15px;\n  height: 15px;\n  border-radius: 100%;\n  margin: 2px;\n  animation-fill-mode: both;\n  border: 2px solid #43bd7e;\n  border-bottom-color: transparent;\n  height: 26px;\n  width: 26px;\n  background: transparent !important;\n  display: inline-block;\n  animation: rotate 0.75s 0s linear infinite; }\n\n.loader-hidden {\n  display: none; }\n\n.loader-active {\n  display: block; }\n\n#blog-submit {\n  height: 50px;\n  font-size: 18px;\n  color: #fff;\n  letter-spacing: 2px;\n  border-radius: 3px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  transition: all .2s ease-in;\n  background-color: #43bd7e;\n  cursor: pointer; }\n\n#blog-submit:hover {\n  box-shadow: 0 4px 10px -2px #777;\n  transition: all .15s ease-in; }\n\n.blog-submit-inactive {\n  border: 1px solid #aaa !important;\n  color: #43bd7e !important;\n  background-color: #eee !important; }\n\n#blog-form-container {\n  width: 100vw;\n  height: auto;\n  padding-bottom: 40px;\n  display: flex;\n  justify-content: center; }\n\n#blog-form {\n  height: 100%;\n  width: 75%;\n  max-width: 650px;\n  background-color: #fff;\n  display: flex;\n  flex-direction: column;\n  padding-top: 15px; }\n\n.blog-input {\n  min-width: 100%;\n  box-sizing: border-box;\n  padding: 7px;\n  border: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 3px;\n  outline: none;\n  font-weight: 100;\n  letter-spacing: 1px; }\n\n#blog-title-input {\n  height: 50px;\n  font-size: 30px;\n  font-weight: 500;\n  letter-spacing: 2px; }\n\n#blog-intro-input {\n  height: 45px;\n  font-size: 15px;\n  font-weight: 100;\n  letter-spacing: 1px; }\n\n#blog-body-input {\n  min-height: 275px;\n  font-size: 17px;\n  padding-top: 15px;\n  border-bottom: 1px solid #eee; }\n\n#add-img-btn {\n  height: 120px;\n  color: #aaa;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center; }\n\n#add-img-btn:hover {\n  color: #000; }\n\n#add-img-icon {\n  height: 50px;\n  margin-bottom: 5px; }\n\n.hidden-label {\n  display: none;\n  position: absolute;\n  top: 15px;\n  left: -50px;\n  color: #444;\n  font-size: 15px;\n  font-weight: 700;\n  letter-spacing: 1px; }\n\n@media screen and (max-width: 450px) {\n  #blog-form {\n    width: 65%; }\n  .hidden-label {\n    left: -40px; } }\n\n#about-blog {\n  width: 100%;\n  height: 40px;\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  margin-bottom: 10px; }\n\n#about-blog-img {\n  min-width: 40px;\n  width: 40px;\n  max-width: 40px;\n  min-height: 40px;\n  height: 40px;\n  max-height: 40px;\n  border-radius: 50%;\n  margin-right: 10px;\n  background-color: #eee;\n  background-position: center;\n  background-size: cover;\n  background-repeat: no-repeat; }\n\n#about-blog-info {\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  font-size: 12px;\n  font-weight: 100;\n  letter-spacing: 1px;\n  line-height: 17px; }\n\n#blog-link {\n  width: 100vw;\n  max-width: 640px;\n  height: auto;\n  background-color: #fff;\n  box-shadow: 0 0 4px #ccc;\n  border-radius: 3px;\n  margin-top: 30px;\n  padding: 15px 20px;\n  padding-bottom: 35px; }\n\n.blog-link-img-box {\n  height: 30vw;\n  max-height: 179.39px;\n  width: 100%;\n  background-position: center;\n  background-size: cover;\n  background-repeat: no-repeat; }\n\n#blog-link-title {\n  margin-top: 30px;\n  margin-bottom: 10px;\n  font-size: 28px;\n  font-weight: 700;\n  color: #333; }\n\n#blog-link-body-intro {\n  font-size: 25px;\n  font-weight: 100;\n  color: #777;\n  margin-bottom: 20px; }\n\n#blog-link-actions {\n  width: 75px;\n  padding-right: 10px;\n  float: right;\n  display: flex;\n  justify-content: space-between;\n  align-items: center; }\n\n#blog-link-action {\n  height: 23px;\n  width: 23px;\n  z-index: 10; }\n\n#blog-link-action:hover {\n  size: 30; }\n\n#blog-link-svg {\n  color: #000; }\n\n#blog {\n  width: 100%;\n  height: auto;\n  margin: 30px 0; }\n\n#blog-title {\n  text-align: center;\n  font-size: 35px;\n  font-weight: 700;\n  letter-spacing: 2px; }\n\n#blog-img {\n  width: 80vw;\n  height: 40vw;\n  margin: 20px 0;\n  background-color: lightgrey;\n  background-position: center;\n  background-size: cover;\n  background-repeat: no-repeat; }\n\n#blog-body {\n  font-size: 17px;\n  font-weight: 100;\n  line-height: 23px;\n  letter-spacing: 1px;\n  margin-bottom: 20px; }\n\n.blog-show-section {\n  width: 100%;\n  height: auto;\n  margin: 10px 0;\n  display: inline-block; }\n\n@keyframes rotate {\n  0% {\n    transform: rotate(0deg); }\n  50% {\n    transform: rotate(180deg); }\n  100% {\n    transform: rotate(360deg); } }\n\n.ball-clip-rotate > div {\n  background-color: #43bd7e;\n  width: 15px;\n  height: 15px;\n  border-radius: 100%;\n  margin: 2px;\n  animation-fill-mode: both;\n  border: 2px solid #43bd7e;\n  border-bottom-color: transparent;\n  height: 26px;\n  width: 26px;\n  background: transparent !important;\n  display: inline-block;\n  animation: rotate 0.75s 0s linear infinite; }\n\n#blogs {\n  width: 100vw;\n  min-height: 100vh;\n  height: auto;\n  margin-top: -70px;\n  padding-top: 70px;\n  padding-bottom: 70px;\n  background-color: whitesmoke;\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n\n.blogs-section-head {\n  max-width: 600px;\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 50px;\n  font-size: 18px;\n  font-weight: 700;\n  letter-spacing: 1px; }\n\n#blogs-loader {\n  background-color: lightgreen;\n  height: 100px;\n  width: 100px; }\n\n#nav-search {\n  height: 25px; }\n\n#search-icon {\n  background-color: #43bd7e;\n  color: #fff;\n  height: 25px;\n  width: 25px;\n  float: left; }\n\n#search-modal {\n  height: 100vh;\n  width: 100vw;\n  position: fixed;\n  top: 0;\n  right: 0;\n  display: flex;\n  justify-content: center;\n  background-color: #fff; }\n\n#search-modal-input {\n  height: 40px;\n  width: 80vw;\n  margin-top: 30vh;\n  border: none;\n  border-bottom: 1px solid #00ab6c;\n  outline: none;\n  font-size: 30px;\n  font-weight: 100;\n  letter-spacing: 1px;\n  padding: 5px 10px; }\n\n@media screen and (max-width: 499px) {\n  #search-modal-container {\n    display: none; } }\n\n@media screen and (min-width: 500px) {\n  #search-modal-container {\n    display: block; }\n  #search-modal {\n    height: 25px;\n    width: 200px;\n    position: absolute;\n    top: -2px;\n    right: 220px;\n    border-radius: 3px; }\n  #search-modal-input {\n    margin-top: 0;\n    height: 100%;\n    width: 100%;\n    font-size: 17px;\n    border-radius: 3px; } }\n\n#about-user {\n  width: 100%;\n  max-width: 80vw;\n  height: 150px;\n  background-color: #fff;\n  border: 1px solid #ccc;\n  box-sizing: border-box;\n  padding: 10px 30px;\n  margin: 0 auto; }\n\n#about-user-img {\n  width: 100px;\n  height: 100px;\n  border-radius: 50%;\n  margin-right: 30px; }\n\n#about-user-name {\n  text-align: center;\n  width: 100px;\n  font-size: 18px;\n  font-weight: 400;\n  letter-spacing: 1px; }\n\n#about-user-bio {\n  font-size: 2vw;\n  line-height: 2.5vw;\n  font-weight: 100;\n  letter-spacing: 1.5px; }\n\n@media screen and (max-width: 600px) {\n  #about-user-bio {\n    font-size: 5px;\n    line-height: 18px; } }\n\n@media screen and (max-width: 1000px) {\n  #about-user-bio {\n    font-size: 17px;\n    line-height: 22px; } }\n\n@media screen and (min-width: 1400px) {\n  #about-user-bio {\n    font-size: 22px;\n    line-height: 29px; } }\n\n.signin-bg {\n  background-color: #fff; }\n\n#signin-guild-logo {\n  width: 100px; }\n\n#signin-guild-head {\n  font-size: 55px;\n  font-weight: 200;\n  letter-spacing: 2px;\n  margin: 20px;\n  margin-top: 10px; }\n\n#signin-guild-span {\n  font-size: 13px;\n  font-weight: 100;\n  letter-spacing: 3px;\n  margin-bottom: 20px; }\n\n#comment-form-container {\n  background-color: lightgreen;\n  width: 100%;\n  height: 80px;\n  margin-top: 20px; }\n\n#comment-form-container form {\n  display: flex;\n  width: 100%;\n  height: 100%; }\n\n#comment-input {\n  outline: none;\n  box-sizing: border-box;\n  padding: 7px;\n  resize: none;\n  width: 80%;\n  height: 100%; }\n\n#submit-comment-btn {\n  width: 20%;\n  height: 100%;\n  font-size: 14px; }\n\n.flex {\n  display: flex; }\n\n.flex-center {\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.flex-around {\n  display: flex;\n  justify-content: space-around; }\n\n.flex-between {\n  display: flex;\n  justify-content: space-between; }\n\n.flex-column {\n  flex-direction: column; }\n\n.flex-row {\n  flex-direction: row; }\n\n.justify-around {\n  justify-content: space-around; }\n\n.justify-between {\n  justify-content: space-between; }\n\n.justify-end {\n  justify-content: flex-end; }\n\n.align-center {\n  align-items: center; }\n\n.title {\n  font-size: 30px;\n  font-weight: 700;\n  letter-spacing: 2px; }\n\n.title-2 {\n  font-size: 15px;\n  letter-spacing: 1px; }\n\n.text-align-center {\n  text-align: center; }\n\n.letter-space-2 {\n  letter-spacing: 2px; }\n\n.letter-space-1 {\n  letter-spacing: 1px; }\n\n.small {\n  font-size: 13px; }\n\n.skinny {\n  font-weight: 100; }\n\n.thin {\n  font-weight: 400; }\n\n.bold {\n  font-weight: 700; }\n\n.dk-green {\n  color: #00ab6c; }\n\n.green {\n  color: #0be370; }\n\n.li-green {\n  color: #14fc7d; }\n\n.white {\n  color: #fff; }\n\n.lightgrey {\n  color: lightgrey; }\n\n.lightgrey-important {\n  color: lightgrey !important; }\n\n.grey {\n  color: grey; }\n\n.black {\n  color: #000; }\n\n.error-message {\n  font-size: 13px;\n  font-weight: 100;\n  color: #ff0000;\n  padding: 3px;\n  display: none; }\n\n.outline-red {\n  border: 1px solid red !important;\n  border-radius: 2px; }\n\n.dark-hover:hover {\n  color: #000; }\n\n.bold-hover:hover {\n  font-weight: 400; }\n\n.btn {\n  background-color: transparent;\n  cursor: pointer;\n  border: none;\n  outline: none; }\n\n.shadow-button {\n  box-shadow: 0 0 20px #777; }\n\n.primary-btn-light {\n  padding: 10px 20px;\n  border-radius: 2px;\n  background-color: #fefefe;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  transition: all .15s ease-in;\n  font-size: 21px;\n  font-weight: 400;\n  letter-spacing: 2px;\n  color: #222; }\n\n.primary-btn {\n  padding: 15px 25px;\n  border-radius: 2px;\n  background-color: #43bd7e;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  transition: all .15s ease-in;\n  font-size: 20px;\n  font-weight: 100;\n  letter-spacing: 2px;\n  color: #fff; }\n\n.primary-btn:hover {\n  box-shadow: 0 4px 10px -2px #777;\n  transition: all .15s ease-in; }\n\n.modal {\n  z-index: 10000; }\n\n.close-modal {\n  position: absolute;\n  top: 7px;\n  right: 17px;\n  color: #555;\n  font-size: 35px;\n  font-weight: 100; }\n", ""]);
+exports.push([module.i, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  font-family: 'Lato', sans-serif;\n  vertical-align: baseline;\n  box-sizing: border-box; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\na {\n  text-decoration: none;\n  color: inherit; }\n\n#app {\n  padding-top: 70px; }\n\n#layout {\n  min-width: 100vw;\n  min-height: 100vh;\n  margin-top: -70px;\n  padding: 0 10vw;\n  padding-top: 70px; }\n\n.position-relative {\n  position: relative; }\n\n.position-absolute {\n  position: absolute; }\n\n.fit-img {\n  width: 100%;\n  height: 100%; }\n\n.center {\n  margin: 0 auto; }\n\n.full-screen {\n  min-width: 100vw;\n  min-height: 100vh;\n  margin-top: -70px;\n  padding-top: 70px; }\n\n.full {\n  width: 100%;\n  height: 100%; }\n\n.border-box-sizing {\n  box-sizing: border-box; }\n\n.content-half {\n  width: 50vw;\n  height: 50vh; }\n\n.display-none {\n  display: none; }\n\n.z1 {\n  z-index: 1;\n  width: 100%;\n  height: 100vh;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center; }\n\n.dark-veil {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.2); }\n\n.margin-top-3 {\n  margin-top: 3px; }\n\n.margin-top-4 {\n  margin-top: 4px; }\n\n.transition-2s-ease-in {\n  transition: all .2s ease-in; }\n\n@media screen and (min-width: 1100px) {\n  .no-desktop {\n    display: none; } }\n\n.inactive {\n  transition: all .2s ease-in;\n  cursor: default !important;\n  box-shadow: none !important; }\n\n#logo {\n  height: 30px;\n  width: 30px; }\n\n#hamburger-menu {\n  height: 30px;\n  width: 30px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  cursor: pointer;\n  margin-left: 50px; }\n\n.hamburger-slab {\n  width: 100%;\n  height: 2px;\n  background-color: #fff; }\n\n#hamburger-dropdown-container {\n  width: 100vw;\n  height: 100vh;\n  background-color: #fff;\n  position: fixed;\n  top: 0;\n  right: 0;\n  display: none; }\n\n#hamburger-dropdown {\n  width: 80%;\n  height: 100%;\n  margin: 0 auto;\n  padding-top: 50px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: flex-start; }\n\n#hamburger-dropdown li {\n  height: 45px;\n  width: 100%;\n  margin: 10px;\n  background-color: #fff;\n  padding: 10px;\n  display: flex;\n  align-items: center;\n  font-size: 25px;\n  font-weight: 100;\n  letter-spacing: 1px;\n  transition: all .2s ease-in; }\n\n@media screen and (min-width: 500px) {\n  .close-modal {\n    display: none; }\n  #hamburger-dropdown-container {\n    top: 70px;\n    right: 0px;\n    width: auto;\n    height: auto; }\n  #hamburger-dropdown {\n    width: 250px;\n    height: auto;\n    padding-top: 0;\n    border-bottom-right-radius: 3px;\n    border-bottom-left-radius: 3px;\n    box-shadow: 0 4px 7px 1px #aaa; }\n  #hamburger-dropdown li {\n    margin: 0;\n    border: 1px solid transparent;\n    border-bottom: 1px solid #e7e7e7;\n    background-color: #fcfcfc;\n    font-size: 15px; }\n  #hamburger-dropdown li:hover {\n    color: #fff;\n    background-color: #43bd7e;\n    border: 1px solid #43bd7e;\n    transition: all .2s ease-in; }\n  #hamburger-dropdown li:last-child {\n    border-bottom: 0;\n    border-bottom-right-radius: 3px;\n    border-bottom-left-radius: 3px; } }\n\n#navbar {\n  height: 70px;\n  width: 100vw;\n  background-color: #43bd7e;\n  box-shadow: 2px 4px 7px -2px #aaa;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-sizing: border-box;\n  padding: 0 25px;\n  z-index: 1000000000000; }\n\n#navdiv {\n  min-width: 190px;\n  position: relative;\n  display: flex;\n  justify-content: flex-end; }\n\n#user-nav-menu {\n  display: flex;\n  align-items: center; }\n\n@keyframes rotate {\n  0% {\n    transform: rotate(0deg); }\n  50% {\n    transform: rotate(180deg); }\n  100% {\n    transform: rotate(360deg); } }\n\n.ball-clip-rotate > div {\n  background-color: #43bd7e;\n  width: 15px;\n  height: 15px;\n  border-radius: 100%;\n  margin: 2px;\n  animation-fill-mode: both;\n  border: 2px solid #43bd7e;\n  border-bottom-color: transparent;\n  height: 26px;\n  width: 26px;\n  background: transparent !important;\n  display: inline-block;\n  animation: rotate 0.75s 0s linear infinite; }\n\n.loader-hidden {\n  display: none; }\n\n.loader-active {\n  display: block; }\n\n#blog-submit {\n  height: 50px;\n  font-size: 18px;\n  color: #fff;\n  letter-spacing: 2px;\n  border-radius: 3px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  transition: all .2s ease-in;\n  background-color: #43bd7e;\n  cursor: pointer; }\n\n#blog-submit:hover {\n  box-shadow: 0 4px 10px -2px #777;\n  transition: all .15s ease-in; }\n\n.blog-submit-inactive {\n  border: 1px solid #aaa !important;\n  color: #43bd7e !important;\n  background-color: #eee !important; }\n\n#blog-form-container {\n  width: 100vw;\n  height: auto;\n  padding-bottom: 40px;\n  display: flex;\n  justify-content: center; }\n\n#blog-form {\n  height: 100%;\n  width: 75%;\n  max-width: 650px;\n  background-color: #fff;\n  display: flex;\n  flex-direction: column;\n  padding-top: 15px; }\n\n.blog-input {\n  min-width: 100%;\n  box-sizing: border-box;\n  padding: 7px;\n  border: none;\n  border-bottom: 1px solid #eee;\n  border-radius: 3px;\n  outline: none;\n  font-weight: 100;\n  letter-spacing: 1px; }\n\n#blog-title-input {\n  height: 50px;\n  font-size: 30px;\n  font-weight: 500;\n  letter-spacing: 2px; }\n\n#blog-intro-input {\n  height: 45px;\n  font-size: 15px;\n  font-weight: 100;\n  letter-spacing: 1px; }\n\n#blog-body-input {\n  min-height: 275px;\n  font-size: 17px;\n  padding-top: 15px;\n  border-bottom: 1px solid #eee; }\n\n#add-img-btn {\n  height: 120px;\n  color: #aaa;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center; }\n\n#add-img-btn:hover {\n  color: #000; }\n\n#add-img-icon {\n  height: 50px;\n  margin-bottom: 5px; }\n\n.hidden-label {\n  display: none;\n  position: absolute;\n  top: 15px;\n  left: -50px;\n  color: #444;\n  font-size: 15px;\n  font-weight: 700;\n  letter-spacing: 1px; }\n\n@media screen and (max-width: 450px) {\n  #blog-form {\n    width: 65%; }\n  .hidden-label {\n    left: -40px; } }\n\n#about-blog {\n  width: 100%;\n  height: 40px;\n  display: flex;\n  justify-content: flex-start;\n  align-items: center;\n  margin-bottom: 10px; }\n\n#about-blog-img {\n  min-width: 40px;\n  width: 40px;\n  max-width: 40px;\n  min-height: 40px;\n  height: 40px;\n  max-height: 40px;\n  border-radius: 50%;\n  margin-right: 10px;\n  background-color: #eee;\n  background-position: center;\n  background-size: cover;\n  background-repeat: no-repeat; }\n\n#about-blog-info {\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  font-size: 12px;\n  font-weight: 100;\n  letter-spacing: 1px;\n  line-height: 17px; }\n\n#blog-link {\n  width: 100vw;\n  max-width: 640px;\n  height: auto;\n  background-color: #fff;\n  box-shadow: 0 0 4px #ccc;\n  border-radius: 3px;\n  margin-top: 30px;\n  padding: 15px 20px;\n  padding-bottom: 35px; }\n\n.blog-link-img-box {\n  height: 30vw;\n  max-height: 179.39px;\n  width: 100%;\n  background-position: center;\n  background-size: cover;\n  background-repeat: no-repeat; }\n\n#blog-link-title {\n  margin-top: 30px;\n  margin-bottom: 10px;\n  font-size: 28px;\n  font-weight: 700;\n  color: #333; }\n\n#blog-link-body-intro {\n  font-size: 25px;\n  font-weight: 100;\n  color: #777;\n  margin-bottom: 20px; }\n\n#blog-link-actions {\n  width: 75px;\n  padding-right: 10px;\n  float: right;\n  display: flex;\n  justify-content: space-between;\n  align-items: center; }\n\n#blog-link-action {\n  height: 23px;\n  width: 23px;\n  z-index: 10; }\n\n#blog-link-action:hover {\n  size: 30; }\n\n#blog-link-svg {\n  color: #000; }\n\n#blog {\n  width: 100%;\n  height: auto;\n  margin: 30px 0; }\n\n#blog-title {\n  text-align: center;\n  font-size: 35px;\n  font-weight: 700;\n  letter-spacing: 2px; }\n\n#blog-img {\n  width: 80vw;\n  height: 40vw;\n  margin: 20px 0;\n  background-color: lightgrey;\n  background-position: center;\n  background-size: cover;\n  background-repeat: no-repeat; }\n\n#blog-body {\n  font-size: 17px;\n  font-weight: 100;\n  line-height: 23px;\n  letter-spacing: 1px;\n  margin-bottom: 20px; }\n\n.blog-show-section {\n  width: 100%;\n  height: auto;\n  margin: 10px 0;\n  display: inline-block; }\n\n@keyframes rotate {\n  0% {\n    transform: rotate(0deg); }\n  50% {\n    transform: rotate(180deg); }\n  100% {\n    transform: rotate(360deg); } }\n\n.ball-clip-rotate > div {\n  background-color: #43bd7e;\n  width: 15px;\n  height: 15px;\n  border-radius: 100%;\n  margin: 2px;\n  animation-fill-mode: both;\n  border: 2px solid #43bd7e;\n  border-bottom-color: transparent;\n  height: 26px;\n  width: 26px;\n  background: transparent !important;\n  display: inline-block;\n  animation: rotate 0.75s 0s linear infinite; }\n\n#blogs {\n  width: 100vw;\n  min-height: 100vh;\n  height: auto;\n  margin-top: -70px;\n  padding-top: 70px;\n  padding-bottom: 70px;\n  background-color: whitesmoke;\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n\n.blogs-section-head {\n  max-width: 600px;\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 50px;\n  font-size: 18px;\n  font-weight: 700;\n  letter-spacing: 1px; }\n\n#blogs-loader {\n  background-color: lightgreen;\n  height: 100px;\n  width: 100px; }\n\n#nav-search {\n  height: 25px; }\n\n#search-icon {\n  background-color: #43bd7e;\n  color: #fff;\n  height: 25px;\n  width: 25px;\n  float: left; }\n\n#search-modal {\n  height: 100vh;\n  width: 100vw;\n  position: fixed;\n  top: 0;\n  right: 0;\n  display: flex;\n  justify-content: center;\n  background-color: #fff; }\n\n#search-modal-input {\n  height: 40px;\n  width: 80vw;\n  margin-top: 30vh;\n  border: none;\n  border-bottom: 1px solid #00ab6c;\n  outline: none;\n  font-size: 30px;\n  font-weight: 100;\n  letter-spacing: 1px;\n  padding: 5px 10px; }\n\n@media screen and (max-width: 499px) {\n  #search-modal-container {\n    display: none; } }\n\n@media screen and (min-width: 500px) {\n  #search-modal-container {\n    display: block; }\n  #search-modal {\n    height: 25px;\n    width: 200px;\n    position: absolute;\n    top: -2px;\n    right: 220px;\n    border-radius: 3px; }\n  #search-modal-input {\n    margin-top: 0;\n    height: 100%;\n    width: 100%;\n    font-size: 17px;\n    border-radius: 3px; } }\n\n#about-user {\n  width: 100%;\n  max-width: 80vw;\n  height: 150px;\n  background-color: #fff;\n  border: 1px solid #ccc;\n  box-sizing: border-box;\n  padding: 10px 30px;\n  margin: 0 auto; }\n\n#about-user-img {\n  width: 100px;\n  height: 100px;\n  border-radius: 50%;\n  margin-right: 30px; }\n\n#about-user-name {\n  text-align: center;\n  width: 100px;\n  font-size: 18px;\n  font-weight: 400;\n  letter-spacing: 1px; }\n\n#about-user-bio {\n  font-size: 2vw;\n  line-height: 2.5vw;\n  font-weight: 100;\n  letter-spacing: 1.5px; }\n\n@media screen and (max-width: 600px) {\n  #about-user-bio {\n    font-size: 5px;\n    line-height: 18px; } }\n\n@media screen and (max-width: 1000px) {\n  #about-user-bio {\n    font-size: 17px;\n    line-height: 22px; } }\n\n@media screen and (min-width: 1400px) {\n  #about-user-bio {\n    font-size: 22px;\n    line-height: 29px; } }\n\n.signin-bg {\n  background-color: #fff; }\n\n#signin-guild-logo {\n  width: 100px; }\n\n#signin-guild-head {\n  font-size: 55px;\n  font-weight: 200;\n  letter-spacing: 2px;\n  margin: 20px;\n  margin-top: 10px; }\n\n#signin-guild-span {\n  font-size: 13px;\n  font-weight: 100;\n  letter-spacing: 3px;\n  margin-bottom: 20px; }\n\n#comment-form-container {\n  background-color: lightgreen;\n  width: 100%;\n  height: 80px;\n  margin-top: 20px; }\n\n#comment-form-container form {\n  display: flex;\n  width: 100%;\n  height: 100%; }\n\n#comment-input {\n  outline: none;\n  box-sizing: border-box;\n  padding: 7px;\n  resize: none;\n  width: 80%;\n  height: 100%; }\n\n#submit-comment-btn {\n  width: 20%;\n  height: 100%;\n  font-size: 14px; }\n\n.flex {\n  display: flex; }\n\n.flex-center {\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.flex-around {\n  display: flex;\n  justify-content: space-around; }\n\n.flex-between {\n  display: flex;\n  justify-content: space-between; }\n\n.flex-column {\n  flex-direction: column; }\n\n.flex-row {\n  flex-direction: row; }\n\n.justify-around {\n  justify-content: space-around; }\n\n.justify-between {\n  justify-content: space-between; }\n\n.justify-end {\n  justify-content: flex-end; }\n\n.align-center {\n  align-items: center; }\n\n.title {\n  font-size: 30px;\n  font-weight: 700;\n  letter-spacing: 2px; }\n\n.title-2 {\n  font-size: 15px;\n  letter-spacing: 1px; }\n\n.text-align-center {\n  text-align: center; }\n\n.letter-space-2 {\n  letter-spacing: 2px; }\n\n.letter-space-1 {\n  letter-spacing: 1px; }\n\n.small {\n  font-size: 13px; }\n\n.skinny {\n  font-weight: 100; }\n\n.thin {\n  font-weight: 400; }\n\n.bold {\n  font-weight: 700; }\n\n.dk-green {\n  color: #00ab6c; }\n\n.primary-green {\n  color: #43bd7e; }\n\n.green {\n  color: #0be370; }\n\n.li-green {\n  color: #14fc7d; }\n\n.white {\n  color: #fff; }\n\n.lightgrey {\n  color: lightgrey; }\n\n.lightgrey-important {\n  color: lightgrey !important; }\n\n.grey {\n  color: grey; }\n\n.black {\n  color: #000; }\n\n.error-message {\n  font-size: 13px;\n  font-weight: 100;\n  color: #ff0000;\n  padding: 3px;\n  display: none; }\n\n.outline-red {\n  border: 1px solid red !important;\n  border-radius: 2px; }\n\n.dark-hover:hover {\n  color: #000; }\n\n.bold-hover:hover {\n  font-weight: 400; }\n\n.underline-hover:hover {\n  text-decoration: underline; }\n\n.btn {\n  background-color: transparent;\n  cursor: pointer;\n  border: none;\n  outline: none; }\n\n.shadow-button {\n  box-shadow: 0 0 20px #777; }\n\n.primary-btn-light {\n  padding: 10px 20px;\n  border-radius: 2px;\n  background-color: #fefefe;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  transition: all .15s ease-in;\n  font-size: 21px;\n  font-weight: 400;\n  letter-spacing: 2px;\n  color: #222; }\n\n.primary-btn {\n  padding: 15px 25px;\n  border-radius: 2px;\n  background-color: #43bd7e;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  transition: all .15s ease-in;\n  font-size: 20px;\n  font-weight: 100;\n  letter-spacing: 2px;\n  color: #fff; }\n\n.primary-btn:hover {\n  box-shadow: 0 4px 10px -2px #777;\n  transition: all .15s ease-in; }\n\n.modal {\n  z-index: 10000; }\n\n.close-modal {\n  position: absolute;\n  top: 7px;\n  right: 17px;\n  color: #555;\n  font-size: 35px;\n  font-weight: 100; }\n", ""]);
 
 // exports
 

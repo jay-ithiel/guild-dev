@@ -4,7 +4,6 @@ import { withRouter } from 'react-router';
 import { deleteBlog } from '../../../actions/blog_actions';
 
 import EditSVG from 'react-icons/lib/fa/edit';
-import TrashSVG from 'react-icons/lib/fa/trash';
 import DeleteBlogButton from './delete_blog_button';
 
 class BlogLinkActions extends React.Component {
@@ -42,11 +41,6 @@ class BlogLinkActions extends React.Component {
         );
     }
 }
-// <button id='blog-link-action' className='btn' onClick={ this.handleDelete }>
-//     <TrashSVG id='blog-link-svg' className='transition-2s-ease-in' size={24}/>
-// </button>
-
-// <DeleteBlogButton isActive={ this.state.isDeleteButtonActive } handleDelete={ this.handleDelete }/>
 
 const mapDispatchToProps = dispatch => ({
     deleteBlog: id => dispatch(deleteBlog(id))

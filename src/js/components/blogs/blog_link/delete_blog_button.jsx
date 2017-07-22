@@ -1,5 +1,4 @@
 import React from 'react';
-var Loader = require('react-loaders').Loader;
 import TrashSVG from 'react-icons/lib/fa/trash';
 
 const DeleteBlogButton = ({ isActive, handleDelete }) => {

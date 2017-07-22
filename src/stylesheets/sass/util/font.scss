@@ -41,6 +41,10 @@
     color: #00ab6c;
 }
 
+.primary-green {
+    color: #43bd7e;
+}
+
 .green {
     color: #0be370;
 }
@@ -88,4 +92,8 @@
 
 .bold-hover:hover {
     font-weight: 400;
+}
+
+.underline-hover:hover {
+    text-decoration: underline;
 }

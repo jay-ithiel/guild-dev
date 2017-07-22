@@ -57,22 +57,25 @@ class Blogs extends React.Component {
         }
 
         let blogLinks = this.mapBlogLinks();
+        let blogsHead = this.state.isUserBlogs ? 'Your Blogs' : 'Recent Blogs';
 
         return blogLinks.length === 0 ? (
             <ul id='blogs' className='border-box-sizing'>
-                <h4 className='blogs-section-head'>
-                    No blogs have been written yet. Be the first to write one!
-                </h4>
+                {
+                    this.state.isUserBlogs ? (
+                        <h4 className='blogs-section-head'>
+                            { `You haven't written any blogs yet.` } <a className='primary-green underline-hover' href='/blogs/new'>Write a blog!</a>
+                        </h4>
+                    ) : (
+                        <h4 className='blogs-section-head'>
+                            No blogs have been written yet. Be the first to <a className='primary-green underline-hover' href='blogs/new'>write a blog!</a>
+                        </h4>
+                    )
+                }
             </ul>
         ) : (
             <ul id='blogs' className='border-box-sizing'>
-                {
-                    this.state.isUserBlogs ? (
-                        <h4 className='blogs-section-head'>Your Blogs</h4>
-                    ) : (
-                        <h4 className='blogs-section-head'>Recent Blogs</h4>
-                    )
-                }
+                <h4 className='blogs-section-head'>{ blogsHead }</h4>
                 { blogLinks }
             </ul>
         )
