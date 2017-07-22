@@ -36,7 +36,7 @@ class BlogForm extends React.Component {
         this.setBlogToEdit(nextProps);
     }
 
-    setBlogToEdit(nextProps = this.props.blogs) {
+    setBlogToEdit(nextProps = this.props) {
         if (this.state.id === null && this.actionType === 'Update') {
             let blog = nextProps.blogs[
                 parseInt( this.props.history.location.pathname.substring(12) )
@@ -118,8 +118,6 @@ class BlogForm extends React.Component {
             );
         }
 
-        debugger;
-        
         this.props.blogs[blog.id] = blog;
         this.props.saveBlogs(this.props.blogs);
         this.setState({ isSubmitButtonActive: false });
