@@ -50033,6 +50033,11 @@ var BlogForm = function (_React$Component) {
             return hasErrors;
         }
     }, {
+        key: 'handleMissingUserInfo',
+        value: function handleMissingUserInfo() {
+            // This function will set the blog.authorId and blog.authorImageUrl if the user hasn't bought a Blockstack username or set their profile image yet
+        }
+    }, {
         key: 'processForm',
         value: function processForm() {
             var blog = this.state;
@@ -51661,7 +51666,7 @@ var saveBlogs = exports.saveBlogs = function saveBlogs(blogs, dispatch) {
 
 var fetchBlogs = exports.fetchBlogs = function fetchBlogs(dispatch) {
     var blogs = {},
-        blogIndex;
+        blogIndex = 0;
 
     (0, _blockstack.getFile)(STORAGE_FILE).then(function (blogItems) {
         blogItems = JSON.parse(blogItems || '[]');
@@ -51698,7 +51703,6 @@ var deleteBlog = exports.deleteBlog = function deleteBlog(targetId, dispatch) {
 
     (0, _blockstack.getFile)(STORAGE_FILE).then(function (blogItems) {
         blogItems = JSON.parse(blogItems || '[]');
-
         Object.keys(blogItems).forEach(function (id) {
             if ((0, _helper_methods.isBlogAuthor)(blogItems[id], user) && !(0, _helper_methods.isBlogToDelete)(id, targetId)) {
                 userBlogs[id] = blogItems[id];

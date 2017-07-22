@@ -14,7 +14,7 @@ export const saveBlogs = (blogs, dispatch) => {
 }
 
 export const fetchBlogs = dispatch => {
-    var blogs = {}, blogIndex;
+    var blogs = {}, blogIndex = 0;
 
     getFile(STORAGE_FILE).then(blogItems => {
         blogItems = JSON.parse(blogItems || '[]');
@@ -50,7 +50,6 @@ export const deleteBlog = (targetId, dispatch) => {
 
     getFile(STORAGE_FILE).then(blogItems => {
         blogItems = JSON.parse(blogItems || '[]');
-
         Object.keys(blogItems).forEach(id => {
             if (isBlogAuthor(blogItems[id], user) && !isBlogToDelete(id, targetId)) {
                 userBlogs[id] = blogItems[id];

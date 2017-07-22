@@ -98,6 +98,10 @@ class BlogForm extends React.Component {
         return hasErrors;
     }
 
+    handleMissingUserInfo() {
+        // This function will set the blog.authorId and blog.authorImageUrl if the user hasn't bought a Blockstack username or set their profile image yet
+    }
+
     processForm() {
         let blog = this.state;
         if (this.actionType === 'Publish') {
