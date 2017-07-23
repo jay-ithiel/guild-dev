@@ -107,8 +107,11 @@ class BlogForm extends React.Component {
         if (this.actionType === 'Publish') {
             this.state.id = this.props.blogIndex + 1;
 
+            debugger;
             if (this.props.currentUser.profile.image) {
                 this.state.authorImageUrl = this.props.currentUser.profile.image[0].contentUrl;
+            } else {
+                this.state.authorImageUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1482131647/person-solid_telh7f.png';
             }
 
             blog = new Blog(

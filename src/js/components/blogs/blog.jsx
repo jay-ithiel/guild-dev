@@ -49,7 +49,7 @@ class Blog extends React.Component {
                     </p>
 
                     <div className='blog-show-section'>
-                        <AboutUser />
+                        <AboutUser isAboutCurrentUser={false} authorName={ blog.authorId } authorImageUrl={ blog.authorImageUrl }/>
                     </div>
 
                     {/* <CommentForm /> */}

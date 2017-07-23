@@ -4,17 +4,27 @@ import { connect } from 'react-redux';
 import UserSVG from 'react-icons/lib/fa/user';
 
 const AboutUser = props => {
-    const user = props.currentUser;
+    let currentUser = props.currentUser.profile;
+    const user = props.isAboutCurrentUser ? {
+        name: `${currentUser.givenName} ${currentUser.familyName}`,
+        imageUrl: currentUser.image ? currentUser.image[0].contentUrl : ''
+    } : {
+        name: props.authorName,
+        imageUrl: props.authorImageUrl
+    };
 
     return !user ? <div></div> : (
         <div id='about-user' className='flex'>
             <div>
-                <div id='about-user-img'></div>
+                <div id='about-user-img'
+                    style={{ backgroundImage: `url(${user.imageUrl})` }}>
+                </div>
             </div>
 
             <div>
                 <h4 id='about-user-name'>
-                    {/* { user.profile.givenName } { user.profile.familyName } */}
+                    {/* { user.givenName } { user.familyName } */}
+                    {/* user.name */}
                     Lorem Ipsum
                 </h4>
                 <p id='about-user-bio'>
