@@ -17,9 +17,16 @@ class Blogs extends React.Component {
         };
 
         this.mapBlogLinks = this.mapBlogLinks.bind(this);
+        this.requestBlogs = this.requestBlogs.bind(this);
     }
 
     componentDidMount() {
+        // If there is no currentUser, user hasn't logged in yet so don't fetch blogs
+        if (!this.props.currentUser) { return; }
+        this.requestBlogs();
+    }
+
+    requestBlogs() {
         if (this.state.isUserBlogs) {
             this.props.requestUserBlogs(this.props.currentUser);
         } else {
@@ -28,6 +35,7 @@ class Blogs extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        if (!this.state.blogs) { this.requestBlogs(); }
         if (this.state.isUserBlogs) {
             this.setState({ blogs: nextProps.userBlogs });
         } else {
