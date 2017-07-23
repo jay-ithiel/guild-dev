@@ -25,7 +25,7 @@ class Blogs extends React.Component {
         if (!this.props.currentUser) { return; }
         this.requestBlogs();
     }
-
+    
     requestBlogs() {
         if (this.state.isUserBlogs) {
             this.props.requestUserBlogs(this.props.currentUser);

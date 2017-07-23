@@ -18,6 +18,10 @@ class BlogLinkActions extends React.Component {
         this.handleDelete = this.handleDelete.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({ isDeleteButtonActive: true });
+    }
+
     redirectToEdit(e) {
         e.stopPropagation();
         this.props.history.push(`/blogs/edit/${this.props.blog.id}`);

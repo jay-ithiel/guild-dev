@@ -1,5 +1,6 @@
 import React from 'react';
 import TrashSVG from 'react-icons/lib/fa/trash';
+var Loader = require('react-loaders').Loader;
 
 const DeleteBlogButton = ({ isActive, handleDelete }) => {
     return isActive ? (
@@ -12,5 +13,6 @@ const DeleteBlogButton = ({ isActive, handleDelete }) => {
         </button>
     )
 }
+
 
 export default DeleteBlogButton;
