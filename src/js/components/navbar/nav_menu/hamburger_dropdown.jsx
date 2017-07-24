@@ -11,7 +11,7 @@ const close = e => {
 
 const HamburgerDropdown = props => (
     <div id='hamburger-dropdown-container'>
-        <span onClick={ close } className='modal no-desktop close-modal'>x</span>
+        <span onClick={ close } className='modal no-desktop close-modal menu-modal'>x</span>
 
         <ul id='hamburger-dropdown'>
             <li onClick={ close }>

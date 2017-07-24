@@ -3,15 +3,18 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { deleteBlog } from '../../../actions/blog_actions';
 
+import TrashSVG from 'react-icons/lib/fa/trash';
 import EditSVG from 'react-icons/lib/fa/edit';
 import DeleteBlogButton from './delete_blog_button';
+import DeleteBlogModal from './delete_blog_modal';
 
 class BlogLinkActions extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            isDeleteButtonActive: true
+            isDeleteButtonActive: true,
+            modalActiveState: false
         };
 
         this.redirectToEdit = this.redirectToEdit.bind(this);
@@ -20,6 +23,7 @@ class BlogLinkActions extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({ isDeleteButtonActive: true });
+        $('#blog-delete-modal').fadeOut();
     }
 
     redirectToEdit(e) {
@@ -33,6 +37,10 @@ class BlogLinkActions extends React.Component {
         this.setState({ isDeleteButtonActive: false });
     }
 
+    showModal() {
+        $('#blog-delete-modal').fadeIn();
+    }
+
     render() {
         return !this.props.isUserBlogs ? <div></div> : (
             <div id='blog-link-actions' className='flex-between align-center'>
@@ -40,7 +48,11 @@ class BlogLinkActions extends React.Component {
                     <EditSVG id='blog-link-svg' className='transition-2s-ease-in' size={24}/>
                 </button>
 
-                <DeleteBlogButton isActive={ this.state.isDeleteButtonActive } handleDelete={ this.handleDelete }/>
+                <button id='blog-link-action' className='btn' onClick={ this.showModal.bind(this) }>
+                    <TrashSVG id='blog-link-svg' className='transition-2s-ease-in' size={24}/>
+                </button>
+
+                <DeleteBlogModal handleDelete={ this.handleDelete } isDeleteButtonActive={ this.state.isDeleteButtonActive }/>
             </div>
         );
     }
