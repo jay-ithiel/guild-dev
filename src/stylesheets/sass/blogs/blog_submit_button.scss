@@ -1,11 +1,13 @@
-$primary-color: #43bd7e;
+$primary-color: #fff;
 @import '../loaders.css/src/animations/ball-clip-rotate.scss';
+// @import '../loaders.css/src/animations/ball-pulse.scss';
 
 .loader-hidden {
   display: none;
 }
 .loader-active {
   display: block;
+  height: 100%;
 }
 
 #blog-submit {
@@ -30,7 +32,7 @@ $primary-color: #43bd7e;
 }
 
 .blog-submit-inactive {
-    border: 1px solid #aaa !important;
+    border: 1px solid #ccc !important;
     color: $primary-color !important;
-    background-color: #eee !important;
+    background-color: #ccc !important;
 }
