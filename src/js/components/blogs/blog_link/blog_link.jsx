@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { parseDateTime, characterLimit } from '../../../util/helper_methods.js';
+
 import BlogLinkActions from './blog_link_actions';
 import AboutBlog from './about_blog';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import TrashSVG from 'react-icons/lib/fa/trash';
 var Loader = require('react-loaders').Loader;
 
 const DeleteBlogButton = ({ isActive, handleDelete }) => {
@@ -8,7 +9,7 @@ const DeleteBlogButton = ({ isActive, handleDelete }) => {
         </button>
     ) : (
         <button id='blog-link-action' className='btn'>
-            <Loader type="ball-clip-rotate" active/>
+            <TrashSVG id='blog-link-svg' className='transition-2s-ease-in inactive lightgrey-important' size={24}/>
         </button>
     )
 }

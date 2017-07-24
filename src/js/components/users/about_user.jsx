@@ -1,24 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import UserSVG from 'react-icons/lib/fa/user';
 
 const AboutUser = props => {
-    const user = props.currentUser;
+    let currentUser = props.currentUser.profile;
+    const user = props.isAboutCurrentUser ? {
+        name: `${currentUser.givenName} ${currentUser.familyName}`,
+        imageUrl: currentUser.image ? currentUser.image[0].contentUrl : ''
+    } : {
+        name: props.authorName,
+        imageUrl: props.authorImageUrl
+    };
 
     return !user ? <div></div> : (
         <div id='about-user' className='flex'>
             <div>
-                <div id='about-user-img'>
-                    <UserSVG size={ 90 }/>
+                <div id='about-user-img'
+                    style={{ backgroundImage: `url(${user.imageUrl})` }}>
                 </div>
-                <h4 id='about-user-name'>
-                    { user.profile.givenName } { user.profile.familyName }
-                </h4>
             </div>
 
             <div>
+                <h4 id='about-user-name'>
+                    {/* { user.givenName } { user.familyName } */}
+                    {/* user.name */}
+                    Lorem Ipsum
+                </h4>
                 <p id='about-user-bio'>
-                    Hello World! This is the user's intro/bio. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </p>
             </div>
         </div>

@@ -36,7 +36,7 @@ class BlogForm extends React.Component {
         this.setBlogToEdit(nextProps);
     }
 
-    setBlogToEdit(nextProps = this.props.blogs) {
+    setBlogToEdit(nextProps = this.props) {
         if (this.state.id === null && this.actionType === 'Update') {
             let blog = nextProps.blogs[
                 parseInt( this.props.history.location.pathname.substring(12) )
@@ -98,6 +98,10 @@ class BlogForm extends React.Component {
         return hasErrors;
     }
 
+    handleMissingUserInfo() {
+        // This function will set the blog.authorId and blog.authorImageUrl if the user hasn't bought a Blockstack username or set their profile image yet
+    }
+
     processForm() {
         let blog = this.state;
         if (this.actionType === 'Publish') {
@@ -105,6 +109,8 @@ class BlogForm extends React.Component {
 
             if (this.props.currentUser.profile.image) {
                 this.state.authorImageUrl = this.props.currentUser.profile.image[0].contentUrl;
+            } else {
+                this.state.authorImageUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1482131647/person-solid_telh7f.png';
             }
 
             blog = new Blog(
@@ -118,8 +124,6 @@ class BlogForm extends React.Component {
             );
         }
 
-        debugger;
-        
         this.props.blogs[blog.id] = blog;
         this.props.saveBlogs(this.props.blogs);
         this.setState({ isSubmitButtonActive: false });

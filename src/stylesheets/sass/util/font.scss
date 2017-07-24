@@ -9,6 +9,13 @@
     letter-spacing: 1px;
 }
 
+.regular {
+    font-size: 15px;
+    font-weight: 100;
+    line-height: 19px;
+    letter-spacing: 1px;
+}
+
 .text-align-center {
     text-align: center;
 }
@@ -41,6 +48,10 @@
     color: #00ab6c;
 }
 
+.primary-green {
+    color: #43bd7e;
+}
+
 .green {
     color: #0be370;
 }
@@ -55,6 +66,10 @@
 
 .lightgrey {
     color: lightgrey;
+}
+
+.lightgrey-important {
+    color: lightgrey !important;
 }
 
 .grey {
@@ -84,4 +99,8 @@
 
 .bold-hover:hover {
     font-weight: 400;
+}
+
+.underline-hover:hover {
+    text-decoration: underline;
 }

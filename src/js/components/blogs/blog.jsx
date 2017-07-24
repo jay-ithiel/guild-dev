@@ -17,12 +17,10 @@ class Blog extends React.Component {
     }
 
     componentDidMount() {
-        console.log(`blog.jsx: setting this.state.blog in componentDidMount`);
         this.setBlog();
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(`blog.jsx: setting this.state.blog in componentWilReceiveProps`);
         this.setBlog(nextProps);
     }
 
@@ -42,14 +40,16 @@ class Blog extends React.Component {
                         { blog.title }
                     </h3>
 
-                    <img id='blog-img' alt='Blog Image' className='blog-show-section' src={ blog.imageUrl } />
+                    <div id='blog-img' className='blog-show-section'
+                        style={{ backgroundImage: `url(${blog.imageUrl})` }}>
+                    </div>
 
                     <p id='blog-body' className='blog-show-section'>
                         { blog.body }
                     </p>
 
                     <div className='blog-show-section'>
-                        <AboutUser />
+                        <AboutUser isAboutCurrentUser={false} authorName={ blog.authorId } authorImageUrl={ blog.authorImageUrl }/>
                     </div>
 
                     {/* <CommentForm /> */}

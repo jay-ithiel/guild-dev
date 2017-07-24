@@ -7,3 +7,11 @@ export const parseDateTime = dateTimeString => {
 export const characterLimit = string => {
     return string.substring(0, 50);
 };
+
+export const isBlogAuthor = (blog, user) => {
+    return blog.authorId === user.username;
+};
+
+export const isBlogToDelete = (id, targetId) => {
+    return parseInt(id) === targetId;
+}

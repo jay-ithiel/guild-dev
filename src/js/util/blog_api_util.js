@@ -1,23 +1,20 @@
-import { getFile, putFile } from 'blockstack';
-
+import { getFile, putFile, loadUserData } from 'blockstack';
+import { isBlogAuthor, isBlogToDelete } from './helper_methods';
 import {
-    RECEIVE_BLOG,
-    RECEIVE_BLOGS,
-    RECEIVE_USER_BLOGS
+    receiveBlogs,
+    receiveUserBlogs
 } from '../actions/blog_actions';
 
 var STORAGE_FILE = 'blogs.json';
 
 export const saveBlogs = (blogs, dispatch) => {
     putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
-        if (isBlogSaved) {
-            window.location = window.location.origin;
-        }
+        if (isBlogSaved) { window.location = '/blogs/user'; }
     });
 }
 
 export const fetchBlogs = dispatch => {
-    var blogs = {}, blogIndex;
+    var blogs = {}, blogIndex = 0;
 
     getFile(STORAGE_FILE).then(blogItems => {
         blogItems = JSON.parse(blogItems || '[]');
@@ -28,11 +25,7 @@ export const fetchBlogs = dispatch => {
             blogIndex = index+1;
         });
 
-        dispatch({
-            type: RECEIVE_BLOGS,
-            blogs,
-            blogIndex
-        });
+        dispatch(receiveBlogs(blogs, blogIndex));
     });
 };
 
@@ -43,40 +36,29 @@ export const fetchUserBlogs = (user, dispatch) => {
         blogItems = JSON.parse(blogItems || '[]');
 
         Object.keys(blogItems).forEach(id => {
-            if (blogItems[id].authorId === user.username) {
+            if (isBlogAuthor(blogItems[id], user)) {
                 userBlogs[id] = blogItems[id];
             }
         });
 
-        dispatch({
-            type: RECEIVE_USER_BLOGS,
-            userBlogs
-        });
+        dispatch(receiveUserBlogs(userBlogs));
     });
 };
 
-export const deleteBlog = (id, dispatch) => {
-    var blogs = {}, blogIndex;
+export const deleteBlog = (targetId, dispatch) => {
+    var userBlogs = {}, user = loadUserData();
 
     getFile(STORAGE_FILE).then(blogItems => {
         blogItems = JSON.parse(blogItems || '[]');
-
-        Object.keys(blogItems).forEach((blogId, index) => {
-            if (parseInt(blogId) !== id) {
-                blogs[blogId] = blogItems[blogId];
+        Object.keys(blogItems).forEach(id => {
+            if (isBlogAuthor(blogItems[id], user) && !isBlogToDelete(id, targetId)) {
+                userBlogs[id] = blogItems[id];
             }
         });
 
-        blogIndex = Object.keys(blogs).length;
-
-        putFile(STORAGE_FILE, JSON.stringify(blogs)).then(isBlogSaved => {
+        putFile(STORAGE_FILE, JSON.stringify(userBlogs)).then(isBlogSaved => {
             if (isBlogSaved) {
-                // Should dispatch BLOG_DELETED action
-                dispatch({
-                    type: RECEIVE_BLOGS,
-                    blogs,
-                    blogIndex
-                });
+                dispatch(receiveUserBlogs(userBlogs));
             }
         });
     });

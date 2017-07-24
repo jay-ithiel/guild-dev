@@ -17,9 +17,16 @@ class Blogs extends React.Component {
         };
 
         this.mapBlogLinks = this.mapBlogLinks.bind(this);
+        this.requestBlogs = this.requestBlogs.bind(this);
     }
 
     componentDidMount() {
+        // If there is no currentUser, user hasn't logged in yet so don't fetch blogs
+        if (!this.props.currentUser) { return; }
+        this.requestBlogs();
+    }
+    
+    requestBlogs() {
         if (this.state.isUserBlogs) {
             this.props.requestUserBlogs(this.props.currentUser);
         } else {
@@ -28,6 +35,7 @@ class Blogs extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        if (!this.state.blogs) { this.requestBlogs(); }
         if (this.state.isUserBlogs) {
             this.setState({ blogs: nextProps.userBlogs });
         } else {
@@ -57,22 +65,25 @@ class Blogs extends React.Component {
         }
 
         let blogLinks = this.mapBlogLinks();
+        let blogsHead = this.state.isUserBlogs ? 'Your Blogs' : 'Recent Blogs';
 
         return blogLinks.length === 0 ? (
             <ul id='blogs' className='border-box-sizing'>
-                <h4 className='blogs-section-head'>
-                    No blogs have been written yet. Be the first to write one!
-                </h4>
+                {
+                    this.state.isUserBlogs ? (
+                        <h4 className='blogs-section-head'>
+                            { `You haven't written any blogs yet.` } <a className='primary-green underline-hover' href='/blogs/new'>Write a blog!</a>
+                        </h4>
+                    ) : (
+                        <h4 className='blogs-section-head'>
+                            No blogs have been written yet. Be the first to <a className='primary-green underline-hover' href='blogs/new'>write a blog!</a>
+                        </h4>
+                    )
+                }
             </ul>
         ) : (
             <ul id='blogs' className='border-box-sizing'>
-                {
-                    this.state.isUserBlogs ? (
-                        <h4 className='blogs-section-head'>Your Blogs</h4>
-                    ) : (
-                        <h4 className='blogs-section-head'>Recent Blogs</h4>
-                    )
-                }
+                <h4 className='blogs-section-head'>{ blogsHead }</h4>
                 { blogLinks }
             </ul>
         )

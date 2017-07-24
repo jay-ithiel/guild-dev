@@ -11,16 +11,20 @@ const close = e => {
 
 const HamburgerDropdown = props => (
     <div id='hamburger-dropdown-container'>
-        <span onClick={ close } className='modal no-desktop close-modal'>x</span>
+        <span onClick={ close } className='modal no-desktop close-modal menu-modal'>x</span>
 
         <ul id='hamburger-dropdown'>
             <li onClick={ close }>
-                <Link className='full flex align-center' to={`/blogs/user`}>My Blogs</Link>
+                <Link className='full flex align-center' to={`/blogs/user`}>
+                    My Blogs
+                </Link>
             </li>
 
             {/*
                 <li onClick={ close }>
-                    <Link to={`/users/${props.currentUser.username}`}>Profile</Link>
+                    <Link className='full flex align-center' to={`/users/${props.currentUser.username}`}>
+                        Profile
+                    </Link>
                 </li>
             */}
 
