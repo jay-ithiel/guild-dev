@@ -22,8 +22,8 @@ class BlogLinkActions extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        this.hideModal();
         this.setState({ isDeleteButtonActive: true });
-        $('#blog-delete-modal').fadeOut();
     }
 
     redirectToEdit(e) {
@@ -41,6 +41,10 @@ class BlogLinkActions extends React.Component {
         $('#blog-delete-modal').fadeIn();
     }
 
+    hideModal() {
+        $('#blog-delete-modal').fadeOut();
+    }
+
     render() {
         return !this.props.isUserBlogs ? <div></div> : (
             <div id='blog-link-actions' className='flex-between align-center'>
@@ -52,7 +56,10 @@ class BlogLinkActions extends React.Component {
                     <TrashSVG id='blog-link-svg' className='transition-2s-ease-in' size={24}/>
                 </button>
 
-                <DeleteBlogModal handleDelete={ this.handleDelete } isDeleteButtonActive={ this.state.isDeleteButtonActive }/>
+                <DeleteBlogModal
+                    handleDelete={ this.handleDelete }
+                    isDeleteButtonActive={ this.state.isDeleteButtonActive }
+                    hideModal={ this.hideModal }/>
             </div>
         );
     }

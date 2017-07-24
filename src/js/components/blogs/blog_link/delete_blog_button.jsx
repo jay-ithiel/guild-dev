@@ -14,5 +14,4 @@ const DeleteBlogButton = ({ isActive, handleDelete }) => {
     )
 }
 
-
 export default DeleteBlogButton;

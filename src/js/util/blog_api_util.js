@@ -47,8 +47,7 @@ export const fetchUserBlogs = (user, dispatch) => {
 
 export const deleteBlog = (targetId, dispatch) => {
     var userBlogs = {}, user = loadUserData();
-// console.log('returning early to stop blog delete');
-// return;
+
     getFile(STORAGE_FILE).then(blogItems => {
         blogItems = JSON.parse(blogItems || '[]');
         Object.keys(blogItems).forEach(id => {

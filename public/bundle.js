@@ -50497,8 +50497,8 @@ var BlogLinkActions = function (_React$Component) {
     _createClass(BlogLinkActions, [{
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
+            this.hideModal();
             this.setState({ isDeleteButtonActive: true });
-            $('#blog-delete-modal').fadeOut();
         }
     }, {
         key: 'redirectToEdit',
@@ -50519,6 +50519,11 @@ var BlogLinkActions = function (_React$Component) {
             $('#blog-delete-modal').fadeIn();
         }
     }, {
+        key: 'hideModal',
+        value: function hideModal() {
+            $('#blog-delete-modal').fadeOut();
+        }
+    }, {
         key: 'render',
         value: function render() {
             return !this.props.isUserBlogs ? _react2.default.createElement('div', null) : _react2.default.createElement(
@@ -50534,7 +50539,10 @@ var BlogLinkActions = function (_React$Component) {
                     { id: 'blog-link-action', className: 'btn', onClick: this.showModal.bind(this) },
                     _react2.default.createElement(_trash2.default, { id: 'blog-link-svg', className: 'transition-2s-ease-in', size: 24 })
                 ),
-                _react2.default.createElement(_delete_blog_modal2.default, { handleDelete: this.handleDelete, isDeleteButtonActive: this.state.isDeleteButtonActive })
+                _react2.default.createElement(_delete_blog_modal2.default, {
+                    handleDelete: this.handleDelete,
+                    isDeleteButtonActive: this.state.isDeleteButtonActive,
+                    hideModal: this.hideModal })
             );
         }
     }]);
@@ -51771,8 +51779,7 @@ var fetchUserBlogs = exports.fetchUserBlogs = function fetchUserBlogs(user, disp
 var deleteBlog = exports.deleteBlog = function deleteBlog(targetId, dispatch) {
     var userBlogs = {},
         user = (0, _blockstack.loadUserData)();
-    // console.log('returning early to stop blog delete');
-    // return;
+
     (0, _blockstack.getFile)(STORAGE_FILE).then(function (blogItems) {
         blogItems = JSON.parse(blogItems || '[]');
         Object.keys(blogItems).forEach(function (id) {
@@ -100035,93 +100042,68 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var Loader = __webpack_require__(155).Loader;
 
-var DeleteBlogModal = function (_React$Component) {
-    _inherits(DeleteBlogModal, _React$Component);
-
-    function DeleteBlogModal(props) {
-        _classCallCheck(this, DeleteBlogModal);
-
-        return _possibleConstructorReturn(this, (DeleteBlogModal.__proto__ || Object.getPrototypeOf(DeleteBlogModal)).call(this, props));
-    }
-
-    _createClass(DeleteBlogModal, [{
-        key: 'hideModal',
-        value: function hideModal() {
-            $('#blog-delete-modal').fadeOut();
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'section',
-                { id: 'blog-delete-modal', className: 'modal' },
-                _react2.default.createElement(
+var DeleteBlogModal = function DeleteBlogModal(_ref) {
+    var isDeleteButtonActive = _ref.isDeleteButtonActive,
+        handleDelete = _ref.handleDelete,
+        hideModal = _ref.hideModal;
+    return _react2.default.createElement(
+        'section',
+        { id: 'blog-delete-modal', className: 'modal' },
+        _react2.default.createElement(
+            'div',
+            { className: 'full flex-center' },
+            _react2.default.createElement(
+                'div',
+                { id: 'blog-delete-modal-content', className: 'position-relative' },
+                isDeleteButtonActive ? _react2.default.createElement(
                     'div',
-                    { className: 'full flex-center' },
+                    null,
+                    _react2.default.createElement(
+                        'p',
+                        { onClick: hideModal, className: 'close-modal' },
+                        'x'
+                    ),
+                    _react2.default.createElement(
+                        'h4',
+                        { className: 'regular margin-bottom-15' },
+                        'Deleting a blog is permanent. Are you sure you want to delete the blog?'
+                    ),
                     _react2.default.createElement(
                         'div',
-                        { id: 'blog-delete-modal-content', className: 'position-relative' },
-                        this.props.isDeleteButtonActive ? _react2.default.createElement(
-                            'div',
-                            null,
-                            _react2.default.createElement(
-                                'p',
-                                { onClick: this.hideModal, className: 'close-modal' },
-                                'x'
-                            ),
-                            _react2.default.createElement(
-                                'h4',
-                                { className: 'regular margin-bottom-15' },
-                                'Deleting a blog is permanent. Are you sure you want to delete the blog?'
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'flex-between full-width flex-wrap' },
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.props.handleDelete, className: 'btn option-btn confirm-btn regular' },
-                                    'Delete'
-                                ),
-                                _react2.default.createElement(
-                                    'button',
-                                    { onClick: this.hideModal, className: 'btn option-btn cancel-btn regular' },
-                                    'Cancel'
-                                )
-                            )
-                        ) : _react2.default.createElement(
-                            'div',
-                            { className: 'fucker' },
-                            _react2.default.createElement(
-                                'p',
-                                { className: 'regular margin-bottom-40' },
-                                'Deleting. Please wait...'
-                            ),
-                            _react2.default.createElement(Loader, { type: 'ball-rotate', active: true })
+                        { className: 'flex-between full-width flex-wrap' },
+                        _react2.default.createElement(
+                            'button',
+                            { onClick: handleDelete, className: 'btn option-btn confirm-btn regular' },
+                            'Delete'
+                        ),
+                        _react2.default.createElement(
+                            'button',
+                            { onClick: hideModal, className: 'btn option-btn cancel-btn regular' },
+                            'Cancel'
                         )
                     )
+                ) : _react2.default.createElement(
+                    'div',
+                    { className: 'fucker' },
+                    _react2.default.createElement(
+                        'p',
+                        { className: 'regular margin-bottom-40' },
+                        'Deleting. Please wait...'
+                    ),
+                    _react2.default.createElement(Loader, { type: 'ball-rotate', active: true })
                 )
-            );
-        }
-    }]);
-
-    return DeleteBlogModal;
-}(_react2.default.Component);
+            )
+        )
+    );
+};
 
 exports.default = DeleteBlogModal;
 
