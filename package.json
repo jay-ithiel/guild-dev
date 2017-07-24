@@ -33,6 +33,7 @@
   "dependencies": {
     "blockstack": "^0.9.1",
     "css-loader": "^0.28.4",
+    "dotenv": "^4.0.0",
     "history": "^4.6.3",
     "loaders.css": "^0.1.2",
     "lodash": "^4.17.4",
