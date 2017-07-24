@@ -25,7 +25,7 @@ class Blogs extends React.Component {
         if (!this.props.currentUser) { return; }
         this.requestBlogs();
     }
-    
+
     requestBlogs() {
         if (this.state.isUserBlogs) {
             this.props.requestUserBlogs(this.props.currentUser);
@@ -59,7 +59,7 @@ class Blogs extends React.Component {
         if (this.state.blogs === null) {
             return (
                 <ul id='blogs' className='border-box-sizing flex-center'>
-                    <Loader type="ball-clip-rotate" id='blogs-loader' active/>
+                    <Loader type="ball-scale-ripple" id='blogs-loader' active/>
                 </ul>
             );
         }
