@@ -49575,7 +49575,7 @@ PEMEncoder.prototype.encode = function encode(data, options) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(process) {
 
 var _react = __webpack_require__(4);
 
@@ -49599,7 +49599,14 @@ var _session_actions = __webpack_require__(45);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+__webpack_require__(850);
+
 document.addEventListener('DOMContentLoaded', function (event) {
+    window.cloudinary_options = {
+        cloud_name: process.env['CLOUD_NAME'],
+        upload_preset: process.env['UPLOAD_PRESET']
+    };
+
     var root = document.getElementById('root');
     var store = (0, _store2.default)();
 
@@ -49617,6 +49624,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     // Allows easy access to store from chrome debugger. Remove before production
     window.store = store;
 });
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 366 */
@@ -49963,6 +49971,10 @@ var _submit_blog_button = __webpack_require__(371);
 
 var _submit_blog_button2 = _interopRequireDefault(_submit_blog_button);
 
+var _image_upload_button = __webpack_require__(851);
+
+var _image_upload_button2 = _interopRequireDefault(_image_upload_button);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -49996,6 +50008,7 @@ var BlogForm = function (_React$Component) {
         _this.actionType = props.history.location.pathname === '/blogs/new/' ? 'Publish' : 'Update';
         _this.setBlogToEdit = _this.setBlogToEdit.bind(_this);
         _this.hasErrors = _this.hasErrors.bind(_this);
+        _this.addImage = _this.addImage.bind(_this);
         _this.handleChange = _this.handleChange.bind(_this);
         return _this;
     }
@@ -50034,6 +50047,21 @@ var BlogForm = function (_React$Component) {
                     updatedAt: blog.updatedAt
                 });
             }
+        }
+    }, {
+        key: 'addImage',
+        value: function addImage(imageUrl) {
+            this.setState({ imageUrl: imageUrl });
+        }
+    }, {
+        key: 'showUploadButton',
+        value: function showUploadButton() {
+            $('.upload-img-btn').fadeIn();
+        }
+    }, {
+        key: 'hideUploadButton',
+        value: function hideUploadButton() {
+            $('.upload-img-btn').fadeOut();
         }
     }, {
         key: 'hasErrors',
@@ -50128,6 +50156,19 @@ var BlogForm = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var imageSection = [];
+
+            if (this.state.imageUrl.length === 0) {
+                imageSection.push(_react2.default.createElement(_image_upload_button2.default, { key: Math.random(), addImage: this.addImage }));
+            } else {
+                imageSection.push(_react2.default.createElement(
+                    'div',
+                    { className: 'update-bimg' },
+                    _react2.default.createElement('img', { key: Math.random(), className: 'blog-img fit-img', src: this.state.imageUrl }),
+                    _react2.default.createElement(_image_upload_button2.default, { key: Math.random(), addImage: this.addImage })
+                ));
+            }
+
             return _react2.default.createElement(
                 'div',
                 { id: 'blog-form-container' },
@@ -50198,7 +50239,10 @@ var BlogForm = function (_React$Component) {
                     ),
                     _react2.default.createElement(
                         'div',
-                        { id: 'add-img-btn', className: 'blog-input btn transition-2s-ease-in' },
+                        { id: 'add-img-btn', className: 'blog-input btn transition-2s-ease-in',
+                            onMouseLeave: this.hideUploadButton,
+                            onMouseEnter: this.showUploadButton },
+                        imageSection,
                         _react2.default.createElement(_camera2.default, { id: 'add-img-icon', size: 50 }),
                         _react2.default.createElement(
                             'h4',
@@ -100062,6 +100106,61 @@ function getZoneFileTemplate() {
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+/* 848 */,
+/* 849 */,
+/* 850 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+process.env['CLOUD_NAME'] = 'ddgtwtbre';
+process.env['UPLOAD_PRESET'] = 'k7gkxhh0';
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 851 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ImageUploadButton = function ImageUploadButton(props) {
+    var upload = function upload(e) {
+        e.preventDefault();
+        cloudinary.openUploadWidget(window.cloudinary_options, function (error, images) {
+            if (error) {
+                // Something went wrong
+            } else {
+                props.addImage(images[0].url);
+            }
+        });
+    };
+
+    return _react2.default.createElement(
+        'div',
+        { className: 'upload-img-btn-box' },
+        _react2.default.createElement(
+            'button',
+            { className: 'upload-img-btn display-none', onClick: upload },
+            'UPLOAD IMAGE'
+        )
+    );
+};
+
+exports.default = ImageUploadButton;
 
 /***/ })
 /******/ ]);

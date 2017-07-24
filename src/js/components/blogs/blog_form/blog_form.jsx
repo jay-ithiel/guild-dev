@@ -4,6 +4,7 @@ import { isUserSignedIn } from 'blockstack';
 import Camera from 'react-icons/lib/fa/camera';
 import Blog from '../../../../models/blog.ts';
 import SubmitBlogButton from './submit_blog_button';
+import ImageUploadButton from './image_upload_button';
 
 class BlogForm extends React.Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class BlogForm extends React.Component {
         this.actionType = props.history.location.pathname === '/blogs/new/' ? 'Publish' : 'Update';
         this.setBlogToEdit = this.setBlogToEdit.bind(this);
         this.hasErrors = this.hasErrors.bind(this);
+        this.addImage = this.addImage.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -53,6 +55,18 @@ class BlogForm extends React.Component {
                 updatedAt: blog.updatedAt
             });
         }
+    }
+
+    addImage(imageUrl) {
+        this.setState({ imageUrl: imageUrl });
+    }
+
+    showUploadButton() {
+        $('.upload-img-btn').fadeIn();
+    }
+
+    hideUploadButton() {
+        $('.upload-img-btn').fadeOut();
     }
 
     hasErrors() {
@@ -147,6 +161,21 @@ class BlogForm extends React.Component {
     }
 
     render() {
+        let imageSection = [];
+
+        if (this.state.imageUrl.length === 0) {
+            imageSection.push(
+                <ImageUploadButton key={ Math.random() } addImage={ this.addImage }/>
+            );
+        } else {
+            imageSection.push(
+                <div className='update-bimg'>
+                    <img key={ Math.random() } className='blog-img fit-img' src={ this.state.imageUrl }/>
+                    <ImageUploadButton key={ Math.random() } addImage={ this.addImage }/>
+                </div>
+            );
+        }
+
         return (
             <div id='blog-form-container'>
                 <form id='blog-form' onSubmit={ this.handleSubmit.bind(this) }>
@@ -177,11 +206,11 @@ class BlogForm extends React.Component {
                         </span>
 
                         <textarea type='text'
-                        id='blog-body-input'
-                        className='blog-input black'
-                        onChange={ this.handleChange('body') }
-                        value={ this.state.body }
-                        placeholder='Write your blog here...'/>
+                            id='blog-body-input'
+                            className='blog-input black'
+                            onChange={ this.handleChange('body') }
+                            value={ this.state.body }
+                            placeholder='Write your blog here...'/>
                     </label>
 
                     <label id='blog-intro-label' className='blog-form-label position-relative' onClick={ this.toggleActiveLabel('intro') }>
@@ -201,7 +230,10 @@ class BlogForm extends React.Component {
                         maxLength='50'/>
                     </label>
 
-                    <div id='add-img-btn' className='blog-input btn transition-2s-ease-in'>
+                    <div id='add-img-btn' className='blog-input btn transition-2s-ease-in'
+                        onMouseLeave={ this.hideUploadButton }
+                        onMouseEnter={ this.showUploadButton }>
+                        { imageSection }
                         <Camera id='add-img-icon' size={50}/>
                         <h4 className='title-2'>Add Cover Photo</h4>
                     </div>
