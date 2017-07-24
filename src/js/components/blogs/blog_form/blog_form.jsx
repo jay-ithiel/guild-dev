@@ -61,14 +61,6 @@ class BlogForm extends React.Component {
         this.setState({ imageUrl: imageUrl });
     }
 
-    showUploadButton() {
-        $('.upload-img-btn').fadeIn();
-    }
-
-    hideUploadButton() {
-        $('.upload-img-btn').fadeOut();
-    }
-
     hasErrors() {
         // Refactor this function
         let hasErrors = false;
@@ -109,6 +101,12 @@ class BlogForm extends React.Component {
             this.state.imageUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1500153014/blog-default-img_d3ke0j.jpg';
         }
 
+        if (this.props.currentUser.profile.image) {
+            this.state.authorImageUrl = this.props.currentUser.profile.image[0].contentUrl;
+        } else {
+            this.state.authorImageUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1482131647/person-solid_telh7f.png';
+        }
+
         return hasErrors;
     }
 
@@ -120,25 +118,21 @@ class BlogForm extends React.Component {
         let blog = this.state;
         if (this.actionType === 'Publish') {
             this.state.id = this.props.blogIndex + 1;
+            blog = this.state;
 
-            if (this.props.currentUser.profile.image) {
-                this.state.authorImageUrl = this.props.currentUser.profile.image[0].contentUrl;
-            } else {
-                this.state.authorImageUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1482131647/person-solid_telh7f.png';
-            }
-
-            blog = new Blog(
-                this.state.id,
-                this.state.title,
-                this.state.blogIntro,
-                this.state.body,
-                this.state.imageUrl,
-                this.props.currentUser.username,
-                this.state.authorImageUrl
-            );
+            // blog = new Blog(
+            //     this.state.id,
+            //     this.state.title,
+            //     this.state.blogIntro,
+            //     this.state.body,
+            //     this.state.imageUrl,
+            //     this.props.currentUser.username,
+            //     this.state.authorImageUrl
+            // );
         }
 
         this.props.blogs[blog.id] = blog;
+        debugger;
         this.props.saveBlogs(this.props.blogs);
         this.setState({ isSubmitButtonActive: false });
     }
@@ -169,9 +163,11 @@ class BlogForm extends React.Component {
             );
         } else {
             imageSection.push(
-                <div className='update-bimg'>
-                    <img key={ Math.random() } className='blog-img fit-img' src={ this.state.imageUrl }/>
-                    <ImageUploadButton key={ Math.random() } addImage={ this.addImage }/>
+                <div>
+                    <div id='blog-uploaded-img' key={ Math.random() }
+                        style={{ backgroundImage: `url(${this.state.imageUrl})` }}>
+                    </div>
+                    <ImageUploadButton color={'white-important'} key={ Math.random() } addImage={ this.addImage }/>
                 </div>
             );
         }
@@ -230,13 +226,11 @@ class BlogForm extends React.Component {
                         maxLength='50'/>
                     </label>
 
-                    <div id='add-img-btn' className='blog-input btn transition-2s-ease-in'
-                        onMouseLeave={ this.hideUploadButton }
-                        onMouseEnter={ this.showUploadButton }>
+
+                    <div className='add-img-btn-box'>
                         { imageSection }
-                        <Camera id='add-img-icon' size={50}/>
-                        <h4 className='title-2'>Add Cover Photo</h4>
                     </div>
+
 
                     <SubmitBlogButton actionType={this.actionType} isActive={this.state.isSubmitButtonActive}/>
                 </form>

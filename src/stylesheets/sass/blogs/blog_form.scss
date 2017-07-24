@@ -53,14 +53,28 @@
     border-bottom: 1px solid #eee;
 }
 
-#add-img-btn {
+.add-img-btn-box {
     height: 120px;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#add-img-btn {
     color: #aaa;
+    height: 100%;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 #add-img-btn:hover {
@@ -70,6 +84,20 @@
 #add-img-icon {
     height: 50px;
     margin-bottom: 5px;
+}
+
+#blog-uploaded-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #eee;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .hidden-label {

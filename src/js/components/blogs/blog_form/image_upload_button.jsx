@@ -1,4 +1,5 @@
 import React from 'react';
+import Camera from 'react-icons/lib/fa/camera';
 
 const ImageUploadButton = props => {
     const upload = e => {
@@ -15,10 +16,9 @@ const ImageUploadButton = props => {
     };
 
     return (
-        <div className='upload-img-btn-box'>
-            <button className='upload-img-btn display-none' onClick={ upload }>
-                UPLOAD IMAGE
-            </button>
+        <div id='add-img-btn' className={`blog-input btn transition-2s-ease-in ${props.color}`} onClick={upload}>
+            <Camera id='add-img-icon' size={50}/>
+            <h4 className='title-2'>Add Cover Photo</h4>
         </div>
     );
 };
