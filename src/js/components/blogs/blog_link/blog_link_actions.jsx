@@ -5,7 +5,6 @@ import { deleteBlog } from '../../../actions/blog_actions';
 
 import TrashSVG from 'react-icons/lib/fa/trash';
 import EditSVG from 'react-icons/lib/fa/edit';
-import DeleteBlogButton from './delete_blog_button';
 import DeleteBlogModal from './delete_blog_modal';
 
 class BlogLinkActions extends React.Component {
