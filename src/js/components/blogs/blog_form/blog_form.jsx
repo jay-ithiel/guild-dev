@@ -96,11 +96,6 @@ class BlogForm extends React.Component {
             $('#blog-body-label').removeClass('outline-red');
         }
 
-
-        if (this.state.imageUrl.length <= 0) {
-            this.state.imageUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1500153014/blog-default-img_d3ke0j.jpg';
-        }
-
         if (this.props.currentUser.profile.image) {
             this.state.authorImageUrl = this.props.currentUser.profile.image[0].contentUrl;
         } else {
@@ -118,21 +113,20 @@ class BlogForm extends React.Component {
         let blog = this.state;
         if (this.actionType === 'Publish') {
             this.state.id = this.props.blogIndex + 1;
-            blog = this.state;
+            // blog = this.state;
 
-            // blog = new Blog(
-            //     this.state.id,
-            //     this.state.title,
-            //     this.state.blogIntro,
-            //     this.state.body,
-            //     this.state.imageUrl,
-            //     this.props.currentUser.username,
-            //     this.state.authorImageUrl
-            // );
+            blog = new Blog(
+                this.state.id,
+                this.state.title,
+                this.state.blogIntro,
+                this.state.body,
+                this.state.imageUrl,
+                this.props.currentUser.username,
+                this.state.authorImageUrl
+            );
         }
 
         this.props.blogs[blog.id] = blog;
-        debugger;
         this.props.saveBlogs(this.props.blogs);
         this.setState({ isSubmitButtonActive: false });
     }
