@@ -24,7 +24,6 @@ class CommentForm extends React.Component {
             this.state.blogId,
             this.state.authorId
         );
-        console.log('handleSubmit() should dispatch createComment action here');
         // dispatch createComment action
         // this.props.createComment(comment);
     }

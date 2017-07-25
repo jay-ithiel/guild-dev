@@ -50458,7 +50458,8 @@ var AboutBlog = function AboutBlog(_ref) {
     var authorId = _ref.authorId,
         _ref$authorImageUrl = _ref.authorImageUrl,
         authorImageUrl = _ref$authorImageUrl === undefined ? '' : _ref$authorImageUrl,
-        date = _ref.date;
+        date = _ref.date,
+        blog = _ref.blog;
     return _react2.default.createElement(
         'section',
         { id: 'about-blog' },
@@ -50476,6 +50477,11 @@ var AboutBlog = function AboutBlog(_ref) {
                 'span',
                 null,
                 date
+            ),
+            _react2.default.createElement(
+                'span',
+                null,
+                blog.title
             )
         )
     );
@@ -50523,7 +50529,8 @@ var BlogLink = function BlogLink(_ref) {
             { className: 'blog-link-info position-relative', to: '/blogs/' + blog.id },
             _react2.default.createElement(_about_blog2.default, { authorId: blog.authorId,
                 authorImageUrl: blog.authorImageUrl,
-                date: (0, _helper_methods.parseDateTime)(blog.updatedAt)
+                date: (0, _helper_methods.parseDateTime)(blog.updatedAt),
+                blog: blog
             }),
             blog.imageUrl.length === 0 ? _react2.default.createElement('div', null) : _react2.default.createElement('div', { className: 'blog-link-img-box',
                 style: { backgroundImage: 'url(' + blog.imageUrl + ')' } }),
@@ -50629,9 +50636,7 @@ var BlogLinkActions = function (_React$Component) {
             var _this2 = this;
 
             return function (e) {
-                debugger;
-                _this2.props.hello();
-                // this.props.deleteBlog(blog.id);
+                _this2.props.deleteBlog(blog.id);
                 _this2.setState({ isDeleteButtonActive: false });
             };
         }
@@ -50704,7 +50709,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Loader = __webpack_require__(155).Loader;
 
 var DeleteBlogModal = function DeleteBlogModal(_ref) {
-    var isDeleteButtonActive = _ref.isDeleteButtonActive,
+    var blog = _ref.blog,
+        isDeleteButtonActive = _ref.isDeleteButtonActive,
         handleDelete = _ref.handleDelete,
         hideModal = _ref.hideModal;
     return _react2.default.createElement(
@@ -50727,7 +50733,9 @@ var DeleteBlogModal = function DeleteBlogModal(_ref) {
                     _react2.default.createElement(
                         'h4',
                         { className: 'regular margin-bottom-15' },
-                        'Deleting a blog is permanent. Are you sure you want to delete the blog?'
+                        'Deleting a blog is permanent. Are you sure you want to delete the blog ',
+                        blog.title,
+                        '?'
                     ),
                     _react2.default.createElement(
                         'div',
@@ -50863,7 +50871,6 @@ var CommentForm = function (_React$Component) {
         value: function handleSubmit(e) {
             e.preventDefault();
             var comment = new _comment2.default(this.state.body, this.state.blogId, this.state.authorId);
-            console.log('handleSubmit() should dispatch createComment action here');
             // dispatch createComment action
             // this.props.createComment(comment);
         }

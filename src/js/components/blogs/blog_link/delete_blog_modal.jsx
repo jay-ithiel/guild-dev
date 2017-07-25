@@ -1,7 +1,7 @@
 import React from 'react';
 var Loader = require('react-loaders').Loader;
 
-const DeleteBlogModal = ({ isDeleteButtonActive, handleDelete, hideModal }) => (
+const DeleteBlogModal = ({ blog, isDeleteButtonActive, handleDelete, hideModal }) => (
     <section id='blog-delete-modal' className='modal'>
         <div className='full flex-center'>
             <div id='blog-delete-modal-content' className='position-relative'>
@@ -12,7 +12,7 @@ const DeleteBlogModal = ({ isDeleteButtonActive, handleDelete, hideModal }) => (
 
                             <h4 className='regular margin-bottom-15'>
                                 Deleting a blog is permanent.
-                                Are you sure you want to delete the blog?
+                                Are you sure you want to delete the blog {blog.title}?
                             </h4>
 
                             <div className='flex-between full-width flex-wrap'>

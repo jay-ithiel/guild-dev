@@ -32,9 +32,7 @@ class BlogLinkActions extends React.Component {
 
     handleDelete(blog) {
         return e => {
-            debugger;
-            this.props.hello();
-            // this.props.deleteBlog(blog.id);
+            this.props.deleteBlog(blog.id);
             this.setState({ isDeleteButtonActive: false });
         };
     }

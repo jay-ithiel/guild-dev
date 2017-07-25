@@ -11,6 +11,7 @@ const BlogLink = ({ blog, isUserBlogs }) => (
             <AboutBlog authorId={ blog.authorId }
                 authorImageUrl={ blog.authorImageUrl }
                 date={ parseDateTime(blog.updatedAt) }
+                blog={ blog }
             />
 
             {
