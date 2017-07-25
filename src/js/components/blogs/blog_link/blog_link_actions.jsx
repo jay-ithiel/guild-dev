@@ -5,7 +5,6 @@ import { deleteBlog } from '../../../actions/blog_actions';
 
 import TrashSVG from 'react-icons/lib/fa/trash';
 import EditSVG from 'react-icons/lib/fa/edit';
-import DeleteBlogButton from './delete_blog_button';
 import DeleteBlogModal from './delete_blog_modal';
 
 class BlogLinkActions extends React.Component {
@@ -31,10 +30,13 @@ class BlogLinkActions extends React.Component {
         this.props.history.push(`/blogs/edit/${this.props.blog.id}`);
     }
 
-    handleDelete(e) {
-        e.stopPropagation();
-        this.props.deleteBlog(this.props.blog.id);
-        this.setState({ isDeleteButtonActive: false });
+    handleDelete(blog) {
+        return e => {
+            debugger;
+            this.props.hello();
+            // this.props.deleteBlog(blog.id);
+            this.setState({ isDeleteButtonActive: false });
+        };
     }
 
     showModal() {
@@ -46,6 +48,7 @@ class BlogLinkActions extends React.Component {
     }
 
     render() {
+        // If it isn't the current user's blogs, don't render the blog link actions
         return !this.props.isUserBlogs ? <div></div> : (
             <div id='blog-link-actions' className='flex-between align-center'>
                 <button id='blog-link-action' className='btn margin-top-4' onClick={ this.redirectToEdit }>
@@ -57,6 +60,7 @@ class BlogLinkActions extends React.Component {
                 </button>
 
                 <DeleteBlogModal
+                    blog={ this.props.blog }
                     handleDelete={ this.handleDelete }
                     isDeleteButtonActive={ this.state.isDeleteButtonActive }
                     hideModal={ this.hideModal }/>

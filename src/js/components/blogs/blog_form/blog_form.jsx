@@ -4,6 +4,7 @@ import { isUserSignedIn } from 'blockstack';
 import Camera from 'react-icons/lib/fa/camera';
 import Blog from '../../../../models/blog.ts';
 import SubmitBlogButton from './submit_blog_button';
+import ImageUploadButton from './image_upload_button';
 
 class BlogForm extends React.Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class BlogForm extends React.Component {
         this.actionType = props.history.location.pathname === '/blogs/new/' ? 'Publish' : 'Update';
         this.setBlogToEdit = this.setBlogToEdit.bind(this);
         this.hasErrors = this.hasErrors.bind(this);
+        this.addImage = this.addImage.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -53,6 +55,10 @@ class BlogForm extends React.Component {
                 updatedAt: blog.updatedAt
             });
         }
+    }
+
+    addImage(imageUrl) {
+        this.setState({ imageUrl: imageUrl });
     }
 
     hasErrors() {
@@ -90,9 +96,10 @@ class BlogForm extends React.Component {
             $('#blog-body-label').removeClass('outline-red');
         }
 
-
-        if (this.state.imageUrl.length <= 0) {
-            this.state.imageUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1500153014/blog-default-img_d3ke0j.jpg';
+        if (this.props.currentUser.profile.image) {
+            this.state.authorImageUrl = this.props.currentUser.profile.image[0].contentUrl;
+        } else {
+            this.state.authorImageUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1482131647/person-solid_telh7f.png';
         }
 
         return hasErrors;
@@ -106,12 +113,7 @@ class BlogForm extends React.Component {
         let blog = this.state;
         if (this.actionType === 'Publish') {
             this.state.id = this.props.blogIndex + 1;
-
-            if (this.props.currentUser.profile.image) {
-                this.state.authorImageUrl = this.props.currentUser.profile.image[0].contentUrl;
-            } else {
-                this.state.authorImageUrl = 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1482131647/person-solid_telh7f.png';
-            }
+            // blog = this.state;
 
             blog = new Blog(
                 this.state.id,
@@ -147,6 +149,23 @@ class BlogForm extends React.Component {
     }
 
     render() {
+        let imageSection = [];
+
+        if (this.state.imageUrl.length === 0) {
+            imageSection.push(
+                <ImageUploadButton key={ Math.random() } addImage={ this.addImage }/>
+            );
+        } else {
+            imageSection.push(
+                <div>
+                    <div id='blog-uploaded-img' key={ Math.random() }
+                        style={{ backgroundImage: `url(${this.state.imageUrl})` }}>
+                    </div>
+                    <ImageUploadButton color={'white-important'} key={ Math.random() } addImage={ this.addImage }/>
+                </div>
+            );
+        }
+
         return (
             <div id='blog-form-container'>
                 <form id='blog-form' onSubmit={ this.handleSubmit.bind(this) }>
@@ -177,11 +196,11 @@ class BlogForm extends React.Component {
                         </span>
 
                         <textarea type='text'
-                        id='blog-body-input'
-                        className='blog-input black'
-                        onChange={ this.handleChange('body') }
-                        value={ this.state.body }
-                        placeholder='Write your blog here...'/>
+                            id='blog-body-input'
+                            className='blog-input black'
+                            onChange={ this.handleChange('body') }
+                            value={ this.state.body }
+                            placeholder='Write your blog here...'/>
                     </label>
 
                     <label id='blog-intro-label' className='blog-form-label position-relative' onClick={ this.toggleActiveLabel('intro') }>
@@ -201,10 +220,11 @@ class BlogForm extends React.Component {
                         maxLength='50'/>
                     </label>
 
-                    <div id='add-img-btn' className='blog-input btn transition-2s-ease-in'>
-                        <Camera id='add-img-icon' size={50}/>
-                        <h4 className='title-2'>Add Cover Photo</h4>
+
+                    <div className='add-img-btn-box'>
+                        { imageSection }
                     </div>
+
 
                     <SubmitBlogButton actionType={this.actionType} isActive={this.state.isSubmitButtonActive}/>
                 </form>

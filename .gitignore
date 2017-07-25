@@ -15,3 +15,4 @@ bundle.js.map
 
 # Custom
 .DS_Store
+.env.js

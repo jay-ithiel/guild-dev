@@ -27,7 +27,7 @@ class Blog {
         this.title = title;
         this.blogIntro = blogIntro;
         this.body = body;
-        this.imageUrl = (imageUrl.length > 0) ? imageUrl : 'https://res.cloudinary.com/ddgtwtbre/image/upload/v1500153014/blog-default-img_d3ke0j.jpg' ;
+        this.imageUrl = imageUrl;
         this.authorId = authorId;
         this.authorImageUrl = authorImageUrl;
         this.createdAt = `${new Date()}`;

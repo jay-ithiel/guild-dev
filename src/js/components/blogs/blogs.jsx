@@ -36,6 +36,7 @@ class Blogs extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (!this.state.blogs) { this.requestBlogs(); }
+
         if (this.state.isUserBlogs) {
             this.setState({ blogs: nextProps.userBlogs });
         } else {

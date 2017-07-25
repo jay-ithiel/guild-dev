@@ -32,7 +32,7 @@ class Blog extends React.Component {
 
     render() {
         let blog = this.state.blog;
-
+        
         return (
             <section id='layout'>
                 <div id='blog' className=''>
@@ -40,9 +40,13 @@ class Blog extends React.Component {
                         { blog.title }
                     </h3>
 
-                    <div id='blog-img' className='blog-show-section'
-                        style={{ backgroundImage: `url(${blog.imageUrl})` }}>
-                    </div>
+                    {
+                        (!blog.imageUrl || blog.imageUrl.length === 0) ? <div></div> : (
+                            <div id='blog-img' className='blog-show-section'
+                                style={{ backgroundImage: `url(${blog.imageUrl})` }}>
+                            </div>
+                        )
+                    }
 
                     <p id='blog-body' className='blog-show-section'>
                         { blog.body }
