@@ -1,42 +1,44 @@
 import React from 'react';
 var Loader = require('react-loaders').Loader;
 
-const DeleteBlogModal = ({ blog, isDeleteButtonActive, handleDelete, hideModal }) => (
-    <section id='blog-delete-modal' className='modal'>
-        <div className='full flex-center'>
-            <div id='blog-delete-modal-content' className='position-relative'>
-                {
-                    isDeleteButtonActive ? (
-                        <div>
-                            <p onClick={ hideModal } className='close-modal'>x</p>
+const DeleteBlogModal = ({ blog, isDeleteButtonActive, handleDelete, hideModal, showModal }) => {
+    return !showModal ? <div></div> : (
+        <section id='blog-delete-modal' className='modal'>
+            <div className='full flex-center'>
+                <div id='blog-delete-modal-content' className='position-relative'>
+                    {
+                        isDeleteButtonActive ? (
+                            <div>
+                                <p onClick={ hideModal } className='close-modal'>x</p>
 
-                            <h4 className='regular margin-bottom-15'>
-                                Deleting a blog is permanent.
-                                Are you sure you want to delete the blog {blog.title}?
-                            </h4>
+                                <h4 className='regular margin-bottom-15'>
+                                    Deleting a blog is permanent.
+                                    Are you sure you want to delete the blog, <strong>`{blog.title}`</strong>?
+                                </h4>
 
-                            <div className='flex-between full-width flex-wrap'>
-                                <button onClick={ handleDelete } className='btn option-btn confirm-btn regular'>
-                                    Delete
-                                </button>
+                                <div className='flex-between full-width flex-wrap'>
+                                    <button onClick={ handleDelete } className='btn option-btn confirm-btn regular'>
+                                        Delete
+                                    </button>
 
-                                <button onClick={ hideModal } className='btn option-btn cancel-btn regular'>
-                                    Cancel
-                                </button>
+                                    <button onClick={ hideModal } className='btn option-btn cancel-btn regular'>
+                                        Cancel
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    ) : (
-                        <div className='fucker'>
-                            <p className='regular margin-bottom-40'>
-                                Deleting. Please wait...
-                            </p>
-                            <Loader type="ball-rotate" active/>
-                        </div>
-                    )
-                }
+                        ) : (
+                            <div className='delete-wait'>
+                                <p className='regular margin-bottom-40'>
+                                    Deleting. Please wait...
+                                </p>
+                                <Loader type="ball-rotate" active/>
+                            </div>
+                        )
+                    }
+                </div>
             </div>
-        </div>
-    </section>
-);
+        </section>
+    );
+};
 
 export default DeleteBlogModal;

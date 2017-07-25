@@ -10,7 +10,6 @@ const AboutBlog = ({ authorId, authorImageUrl='', date, blog }) => (
         <div id='about-blog-info'>
             <span>{authorId}</span>
             <span>{date}</span>
-            <span>{blog.title}</span>
         </div>
     </section>
 );
