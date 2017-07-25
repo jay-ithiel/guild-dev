@@ -13,11 +13,14 @@ class BlogLinkActions extends React.Component {
 
         this.state = {
             isDeleteButtonActive: true,
-            modalActiveState: false
+            modalActiveState: false,
+            showModal: false
         };
 
         this.redirectToEdit = this.redirectToEdit.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.showModal = this.showModal.bind(this);
+        this.hideModal = this.hideModal.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -30,19 +33,17 @@ class BlogLinkActions extends React.Component {
         this.props.history.push(`/blogs/edit/${this.props.blog.id}`);
     }
 
-    handleDelete(blog) {
-        return e => {
-            this.props.deleteBlog(blog.id);
-            this.setState({ isDeleteButtonActive: false });
-        };
+    handleDelete() {
+        this.props.deleteBlog(this.props.blog.id);
+        this.setState({ isDeleteButtonActive: false });
     }
 
     showModal() {
-        $('#blog-delete-modal').fadeIn();
+        this.setState({ showModal: true });
     }
 
     hideModal() {
-        $('#blog-delete-modal').fadeOut();
+        this.setState({ showModal: false });
     }
 
     render() {
@@ -60,6 +61,7 @@ class BlogLinkActions extends React.Component {
                 <DeleteBlogModal
                     blog={ this.props.blog }
                     handleDelete={ this.handleDelete }
+                    showModal={ this.state.showModal }
                     isDeleteButtonActive={ this.state.isDeleteButtonActive }
                     hideModal={ this.hideModal }/>
             </div>
