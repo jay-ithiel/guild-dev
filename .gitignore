@@ -15,5 +15,5 @@ bundle.js.map
 
 # Custom
 .DS_Store
-.env.js
+env.js
 ./src/stylesheets/sass/loaders.css
