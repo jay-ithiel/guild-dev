@@ -1,4 +1,4 @@
-require('../../.env.js');
+require('../../env.js');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
