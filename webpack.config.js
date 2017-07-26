@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/js/Guild.js',
+  entry: './src/js/guild.js',
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'public'),
