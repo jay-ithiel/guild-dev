@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "browserify": "browserify requires.js -o public/bundle.js",
-    "start": "node server.js",
+    "start": "node server.js | npm run webpack",
     "webpack": "webpack -w",
     "webpack-server": "webpack-dev-server"
   },
