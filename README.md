@@ -9,6 +9,5 @@ This code is published under the [GNU General Public License v3.0](LICENSE.md)
 This project is open source! Feel free to contribute.
 
 ## Dev Installation
-- `guild $ npm install`
-- `guild $ npm run start`
-- `guild $ npm run webpack`
+- `$ npm install`
+- `$ npm run start`

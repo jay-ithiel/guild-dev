@@ -26,7 +26,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div id='app' className=''>
+            <div id='app'>
                 <Navbar />
 
                 <Switch>

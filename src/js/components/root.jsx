@@ -8,11 +8,11 @@ import { isUserSignedIn } from 'blockstack';
 import App from './app';
 
 const Root = ({ store }) => (
-<Provider store={ store }>
-    <Router history={ createBrowserHistory() }>
-        <App/>
-    </Router>
-</Provider>
+    <Provider store={ store }>
+        <Router history={ createBrowserHistory() }>
+            <App/>
+        </Router>
+    </Provider>
 );
 
 export default Root;
