@@ -1,3 +1,6 @@
+# Warning
+This repository has been moved to http://github.com/jay-hwang/guild
+
 # Guild
 
 Guild is a decentralized, server-less, blogging app powered by [Blockstack](https://blockstack.org/intro).
